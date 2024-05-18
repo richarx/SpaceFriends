@@ -4,15 +4,18 @@ using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
-{ 
+{
+    public Vector2 MoveDirection => direction;
+    private Vector2 direction;
+
     void Update()
     {
         if (!IsOwner)
             return;
         
-        Vector2 direction = Vector2.zero;
+        direction = Vector2.zero;
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W))
             direction.y = 1.0f;
         if (Input.GetKey(KeyCode.S))
             direction.y = -1.0f;
