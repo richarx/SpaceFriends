@@ -1,31 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    public Vector2 MoveDirection => direction;
-    private Vector2 direction;
+    private Rigidbody2D attachedRigidbody;
+    
+    public Vector2 MoveDirection => direction.Value;
+    private NetworkVariable<Vector2> direction = new NetworkVariable<Vector2>(
+        Vector2.zero,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+    );
+    
+    private float speed = 5.0f;
 
-    void Update()
+    private void Start()
+    {
+        attachedRigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
     {
         if (!IsOwner)
             return;
+
+        Vector2 inputDirection = ComputeInputDirection();
+
+        direction.Value = inputDirection;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!IsOwner || MoveDirection.magnitude <= 0.15f)
+            return;
         
-        direction = Vector2.zero;
+        Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (speed * Time.fixedDeltaTime));
+        
+        attachedRigidbody.MovePosition(newPosition);
+    }
 
-        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W))
-            direction.y = 1.0f;
-        if (Input.GetKey(KeyCode.S))
-            direction.y = -1.0f;
-        if (Input.GetKey(KeyCode.D))
-            direction.x = 1.0f;
-        if (Input.GetKey(KeyCode.A))
-            direction.x = -1.0f;
+    private Vector2 ComputeInputDirection()
+    {
+        Vector2 gamepadDirection = ComputeGamepadDirection();
+        Vector2 keyboardDirection = ComputeKeyboardDirection();
 
-        float speed = 3.0f;
+        return (gamepadDirection + keyboardDirection).normalized;
+    }
 
-        transform.position += (Vector3)direction.normalized * (speed * Time.deltaTime);
+    private Vector2 ComputeGamepadDirection()
+    {
+        Vector2 input = new Vector2(Gamepad.current.leftStick.x.ReadValue(), Gamepad.current.leftStick.y.ReadValue());
+
+        return input.magnitude >= 0.15f ? input.normalized : Vector2.zero;
+    }
+    
+    private Vector2 ComputeKeyboardDirection()
+    {
+        Vector2 inputDirection = Vector2.zero;
+
+        if (Keyboard.current.wKey.isPressed)
+            inputDirection.y = 1.0f;
+        if (Keyboard.current.sKey.isPressed)
+            inputDirection.y = -1.0f;
+        if (Keyboard.current.dKey.isPressed)
+            inputDirection.x = 1.0f;
+        if (Keyboard.current.aKey.isPressed)
+            inputDirection.x = -1.0f;
+
+        return inputDirection.normalized;
     }
 }
