@@ -58,6 +58,11 @@ public class BringItemToRoom : NetworkBehaviour
     {
         Debug.Log("Zuzu : UpdateSprites");
         
+        if (!firstItem.transform.parent.gameObject.activeSelf)
+            firstItem.transform.parent.gameObject.SetActive(true);
+        if (!secondItem.transform.parent.gameObject.activeSelf)
+            secondItem.transform.parent.gameObject.SetActive(true);
+
         firstItem.sprite = items[firstItemIndex];
         firstRoom.sprite = rooms[firstRoomIndex];
         secondItem.sprite = items[secondItemIndex];
