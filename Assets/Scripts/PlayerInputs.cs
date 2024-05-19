@@ -47,6 +47,9 @@ public class PlayerInputs
 
     private static bool CheckGamepadPickup()
     {
+        if (Gamepad.current == null)
+            return false;
+        
         return Gamepad.current.buttonSouth.wasPressedThisFrame;
     }
     
@@ -57,31 +60,31 @@ public class PlayerInputs
 
     public static bool CheckForSpeedIncrease()
     {
-        return Keyboard.current.rightArrowKey.wasPressedThisFrame;
+        return Keyboard.current.rightArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.right.wasPressedThisFrame);
     }
     
     public static bool CheckForSpeedDecrease()
     {
-        return Keyboard.current.leftArrowKey.wasPressedThisFrame;
+        return Keyboard.current.leftArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.left.wasPressedThisFrame);
     }
     
     public static bool CheckForZoomIncrease()
     {
-        return Keyboard.current.upArrowKey.wasPressedThisFrame;
+        return Keyboard.current.upArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.up.wasPressedThisFrame);
     }
     
     public static bool CheckForZoomDecrease()
     {
-        return Keyboard.current.downArrowKey.wasPressedThisFrame;
+        return Keyboard.current.downArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.down.wasPressedThisFrame);
     }
     
     public static bool CheckForResetObjective()
     {
-        return Keyboard.current.spaceKey.wasPressedThisFrame;
+        return Keyboard.current.spaceKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.leftShoulder.wasPressedThisFrame);
     }
     
     public static bool CheckForSwapMap()
     {
-        return Keyboard.current.enterKey.wasPressedThisFrame;
+        return Keyboard.current.enterKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.rightShoulder.wasPressedThisFrame);
     }
 }

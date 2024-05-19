@@ -36,10 +36,10 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (IsServer && PlayerInputs.CheckForSpeedIncrease())
             speed.Value += 1.0f;
-        
+
         if (IsServer && PlayerInputs.CheckForSpeedDecrease())
-            speed.Value -= 1.0f;
-        
+            speed.Value = Mathf.Max(speed.Value - 1.0f, 0.0f);
+
         if (!IsOwner)
             return;
 
