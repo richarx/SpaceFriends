@@ -13,6 +13,9 @@ public class PlayerInputs
 
     private static Vector2 ComputeGamepadDirection()
     {
+        if (Gamepad.current == null)
+            return Vector2.zero;
+        
         Vector2 input = new Vector2(Gamepad.current.leftStick.x.ReadValue(), Gamepad.current.leftStick.y.ReadValue());
 
         return input.magnitude >= 0.15f ? input.normalized : Vector2.zero;
