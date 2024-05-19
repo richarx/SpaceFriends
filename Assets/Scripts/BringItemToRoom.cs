@@ -45,8 +45,10 @@ public class BringItemToRoom : NetworkBehaviour
     }
 
     [Rpc(SendTo.Everyone)]
-    private void UpdateSpritesRpc(int firstItemIndex, int firstRoomIndex, int secondItemIndex, int secondRoomIndex)
+    public void UpdateSpritesRpc(int firstItemIndex, int firstRoomIndex, int secondItemIndex, int secondRoomIndex)
     {
+        Debug.Log("Zuzu : UpdateSprites");
+        
         firstItem.sprite = items[firstItemIndex];
         firstRoom.sprite = rooms[firstRoomIndex];
         secondItem.sprite = items[secondItemIndex];
