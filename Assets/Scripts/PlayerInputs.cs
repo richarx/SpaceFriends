@@ -74,4 +74,9 @@ public class PlayerInputs
     {
         return Keyboard.current.downArrowKey.wasPressedThisFrame;
     }
+    
+    public static bool CheckForResetObjective()
+    {
+        return Keyboard.current.spaceKey.wasPressedThisFrame;
+    }
 }
