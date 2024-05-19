@@ -29,12 +29,12 @@ public class MapSwapper : NetworkBehaviour
         if (IsServer && PlayerInputs.CheckForSwapMap())
         {
             Debug.Log("Zuzu : SWAP MAP");
-            
-            if (mapIndex.Value < maps.Count - 1)
-            {
+
+            if (mapIndex.Value >= maps.Count - 1)
+                mapIndex.Value = 0;
+            else
                 mapIndex.Value += 1;
-                //UpdateMap(mapIndex.Value);
-            }
+            
         }
     }
 
