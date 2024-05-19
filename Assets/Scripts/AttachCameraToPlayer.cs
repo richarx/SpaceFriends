@@ -38,6 +38,7 @@ public class AttachCameraToPlayer : NetworkBehaviour
         if (IsServer && PlayerInputs.CheckForZoomIncrease())
         {
             zoom.Value -= 0.5f;
+            zoom.Value = Mathf.Max(zoom.Value, 0.5f);
             virtualCamera.m_Lens.OrthographicSize = zoom.Value;
         }
 
