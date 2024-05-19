@@ -33,4 +33,22 @@ public class PlayerInputs
 
         return inputDirection.normalized;
     }
+
+    public static bool CheckForPickupInput()
+    {
+        bool gamepad = CheckGamepadPickup();
+        bool keyboard = CheckKeyboardPickup();
+
+        return gamepad || keyboard;
+    }
+
+    private static bool CheckGamepadPickup()
+    {
+        return Gamepad.current.buttonSouth.wasPressedThisFrame;
+    }
+    
+    private static bool CheckKeyboardPickup()
+    {
+        return Keyboard.current.eKey.wasPressedThisFrame;
+    }
 }
