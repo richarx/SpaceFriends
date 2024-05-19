@@ -58,8 +58,6 @@ public class ItemHandler : NetworkBehaviour
         currentItem = targetItem;
     }
 
-    
-
     private PickableItem LookForPickupItem()
     {
         List<Collider2D> results = new List<Collider2D>();
