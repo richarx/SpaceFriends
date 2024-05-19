@@ -14,6 +14,8 @@ public class BringItemToRoom : NetworkBehaviour
     [SerializeField] private List<Sprite> items;
     [SerializeField] private List<Sprite> rooms;
 
+    private int mapSwapped = 0;
+    
     private void Start()
     {
         if (!IsClient)
@@ -27,6 +29,10 @@ public class BringItemToRoom : NetworkBehaviour
         
         if (PlayerInputs.CheckForResetObjective())
             ChooseItemAndRoom();
+
+        if (PlayerInputs.CheckForSwapMap())
+            mapSwapped += 1;
+
     }
 
     private void ChooseItemAndRoom()
@@ -34,6 +40,9 @@ public class BringItemToRoom : NetworkBehaviour
         List<int> indexes = new List<int>() { 0, 1, 2 };
 
         List<int> selectedItems = indexes.GetRandomElements(2);
+        
+        if (mapSwapped > 2)
+            indexes.Add(3);
         List<int> selectedRooms = indexes.GetRandomElements(2);
 
         UpdateSpritesRpc(

@@ -79,4 +79,9 @@ public class PlayerInputs
     {
         return Keyboard.current.spaceKey.wasPressedThisFrame;
     }
+    
+    public static bool CheckForSwapMap()
+    {
+        return Keyboard.current.enterKey.wasPressedThisFrame;
+    }
 }
