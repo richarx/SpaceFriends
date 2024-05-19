@@ -1,10 +1,13 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    public static UnityEvent<Transform> OnPlayerSpawn = new UnityEvent<Transform>();
+    
     private Rigidbody2D attachedRigidbody;
     
     public Vector2 MoveDirection => direction.Value;
@@ -19,6 +22,12 @@ public class PlayerMovement : NetworkBehaviour
     private void Start()
     {
         attachedRigidbody = GetComponent<Rigidbody2D>();
+
+        if (!IsOwner)
+            attachedRigidbody.bodyType = RigidbodyType2D.Kinematic;
+        
+        if (IsOwner)
+            OnPlayerSpawn?.Invoke(transform);
     }
 
     private void Update()
