@@ -11,12 +11,15 @@ public class PlayerAnimation : MonoBehaviour
     {
         Vector2 direction = playerMovement.MoveDirection;
 
-        string animation = ComputeAnimation(direction, previousAnimation);
-        
-        if (string.IsNullOrEmpty(previousAnimation) || !animation.Equals(previousAnimation))
-            animator.Play(animation);
+        string targetAnimation = ComputeAnimation(direction, previousAnimation);
 
-        previousAnimation = animation;
+        bool isFirstAnimationEver = string.IsNullOrEmpty(previousAnimation);
+        bool isANewAnimation = !isFirstAnimationEver && !targetAnimation.Equals(previousAnimation);
+        
+        if (isFirstAnimationEver || isANewAnimation)
+            animator.Play(targetAnimation);
+
+        previousAnimation = targetAnimation;
     }
 
     private static string ComputeAnimation(Vector2 direction, string previousAnimation)
