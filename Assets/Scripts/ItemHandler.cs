@@ -26,9 +26,7 @@ public class ItemHandler : NetworkBehaviour
 
         if (IsHoldingItem)
         {
-            Debug.Log($"Zuzu : Im holding an item 1 : {currentItem.transform.position} / {itemHolder.position}");
             currentItem.transform.position = itemHolder.position;
-            Debug.Log($"Zuzu : Im holding an item 2 : {currentItem.transform.position} / {itemHolder.position}");
         }
     }
 
