@@ -54,4 +54,24 @@ public class PlayerInputs
     {
         return Keyboard.current.eKey.wasPressedThisFrame;
     }
+
+    public static bool CheckForSpeedIncrease()
+    {
+        return Keyboard.current.rightArrowKey.wasPressedThisFrame;
+    }
+    
+    public static bool CheckForSpeedDecrease()
+    {
+        return Keyboard.current.leftArrowKey.wasPressedThisFrame;
+    }
+    
+    public static bool CheckForZoomIncrease()
+    {
+        return Keyboard.current.upArrowKey.wasPressedThisFrame;
+    }
+    
+    public static bool CheckForZoomDecrease()
+    {
+        return Keyboard.current.downArrowKey.wasPressedThisFrame;
+    }
 }

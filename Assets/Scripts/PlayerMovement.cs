@@ -15,7 +15,11 @@ public class PlayerMovement : NetworkBehaviour
         NetworkVariableWritePermission.Owner
     );
 
-    private float speed = 5.0f;
+    private NetworkVariable<float> speed = new NetworkVariable<float>(
+        5,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     private void Start()
     {
@@ -30,6 +34,12 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Update()
     {
+        if (IsServer && PlayerInputs.CheckForSpeedIncrease())
+            speed.Value += 1.0f;
+        
+        if (IsServer && PlayerInputs.CheckForSpeedDecrease())
+            speed.Value -= 1.0f;
+        
         if (!IsOwner)
             return;
 
@@ -43,7 +53,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner || MoveDirection.magnitude <= 0.15f)
             return;
 
-        Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (speed * Time.fixedDeltaTime));
+        Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (speed.Value * Time.fixedDeltaTime));
 
         attachedRigidbody.MovePosition(newPosition);
     }
