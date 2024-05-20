@@ -1,36 +1,64 @@
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Timer : NetworkBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
+    public static UnityEvent<float, bool> OnTriggerTimer = new UnityEvent<float, bool>();
+    
+    [FormerlySerializedAs("text")] [SerializeField] private TextMeshProUGUI timerText;
 
     private float timer = 0.0f;
+    private bool chill = false;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        OnTriggerTimer?.AddListener(ResetTimerRpc);
+    }
 
     private void Update()
     {
         if (timer > 0.0f)
             timer -= Time.deltaTime;
 
-        string prefix = "";
-        if (timer <= 3.0f)
-            prefix = "<color=\"red\">";
-        else if (timer <= 6.0f)
-            prefix = "<color=\"yellow\">";
+        timerText.text = $"{ComputePrefix()}{ComputeTimer()}";
 
-        text.text = $"{prefix}{timer:0.00}";
+        if (IsServer && PlayerInputs.CheckForSwapMap())
+            timer = 0.0f;
+    }
+
+    private string ComputeTimer()
+    {
+        if (chill)
+            return timer.ToString("0");
         
-        if (IsServer && PlayerInputs.CheckForResetObjective())
-            ResetTimerRpc();
+        return timer.ToString("0.00");
+    }
+    
+    private string ComputePrefix()
+    {
+        if (chill)
+            return "<color=\"green\">";
+        
+        if (timer <= 5.0f)
+            return "<color=\"red\">";
+        
+        if (timer <= 10.0f)
+            return "<color=\"yellow\">";
+
+        return "";
     }
 
     [Rpc(SendTo.Everyone)]
-    private void ResetTimerRpc()
+    private void ResetTimerRpc(float duration, bool isChill)
     {
-        if (!text.gameObject.activeSelf)
-            text.gameObject.SetActive(true);
-            
-        timer = 15.0f;
+        if (!timerText.gameObject.activeSelf)
+            timerText.gameObject.SetActive(true);
+
+        chill = isChill;
+        timer = duration;
     }
 }

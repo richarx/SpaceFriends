@@ -52,7 +52,7 @@ public class NetworkManagerUI : MonoBehaviour
     {
         try
         {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(9);
 
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             
