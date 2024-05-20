@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,13 +38,19 @@ public class BringItemToRoom : NetworkBehaviour
 
     private void ChooseItemAndRoom()
     {
-        List<int> indexes = new List<int>() { 0, 1, 2 };
+        List<int> itemIndexes = new List<int>() { 0, 1, 2, 3, 4, 5, 6 };
+        List<int> roomIndexes = new List<int>() { 0, 1, 2 };
 
-        List<int> selectedItems = indexes.GetRandomElements(2);
+        List<int> selectedItems = itemIndexes.GetRandomElements(2);
         
         if (mapSwapped > 2)
-            indexes.Add(3);
-        List<int> selectedRooms = indexes.GetRandomElements(2);
+            roomIndexes.Add(3);
+
+        List<int> selectedRooms = new List<int>();
+        for (int i = 0; i < 2; i++)
+        {
+            selectedRooms.Add(roomIndexes.GetRandomElements(1).First());
+        }
 
         UpdateSpritesRpc(
             selectedItems[0],

@@ -31,6 +31,6 @@ public class Timer : NetworkBehaviour
         if (!text.gameObject.activeSelf)
             text.gameObject.SetActive(true);
             
-        timer = 10.0f;
+        timer = 15.0f;
     }
 }
