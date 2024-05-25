@@ -11,7 +11,7 @@ public class UsableItem : NetworkBehaviour
         itemTriggerZone = GetComponent<Collider2D>();
     }
     
-    public virtual void UseItem()
+    public virtual void UseItem(ItemHandler itemHandler)
     {
         Debug.Log("Zuzu : Calling UseItem on parent class");
     }

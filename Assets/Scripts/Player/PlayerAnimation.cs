@@ -7,10 +7,25 @@ public class PlayerAnimation : MonoBehaviour
 
     private string previousAnimation;
 
+    private bool isPlayingBanjo = false;
+    private Banjo banjoRef = null;
+
     private void LateUpdate()
     {
         Vector2 direction = playerMovement.MoveDirection;
 
+        if (isPlayingBanjo)
+        {
+            if (direction.magnitude > 0.5f)
+            {
+                isPlayingBanjo = false;
+                GetComponent<AudioSource>().Stop();
+                banjoRef.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else
+                return;
+        }
+        
         string targetAnimation = ComputeAnimation(direction, previousAnimation);
 
         bool isFirstAnimationEver = string.IsNullOrEmpty(previousAnimation);
@@ -20,6 +35,15 @@ public class PlayerAnimation : MonoBehaviour
             animator.Play(targetAnimation);
 
         previousAnimation = targetAnimation;
+    }
+
+    public void PlayBanjo(Banjo banjo)
+    {
+        banjoRef = banjo;
+        previousAnimation = string.Empty;
+        isPlayingBanjo = true;
+        animator.Play("Banjo");
+        GetComponent<AudioSource>().Play();
     }
 
     private static string ComputeAnimation(Vector2 direction, string previousAnimation)

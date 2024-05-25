@@ -39,10 +39,9 @@ public class ItemHandler : NetworkBehaviour
 
     private void UseItem()
     {
-        Debug.Log("Zuzu : ItemHandler UseItem");
         UsableItem usableItem = currentItem.GetComponent<UsableItem>();
         if (usableItem != null)
-            usableItem.UseItem();
+            usableItem.UseItem(this);
         else
             Debug.Log("Zuzu : ItemHandler item not usable");
     }

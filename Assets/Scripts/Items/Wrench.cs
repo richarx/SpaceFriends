@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wrench : UsableItem
 {
-    public override void UseItem()
+    public override void UseItem(ItemHandler itemHandler)
     {
         Debug.Log("Zuzu : Using Wrench !");
         
