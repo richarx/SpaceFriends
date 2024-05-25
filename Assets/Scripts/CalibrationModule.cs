@@ -46,6 +46,21 @@ public class CalibrationModule : NetworkBehaviour
             yield return new WaitForSeconds(5.0f);
         }
     }
+
+    public void UseWrench()
+    {
+        if (!isBroken)
+            RecalibrateModuleRpc();
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void RecalibrateModuleRpc()
+    {
+        if (!isCalibrated)
+            calibrationStep -= Math.Sign(calibrationStep);
+        
+        SetCursorPositionRpc(calibrationStep);
+    }
     
     [Rpc(SendTo.Everyone)]
     private void BreakDownModuleRpc()
@@ -96,6 +111,11 @@ public class CalibrationModule : NetworkBehaviour
     }
 
     private bool isQuitting = false;
+
+    public override void OnNetworkDespawn()
+    {
+        isQuitting = true;
+    }
 
     private void OnApplicationQuit()
     {

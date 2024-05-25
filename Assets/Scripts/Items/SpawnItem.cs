@@ -11,14 +11,6 @@ public class SpawnItem : NetworkBehaviour
         if (IsServer)
             SpawnNewItem();
     }
-    
-    
-
-    private void Update()
-    {
-        if (IsServer && PlayerInputs.CheckForSwapMap())
-            SpawnNewItem();
-    }
 
     private void SpawnNewItem()
     {

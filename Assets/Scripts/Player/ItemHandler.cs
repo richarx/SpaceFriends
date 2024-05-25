@@ -24,11 +24,27 @@ public class ItemHandler : NetworkBehaviour
             else
                 TryToPickupItem();
         }
+        
+        if (IsHoldingItem && PlayerInputs.CheckForUseItem())
+        {
+            Debug.Log("Zuzu : CheckForUseItem");
+            UseItem();
+        }
 
         if (IsHoldingItem)
         {
             currentItem.transform.position = itemHolder.position;
         }
+    }
+
+    private void UseItem()
+    {
+        Debug.Log("Zuzu : ItemHandler UseItem");
+        UsableItem usableItem = currentItem.GetComponent<UsableItem>();
+        if (usableItem != null)
+            usableItem.UseItem();
+        else
+            Debug.Log("Zuzu : ItemHandler item not usable");
     }
 
     private void DropItem()

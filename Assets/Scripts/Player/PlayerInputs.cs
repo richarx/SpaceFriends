@@ -78,9 +78,9 @@ public class PlayerInputs
         return Keyboard.current.downArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.down.wasPressedThisFrame);
     }
     
-    public static bool CheckForResetObjective()
+    public static bool CheckForUseItem()
     {
-        return Keyboard.current.spaceKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.leftShoulder.wasPressedThisFrame);
+        return Keyboard.current.fKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame);
     }
     
     public static bool CheckForSwapMap()

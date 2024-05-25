@@ -8931,6 +8931,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Calibration Module
       objectReference: {fileID: 0}
+    - target: {fileID: 3313421558176566526, guid: c7d3b5bab7f8c4f479eb001a38604d76, type: 3}
+      propertyPath: m_TagString
+      value: Module
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8948,6 +8952,6 @@ SceneRoots:
   - {fileID: 1941593751}
   - {fileID: 1365768313}
   - {fileID: 1687147731}
-  - {fileID: 1212547048557993946}
   - {fileID: 639887372}
   - {fileID: 146183446}
+  - {fileID: 1212547048557993946}
