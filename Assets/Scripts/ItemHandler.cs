@@ -9,6 +9,7 @@ public class ItemHandler : NetworkBehaviour
     [SerializeField] private Collider2D playerCollider;
 
     public bool IsHoldingItem => currentItem != null;
+    public string itemName => currentItem.name;
     private PickableItem currentItem = null;
 
     private void Update()

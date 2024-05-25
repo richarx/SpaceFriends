@@ -8,6 +8,8 @@ public class PlayerMovement : NetworkBehaviour
 
     private Rigidbody2D attachedRigidbody;
 
+    private bool isInit = false;
+
     public Vector2 MoveDirection => direction.Value;
     private NetworkVariable<Vector2> direction = new NetworkVariable<Vector2>(
         Vector2.zero,
@@ -16,12 +18,12 @@ public class PlayerMovement : NetworkBehaviour
     );
 
     private NetworkVariable<float> speed = new NetworkVariable<float>(
-        5,
+        6,
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
         attachedRigidbody = GetComponent<Rigidbody2D>();
 
@@ -30,10 +32,15 @@ public class PlayerMovement : NetworkBehaviour
         
         if (IsOwner)
             OnPlayerSpawn?.Invoke(transform);
+
+        isInit = true;
     }
 
     private void Update()
     {
+        if (!isInit)
+            return;
+        
         if (IsServer && PlayerInputs.CheckForSpeedIncrease())
             speed.Value += 1.0f;
 
@@ -50,6 +57,9 @@ public class PlayerMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (!isInit)
+            return;
+
         if (!IsOwner || MoveDirection.magnitude <= 0.15f)
             return;
 

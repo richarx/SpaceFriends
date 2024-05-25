@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2cde8ddca1b0ae349973cd89dbbace03
+guid: 66705cf843eea984faabad996cf7cc72
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -32,10 +32,10 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 0
+    spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 8
+    spritePixelsToUnits: 32
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638522372236796522
+  platformSettingsDirtyTick: 638522469016534546
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Room_Floor
+  - name: Modules
     originalName: 
-    pivot: {x: 3.5625002, y: -9.9375}
+    pivot: {x: 0.58, y: -0.026200874}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
-      height: 16
-    spriteID: 9c739bc92971f9b449a817962ac9ae57
+      width: 200
+      height: 229
+    spriteID: 1fe49cf24c5d5e44899e17d4d94d8d57
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,18 +142,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
   spriteSheetImportData:
-  - name: Room_Floor_0
+  - name: Modules_0
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
+    pivot: {x: 0.5, y: 0.21}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 164
-      width: 16
-      height: 16
-    spriteID: 66babfb3663b0f24d8aa94785c167a0c
+      x: 13
+      y: 174
+      width: 41
+      height: 59
+    spriteID: c4d1fe97f1f513e428c6496242de92c1
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -162,18 +162,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_1
+  - name: Modules_1
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 132
-      width: 16
-      height: 16
-    spriteID: cc5f86a9f5a7c4a4abf121ea724b14e4
+      x: 88
+      y: 174
+      width: 33
+      height: 33
+    spriteID: d4acb117867a5e44ba608a7dc3370873
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -182,18 +182,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_2
+  - name: Modules_2
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 100
-      width: 16
-      height: 16
-    spriteID: 7f4fb8575854d32488c6211f7449f6f8
+      x: 151
+      y: 169
+      width: 19
+      height: 40
+    spriteID: 5b5c2cbee63839246aefe92570ccc261
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -202,18 +202,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_3
+  - name: Modules_3
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 68
-      width: 16
-      height: 16
-    spriteID: 117b5845398d8904ba5012593538d055
+      x: 179
+      y: 158
+      width: 25
+      height: 50
+    spriteID: 1fadb4a87af13af4597b29e2051ecbb3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -222,18 +222,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_4
+  - name: Modules_4
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 36
-      width: 16
-      height: 16
-    spriteID: d6870e43e8f84a044b736660826d8ef4
+      x: 151
+      y: 126
+      width: 19
+      height: 37
+    spriteID: b30d3e16d9a063041a7ea4a6b23b3778
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -242,18 +242,198 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_5
+  - name: Modules_5
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 88
+      y: 158
+      width: 42
+      height: 6
+    spriteID: 01ff6c5d3d5d7254f8064f9622a3102b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 58
+      y: 126
+      width: 12
+      height: 23
+    spriteID: ee0cefd8d24beba498162e3cd4076caa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 74
+      y: 126
+      width: 12
+      height: 23
+    spriteID: 4b6ea02b3647dcb429a08d2ffd30dd52
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 94
+      y: 126
+      width: 33
+      height: 28
+    spriteID: d0fb5455e368bd04fa0336727fe2564c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
+      y: 140
+      width: 40
+      height: 20
+    spriteID: 3647cdd05e713da429a7b4c251c001d1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 13
+      y: 62
+      width: 87
+      height: 31
+    spriteID: 9481ff974d6ae5840b26e8aa8ef01e36
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 114
+      y: 62
+      width: 27
+      height: 32
+    spriteID: 1935c484fdd33b643ba83a63ded90414
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_12
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 62
+      width: 21
+      height: 33
+    spriteID: d77a5f47fcf3316498c00ebebc3a2574
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_13
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 174
+      y: 62
+      width: 21
+      height: 33
+    spriteID: 1c7adc65398784345a082c514b840a23
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Modules_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 101
       y: 4
-      width: 16
-      height: 16
-    spriteID: 028fc3c39e255ff4fbf48d1fa5530d6a
+      width: 22
+      height: 33
+    spriteID: fc948d0acf778684c8a8119bdbd91ccd
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -262,278 +442,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_6
+  - name: Modules_15
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
+    pivot: {x: 0.87265366, y: 0.10802152}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 36
-      y: 148
-      width: 16
-      height: 16
-    spriteID: 203f989675e5dfa46a5560f56caa7e09
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_7
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 68
-      y: 148
-      width: 16
-      height: 16
-    spriteID: 03df8c7a909bcc44c8b7bb022786ca8d
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_8
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 100
-      y: 148
-      width: 16
-      height: 16
-    spriteID: c771a67fbe1068944be68d5fd6113eff
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_9
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 132
-      y: 148
-      width: 16
-      height: 16
-    spriteID: d046f5d79c3ce3c4e8b8c8993d3f5e3a
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_10
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 36
-      y: 116
-      width: 16
-      height: 16
-    spriteID: 4b3499c33275f574c8e08e9ef7e2ae21
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_11
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 68
-      y: 116
-      width: 16
-      height: 16
-    spriteID: f585788a09f1e124bab3a8f76fab6ca3
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_12
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 100
-      y: 116
-      width: 16
-      height: 16
-    spriteID: 9b0131ff872b3ba459ae52d0bf3c79c7
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_13
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 132
-      y: 116
-      width: 16
-      height: 16
-    spriteID: f4dc383f812d18d4da5e586a3b8b3a4e
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_14
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 7, y: 5, z: 5, w: 7}
-    rect:
-      serializedVersion: 2
-      x: 36
-      y: 84
-      width: 16
-      height: 16
-    spriteID: cf81891a975718941b1a73508329eef4
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_15
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 7, w: 7}
-    rect:
-      serializedVersion: 2
-      x: 68
-      y: 84
-      width: 16
-      height: 16
-    spriteID: c72deb869bba2a647b8b81cbfb7fb9d8
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_16
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 7, y: 7, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 36
-      y: 52
-      width: 16
-      height: 16
-    spriteID: b857e10d99b3855458b2323615e9beb7
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_17
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 7, z: 7, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 68
-      y: 52
-      width: 16
-      height: 16
-    spriteID: b028f61f53a1e5940a0837931ddd8ce1
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_18
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 100
-      y: 84
-      width: 16
-      height: 16
-    spriteID: 8249fae63a15c1340a6fb93f0820adf3
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Room_Floor_19
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 5, y: 5, z: 5, w: 5}
-    rect:
-      serializedVersion: 2
-      x: 36
-      y: 4
-      width: 16
-      height: 16
-    spriteID: bc9208118886d8b4faa31b3e067a0a49
+      x: 64
+      y: 20
+      width: 28
+      height: 31
+    spriteID: 8fb2059babfc75244b57de43f5f66626
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -544,20 +464,20 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
-    guid: -1070798576
-    name: Room_Floor
+    guid: -969027855
+    name: Modules
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Room_Floor
+    - name: Modules
       frameIndex: 0
       cellRect:
-        x: 48
-        y: 15
-        width: 144
-        height: 176
-      spriteId: 9c739bc92971f9b449a817962ac9ae57
+        x: 12
+        y: 6
+        width: 200
+        height: 229
+      spriteId: 1fe49cf24c5d5e44899e17d4d94d8d57
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -600,4 +520,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 210, y: 207}
+  canvasSize: {x: 256, y: 256}
