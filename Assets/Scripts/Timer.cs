@@ -8,7 +8,7 @@ public class Timer : NetworkBehaviour
 {
     public static UnityEvent<float, bool> OnTriggerTimer = new UnityEvent<float, bool>();
     
-    [FormerlySerializedAs("text")] [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI timerText;
 
     private float timer = 0.0f;
     private bool chill = false;
