@@ -9,8 +9,19 @@ public class Wrench : UsableItem
         Debug.Log("Zuzu : Using Wrench !");
         
         CalibrationModule calibrationModule = LookForCalibrationModule();
-        
+
         if (calibrationModule != null)
-            calibrationModule.UseWrench();
+        {
+            bool wasActionPerformed = calibrationModule.UseWrench();
+            if (wasActionPerformed)
+                StartCoroutine(HideWrenchForDuration(0.5f));
+        }
+    }
+
+    private IEnumerator HideWrenchForDuration(float duration)
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        yield return new WaitForSeconds(duration);
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 }

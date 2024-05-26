@@ -47,17 +47,24 @@ public class CalibrationModule : NetworkBehaviour
         }
     }
 
-    public void UseWrench()
+    public bool UseWrench()
     {
+        bool recalibrate = !isBroken && !isCalibrated;
+        
         if (!isBroken)
             RecalibrateModuleRpc();
+
+        return recalibrate;
     }
 
     [Rpc(SendTo.Everyone)]
     private void RecalibrateModuleRpc()
     {
         if (!isCalibrated)
+        {
+            nutSelected.GetComponent<Animator>().Play("Wrench_Recalibrate");
             calibrationStep -= Math.Sign(calibrationStep);
+        }
         
         SetCursorPositionRpc(calibrationStep);
     }
