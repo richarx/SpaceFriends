@@ -5,8 +5,12 @@ using UnityEngine;
 public class ItemHandler : NetworkBehaviour
 {
     [SerializeField] private Transform itemHolder;
-    [SerializeField] private Transform itemDropPosition;
+    [SerializeField] private Transform itemDropper;
     [SerializeField] private Collider2D playerCollider;
+
+    public Vector2 itemHolderPosition => itemHolder.position;
+    public float itemHolderDirection => itemHolder.localScale.x;
+    public Vector2 itemDropPosition => itemDropper.position;
 
     public bool IsHoldingItem => currentItem != null;
     public string itemName => currentItem.name;
@@ -30,11 +34,6 @@ public class ItemHandler : NetworkBehaviour
             Debug.Log("Zuzu : CheckForUseItem");
             UseItem();
         }
-
-        if (IsHoldingItem)
-        {
-            currentItem.transform.position = itemHolder.position;
-        }
     }
 
     private void UseItem()
@@ -49,10 +48,7 @@ public class ItemHandler : NetworkBehaviour
     private void DropItem()
     {
         Debug.Log($"Zuzu : Dropping item : {currentItem}");
-        currentItem.SetItemAsDropped();
-        currentItem.transform.position = itemDropPosition.transform.position;
-        if (!IsServer)
-            currentItem.RemoveOwnershipRpc();
+        currentItem.DropItem();
         currentItem = null;
     }
 
@@ -68,9 +64,7 @@ public class ItemHandler : NetworkBehaviour
     {
         Debug.Log($"Zuzu : PickupItem : {targetItem}");
 
-        targetItem.SetItemAsPickedUp();
-        if (!targetItem.NetworkObject.IsOwner)
-            targetItem.GiveOwnershipRpc(OwnerClientId);
+        targetItem.PickedUpItem(this);
         currentItem = targetItem;
     }
 

@@ -227,6 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6232090931813660008}
+  - component: {fileID: 6244687889158216733}
   m_Layer: 0
   m_Name: ItemDropper
   m_TagString: Untagged
@@ -249,6 +250,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6567376268294888495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6244687889158216733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986605043221859573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af71bd7684188b34d8a1a9594ce3c3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 7437365389002864312}
 --- !u!1 &1302950719010615860
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3750957412363415888}
+  - component: {fileID: 5965422055516640108}
   m_Layer: 0
   m_Name: ItemHolder
   m_TagString: Untagged
@@ -274,12 +289,25 @@ Transform:
   m_GameObject: {fileID: 1302950719010615860}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.237, y: 0.203, z: 0}
+  m_LocalPosition: {x: 0.235, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6567376268294888495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5965422055516640108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302950719010615860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af71bd7684188b34d8a1a9594ce3c3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 7437365389002864312}
 --- !u!1 &2585346419453966884
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemHolder: {fileID: 3750957412363415888}
-  itemDropPosition: {fileID: 6232090931813660008}
+  itemDropper: {fileID: 6232090931813660008}
   playerCollider: {fileID: 7014968067893059866}
 --- !u!1 &8069339732170750552
 GameObject:

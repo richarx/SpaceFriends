@@ -16,8 +16,29 @@ public class PickableItem : NetworkBehaviour
     [SerializeField] private Sprite selectedSprite;
     [SerializeField] private Sprite pickedUpSprite;
 
+    private ItemHandler currentHolder = null;
     private bool isPickedUp = false;
-    
+
+    private void LateUpdate()
+    {
+        if (isPickedUp && currentHolder != null)
+        {
+            Vector2 position = currentHolder.itemHolderPosition;
+            float direction = currentHolder.itemHolderDirection;
+            
+            transform.position = position;
+            transform.localScale = new Vector3(direction, 1.0f, 1.0f);
+            UpdatePositionAndDirectionRpc(position, direction);
+        }
+    }
+
+    [Rpc(SendTo.NotMe)]
+    private void UpdatePositionAndDirectionRpc(Vector2 position, float direction)
+    {
+        transform.position = position;
+        transform.localScale = new Vector3(direction, 1.0f, 1.0f);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (isPickedUp)
@@ -36,13 +57,30 @@ public class PickableItem : NetworkBehaviour
             SetSpriteState(ItemDisplayState.Idle);
     }
 
-    public void SetItemAsPickedUp()
+    public void PickedUpItem(ItemHandler itemHandler)
+    {
+        currentHolder = itemHandler;
+        SetItemAsPickedUpRpc();
+    }
+    
+    [Rpc(SendTo.Everyone)]
+    private void SetItemAsPickedUpRpc()
     {
         isPickedUp = true;
         SetSpriteState(ItemDisplayState.PickedUp);
     }
     
-    public void SetItemAsDropped()
+    public void DropItem()
+    {
+        transform.position = currentHolder.itemDropPosition;
+        UpdatePositionAndDirectionRpc(currentHolder.itemDropPosition, currentHolder.itemHolderDirection);
+        
+        currentHolder = null;
+        SetItemAsDroppedRpc();
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void SetItemAsDroppedRpc()
     {
         isPickedUp = false;
         SetSpriteState(ItemDisplayState.Selected);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class BlowTorch : UsableItem
 {
     [SerializeField] private GameObject torchFlame;
-    
+
     private bool isUsingTorch;
 
     private Coroutine flameRoutine = null;
@@ -19,7 +19,7 @@ public class BlowTorch : UsableItem
         CalibrationModule calibrationModule = LookForCalibrationModule();
 
         bool wasActionPerformed = false;
-        
+
         if (calibrationModule != null)
             wasActionPerformed = calibrationModule.UseTorch();
 
@@ -31,7 +31,7 @@ public class BlowTorch : UsableItem
     {
         if (flameRoutine != null)
             StopAllCoroutines();
-            
+
         flameRoutine = StartCoroutine(ActivateFlameForDuration(1.0f, wasActionPerformed));
     }
     
