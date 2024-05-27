@@ -13,6 +13,7 @@ public class ItemHandler : NetworkBehaviour
     public Vector2 itemDropPosition => itemDropper.position;
 
     public bool IsHoldingItem => currentItem != null;
+    public bool IsItemThrowable => IsHoldingItem && currentItem.canBeThrown;
     public string itemName => currentItem.name;
     private PickableItem currentItem = null;
 
@@ -34,20 +35,14 @@ public class ItemHandler : NetworkBehaviour
             Debug.Log("Zuzu : CheckForUseItem");
             UseItem();
         }
-        
-        if (IsHoldingItem && PlayerInputs.CheckForThrowItem())
-        {
-            Debug.Log("Zuzu : CheckForUseItem");
-            ThrowItem();
-        }
     }
     
-    private void ThrowItem()
+    public void ThrowItem(Vector2 direction)
     {
         ThrowableItem throwableItem = currentItem.GetComponent<ThrowableItem>();
         if (throwableItem != null)
         {
-            throwableItem.ThrowItem(Vector2.right);
+            throwableItem.ThrowItem(direction);
             currentItem = null;
         }
         else

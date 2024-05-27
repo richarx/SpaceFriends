@@ -15,9 +15,17 @@ public class PickableItem : NetworkBehaviour
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite selectedSprite;
     [SerializeField] private Sprite pickedUpSprite;
-
+    
+    [HideInInspector]
+    public bool canBeThrown;
+    
     private ItemHandler currentHolder = null;
     private bool isPickedUp = false;
+
+    private void Start()
+    {
+        canBeThrown = TryGetComponent(out ThrowableItem _);
+    }
 
     private void LateUpdate()
     {

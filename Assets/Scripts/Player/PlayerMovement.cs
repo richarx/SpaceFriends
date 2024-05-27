@@ -7,6 +7,7 @@ public class PlayerMovement : NetworkBehaviour
     public static readonly UnityEvent<Transform> OnPlayerSpawn = new UnityEvent<Transform>();
 
     private Rigidbody2D attachedRigidbody;
+    private AimHandler aimHandler;
 
     private bool isInit = false;
 
@@ -29,9 +30,12 @@ public class PlayerMovement : NetworkBehaviour
 
         if (!IsOwner)
             attachedRigidbody.bodyType = RigidbodyType2D.Kinematic;
-        
+
         if (IsOwner)
+        {
             OnPlayerSpawn?.Invoke(transform);
+            aimHandler = GetComponent<AimHandler>();
+        }
 
         isInit = true;
     }
@@ -63,7 +67,9 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner || MoveDirection.magnitude <= 0.15f)
             return;
 
-        Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (speed.Value * Time.fixedDeltaTime));
+        float moveSpeed = aimHandler.isAiming ? speed.Value / 2.0f : speed.Value;
+        
+        Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (moveSpeed * Time.fixedDeltaTime));
 
         attachedRigidbody.MovePosition(newPosition);
     }

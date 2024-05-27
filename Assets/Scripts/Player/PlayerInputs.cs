@@ -36,6 +36,31 @@ public class PlayerInputs
 
         return inputDirection.normalized;
     }
+    
+    public static Vector2 ComputeAimDirection(Vector2 currentPosition, Camera camera)
+    {
+        if (Gamepad.current != null)
+            return ComputeGamepadAimDirection();
+
+        return ComputeKeyboardAimDirection(currentPosition, camera);
+    }
+
+    private static Vector2 ComputeGamepadAimDirection()
+    {
+        if (Gamepad.current == null)
+            return Vector2.zero;
+        
+        Vector2 input = new Vector2(Gamepad.current.rightStick.x.ReadValue(), Gamepad.current.rightStick.y.ReadValue());
+
+        return input.magnitude >= 0.15f ? input.normalized : Vector2.zero;
+    }
+    
+    private static Vector2 ComputeKeyboardAimDirection(Vector2 currentPosition, Camera camera)
+    {
+        Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+
+        return (mousePosition - currentPosition).normalized;
+    }
 
     public static bool CheckForPickupInput()
     {
@@ -85,6 +110,11 @@ public class PlayerInputs
     
     public static bool CheckForThrowItem()
     {
-        return Keyboard.current.aKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame);
+        return Mouse.current.leftButton.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.rightTrigger.wasPressedThisFrame);
+    }
+    
+    public static bool CheckForAim()
+    {
+        return Mouse.current.rightButton.isPressed || (Gamepad.current != null && Gamepad.current.leftTrigger.isPressed);
     }
 }
