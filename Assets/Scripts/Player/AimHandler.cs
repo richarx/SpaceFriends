@@ -5,7 +5,7 @@ public class AimHandler : NetworkBehaviour
 {
     [SerializeField] private GameObject cursor;
     
-    private Camera camera;
+    private Camera _camera;
     private ItemHandler itemHandler;
 
     private Vector2 previousDirection = Vector2.right;
@@ -18,7 +18,7 @@ public class AimHandler : NetworkBehaviour
             return;
         
         itemHandler = GetComponent<ItemHandler>();
-        camera = FindObjectOfType<Camera>();
+        _camera = FindObjectOfType<Camera>();
     }
 
     private void Update()
@@ -44,7 +44,7 @@ public class AimHandler : NetworkBehaviour
 
     private Vector2 ComputeDirection()
     {
-        Vector2 direction = PlayerInputs.ComputeAimDirection(cursor.transform.position, camera);
+        Vector2 direction = PlayerInputs.ComputeAimDirection(cursor.transform.position, _camera);
 
         if (direction == Vector2.zero)
             return previousDirection;
