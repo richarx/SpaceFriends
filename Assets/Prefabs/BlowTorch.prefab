@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 5156309990538089235}
   - component: {fileID: 608356231403705786}
   - component: {fileID: -2031035935480360611}
+  - component: {fileID: -5681823303176988470}
   m_Layer: 0
   m_Name: BlowTorch
   m_TagString: Item
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3002451120
+  GlobalObjectIdHash: 2419570905
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -216,6 +217,7 @@ MonoBehaviour:
   idleSprite: {fileID: -3381738298284461146, guid: 87d16f43c3f937a48a9074acd4bf5a48, type: 3}
   selectedSprite: {fileID: -5095904570462140699, guid: 87d16f43c3f937a48a9074acd4bf5a48, type: 3}
   pickedUpSprite: {fileID: 3476745048942856070, guid: 87d16f43c3f937a48a9074acd4bf5a48, type: 3}
+  canBeThrown: 0
 --- !u!114 &608356231403705786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +262,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   torchFlame: {fileID: 3358568357385921118}
+--- !u!114 &-5681823303176988470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955429779435958980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccd13d97ef765a4aac6b7205a8b5719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6713792399368254624
 GameObject:
   m_ObjectHideFlags: 0

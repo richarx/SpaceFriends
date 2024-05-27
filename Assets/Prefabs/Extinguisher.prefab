@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9034667683581412870}
   - component: {fileID: 5156309990538089235}
   - component: {fileID: 608356231403705786}
+  - component: {fileID: -591966393706940656}
   m_Layer: 0
   m_Name: Extinguisher
   m_TagString: Item
@@ -83,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 274349672
+  GlobalObjectIdHash: 1388291479
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -108,6 +109,7 @@ MonoBehaviour:
   idleSprite: {fileID: -7088851844589570183, guid: 51dbdc57893700f46b7290617cc250fb, type: 3}
   selectedSprite: {fileID: 2560272459124471374, guid: 51dbdc57893700f46b7290617cc250fb, type: 3}
   pickedUpSprite: {fileID: 9079613888231489894, guid: 51dbdc57893700f46b7290617cc250fb, type: 3}
+  canBeThrown: 0
 --- !u!114 &608356231403705786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +141,18 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 1
+--- !u!114 &-591966393706940656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955429779435958980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccd13d97ef765a4aac6b7205a8b5719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6713792399368254624
 GameObject:
   m_ObjectHideFlags: 0
