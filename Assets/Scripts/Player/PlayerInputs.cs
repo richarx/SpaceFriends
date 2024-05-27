@@ -83,8 +83,8 @@ public class PlayerInputs
         return Keyboard.current.fKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame);
     }
     
-    public static bool CheckForSwapMap()
+    public static bool CheckForThrowItem()
     {
-        return Keyboard.current.enterKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.rightShoulder.wasPressedThisFrame);
+        return Keyboard.current.aKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame);
     }
 }

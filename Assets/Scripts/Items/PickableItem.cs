@@ -79,6 +79,11 @@ public class PickableItem : NetworkBehaviour
         SetItemAsDroppedRpc();
     }
 
+    public void DetachItem()
+    {
+        SetItemAsDroppedRpc();
+    }
+
     [Rpc(SendTo.Everyone)]
     private void SetItemAsDroppedRpc()
     {

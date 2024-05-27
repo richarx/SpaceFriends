@@ -22,6 +22,8 @@ public class CalibrationModule : NetworkBehaviour
     
     [HideInInspector] public bool isBroken = false;
 
+    private float uncalibrationSpeed = 5.0f;
+    
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -41,15 +43,18 @@ public class CalibrationModule : NetworkBehaviour
 
             if (calibrationStep < 9 && calibrationStep > -9)
             {
-                calibrationStep += direction ? 1 : -1;
-                SetCursorPositionRpc(calibrationStep);
+                if (Tools.RandomBool())
+                {
+                    calibrationStep += direction ? 1 : -1;
+                    SetCursorPositionRpc(calibrationStep);
+                }
             }
             else
             {
                 BreakDownModuleRpc();
             }
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(uncalibrationSpeed);
         }
     }
 
@@ -128,6 +133,7 @@ public class CalibrationModule : NetworkBehaviour
         brokenModule.SetActive(false);
         repairStep = 0;
         calibrationStep = 0;
+        SetCursorPosition(calibrationStep);
     }
     
     [Rpc(SendTo.Everyone)]
@@ -149,8 +155,13 @@ public class CalibrationModule : NetworkBehaviour
     private void SetCursorPositionRpc(int step)
     {
         calibrationStep = step;
-        cursor.localPosition = new Vector3(step * 0.1f, 0.42f, 0.0f);
+        SetCursorPosition(step);
         SetBulbState(step >= 5 || step <= -5);
+    }
+
+    private void SetCursorPosition(int step)
+    {
+        cursor.localPosition = new Vector3(step * 0.1f, 0.42f, 0.0f);
     }
 
     private void SetBulbState(bool alarmed)

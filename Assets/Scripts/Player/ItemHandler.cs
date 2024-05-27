@@ -34,6 +34,24 @@ public class ItemHandler : NetworkBehaviour
             Debug.Log("Zuzu : CheckForUseItem");
             UseItem();
         }
+        
+        if (IsHoldingItem && PlayerInputs.CheckForThrowItem())
+        {
+            Debug.Log("Zuzu : CheckForUseItem");
+            ThrowItem();
+        }
+    }
+    
+    private void ThrowItem()
+    {
+        ThrowableItem throwableItem = currentItem.GetComponent<ThrowableItem>();
+        if (throwableItem != null)
+        {
+            throwableItem.ThrowItem(Vector2.right);
+            currentItem = null;
+        }
+        else
+            Debug.Log("Zuzu : ItemHandler item not throwable");
     }
 
     private void UseItem()
