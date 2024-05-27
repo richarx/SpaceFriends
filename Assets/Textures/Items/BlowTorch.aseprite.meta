@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 08f800eb958c5f34eaaa67c18ecf6caf
+guid: 87d16f43c3f937a48a9074acd4bf5a48
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -32,7 +32,7 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 0
+    spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 32
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638523973618333322
+  platformSettingsDirtyTick: 638524031832017728
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,38 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Calibration Module
+  - name: BlowTorch_Frame_0
     originalName: 
-    pivot: {x: 0.41975307, y: -0.7432433}
+    pivot: {x: 0.5217391, y: -0.18181819}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 36
+      width: 23
+      height: 22
+    spriteID: 69f246aa9e30b884397007c49ed47e8f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 36}
+  - name: BlowTorch_Frame_2
+    originalName: 
+    pivot: {x: 0.52, y: -0.125}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 162
-      height: 74
-    spriteID: 5969aa3805e63434ea0a268e54fbc000
+      width: 25
+      height: 24
+    spriteID: e54e2268424c3ba4ba5cf907038ed1a4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,99 +161,39 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: BlowTorch_Frame_1
+    originalName: 
+    pivot: {x: 0.5217391, y: -0.23809525}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 37
+      y: 4
+      width: 23
+      height: 21
+    spriteID: 52a5c929b9f087a4584e64b40de015d9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 37, y: 4}
   spriteSheetImportData:
-  - name: Calibration Module_0
-    originalName: 
-    pivot: {x: 0.5, y: 0.25}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 58
-      y: 37
-      width: 116
-      height: 74
-    spriteID: b8754da33072bbc45b8d21168552ec9b
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_1
-    originalName: 
-    pivot: {x: 0.5, y: 0.25}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 126
-      y: 148
-      width: 116
-      height: 74
-    spriteID: 126a9efcaedef434a997093bb1abf86a
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_2
+  - name: BlowTorch_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 142
-      y: 8
-      width: 3
-      height: 11
-    spriteID: 2238f2e6d55d816449ead159d9a6b60d
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_3
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 62
-      y: 4
-      width: 64
-      height: 26
-    spriteID: 0a86f5dfd2fe9a843bb1aefd25d443bd
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_4
-    originalName: 
-    pivot: {x: 0.778072, y: 0.09251455}
-    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 111
-      width: 50
-      height: 59
-    spriteID: 17fa077d34a9ac74e88feb317b21328f
+      y: 4
+      width: 25
+      height: 24
+    spriteID: 45afaa05b43d2484ea5930a0974dcdae
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -242,18 +202,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_5
+  - name: BlowTorch_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 190
-      y: 57
-      width: 9
-      height: 10
-    spriteID: 84052f506eabb1f498a0d7efca0ac911
+      x: 37
+      y: 4
+      width: 23
+      height: 21
+    spriteID: 1ee4d261d14635741ab3840791bf6028
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -262,98 +222,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_6
+  - name: BlowTorch_0
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 206
-      y: 57
-      width: 9
-      height: 10
-    spriteID: 5165364129b5ddc4793f7791d60aa78b
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_7
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 222
-      y: 57
-      width: 9
-      height: 10
-    spriteID: 19dd0fec1ed659e489960d5aa2f1e183
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_8
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 190
-      y: 14
-      width: 16
-      height: 20
-    spriteID: ff0bb5fe8c7570b43a7ba2508d312619
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_9
-    originalName: 
-    pivot: {x: 0, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 141
-      y: 138
-      width: 50
-      height: 5
-    spriteID: b8d3aa56083b9fc4cb0a21e909ef207e
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Calibration Module_10
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 141
-      y: 132
-      width: 50
-      height: 5
-    spriteID: 8fb95cda8160d0e48bbad25e2b1f5448
+      x: 3
+      y: 35
+      width: 25
+      height: 24
+    spriteID: c223d92f645dcb944b4ff12909378aad
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -364,20 +244,36 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
-    guid: 1566799018
-    name: Calibration Module
+    guid: -68184352
+    name: BlowTorch
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Calibration Module
+    - name: BlowTorch_Frame_0
       frameIndex: 0
       cellRect:
-        x: 6
-        y: 22
-        width: 238
-        height: 218
-      spriteId: 5969aa3805e63434ea0a268e54fbc000
+        x: 2
+        y: 4
+        width: 23
+        height: 22
+      spriteId: 69f246aa9e30b884397007c49ed47e8f
+    - name: BlowTorch_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 1
+        y: 3
+        width: 25
+        height: 24
+      spriteId: e54e2268424c3ba4ba5cf907038ed1a4
+    - name: BlowTorch_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 2
+        y: 5
+        width: 23
+        height: 21
+      spriteId: 52a5c929b9f087a4584e64b40de015d9
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -420,4 +316,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 256, y: 256}
+  canvasSize: {x: 28, y: 30}

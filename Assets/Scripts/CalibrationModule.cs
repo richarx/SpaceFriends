@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class CalibrationModule : NetworkBehaviour
 {
-    [SerializeField] private GameObject nutSelected;
+    [SerializeField] private Animator nutSelected;
     [SerializeField] private Transform cursor;
     [SerializeField] private GameObject bulbOff;
     [SerializeField] private GameObject bulbOn;
     [SerializeField] private GameObject bulbBroken;
     [SerializeField] private GameObject brokenModule;
     [SerializeField] private GameObject smoke;
+    [SerializeField] private GameObject screen;
+    [SerializeField] private SpriteRenderer repairBar;
 
     public bool isCalibrated => calibrationStep == 0;
     private int calibrationStep = 0;
+
+    private int repairStep = 0;
     
     [HideInInspector] public bool isBroken = false;
 
@@ -33,6 +37,8 @@ public class CalibrationModule : NetworkBehaviour
             if (isCalibrated)
                 direction = Tools.RandomBool();
 
+            yield return new WaitWhile(() => isBroken);
+
             if (calibrationStep < 9 && calibrationStep > -9)
             {
                 calibrationStep += direction ? 1 : -1;
@@ -42,19 +48,60 @@ public class CalibrationModule : NetworkBehaviour
             {
                 BreakDownModuleRpc();
             }
-            
-            yield return new WaitForSeconds(5.0f);
+
+            yield return new WaitForSeconds(2.0f);
         }
     }
 
     public bool UseWrench()
     {
-        bool recalibrate = !isBroken && !isCalibrated;
-        
-        if (!isBroken)
-            RecalibrateModuleRpc();
+        if (!nutSelected.gameObject.activeSelf)
+            return false;
+            
+        if (isBroken)
+        {
+            RepairModuleRpc(true);
+            return true;
+        }
 
-        return recalibrate;
+        if (!isCalibrated)
+        {
+            RecalibrateModuleRpc();
+            return true;
+        }
+
+        return false;
+    }
+    
+    public bool UseTorch()
+    {
+        if (!nutSelected.gameObject.activeSelf)
+            return false;
+            
+        if (isBroken)
+        {
+            RepairModuleRpc(false);
+            return true;
+        }
+        
+        return false;
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void RepairModuleRpc(bool isUsingWrench)
+    {
+        repairStep += isUsingWrench ? 1 : 4;
+
+        if (repairStep >= 20)
+        {
+            BuildBackModule();
+            return;
+        }
+        
+        repairBar.size = new Vector2(repairStep * 0.18f, 2.5f);
+        
+        if (isUsingWrench)
+            nutSelected.Play("Wrench_Recalibrate");
     }
 
     [Rpc(SendTo.Everyone)]
@@ -62,11 +109,25 @@ public class CalibrationModule : NetworkBehaviour
     {
         if (!isCalibrated)
         {
-            nutSelected.GetComponent<Animator>().Play("Wrench_Recalibrate");
+            nutSelected.Play("Wrench_Recalibrate");
             calibrationStep -= Math.Sign(calibrationStep);
         }
         
         SetCursorPositionRpc(calibrationStep);
+    }
+
+    private void BuildBackModule()
+    {
+        isBroken = false;
+        bulbOff.SetActive(true);
+        bulbOn.SetActive(false);
+        bulbBroken.SetActive(false);
+        cursor.gameObject.SetActive(true);
+        screen.SetActive(true);
+        smoke.SetActive(false);
+        brokenModule.SetActive(false);
+        repairStep = 0;
+        calibrationStep = 0;
     }
     
     [Rpc(SendTo.Everyone)]
@@ -76,9 +137,12 @@ public class CalibrationModule : NetworkBehaviour
         bulbOff.SetActive(false);
         bulbOn.SetActive(false);
         cursor.gameObject.SetActive(false);
+        screen.SetActive(false);
         bulbBroken.SetActive(true);
         smoke.SetActive(true);
         brokenModule.SetActive(true);
+        repairBar.size = new Vector2(0.0f, 2.5f);
+        repairStep = 0;
     }
     
     [Rpc(SendTo.Everyone)]
@@ -114,7 +178,7 @@ public class CalibrationModule : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void SetNutStateRpc(bool state)
     {
-        nutSelected.SetActive(state);
+        nutSelected.gameObject.SetActive(state);
     }
 
     private bool isQuitting = false;

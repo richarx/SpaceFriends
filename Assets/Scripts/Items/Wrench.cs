@@ -1,27 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Wrench : UsableItem
 {
+    [SerializeField] private GameObject graphics;
+
+    private bool isUsingWrench;
+    
     public override void UseItem(ItemHandler itemHandler)
     {
-        Debug.Log("Zuzu : Using Wrench !");
-        
+        if (isUsingWrench)
+            return;
+
         CalibrationModule calibrationModule = LookForCalibrationModule();
 
         if (calibrationModule != null)
         {
             bool wasActionPerformed = calibrationModule.UseWrench();
             if (wasActionPerformed)
-                StartCoroutine(HideWrenchForDuration(0.5f));
+                HideWrenchRpc();
         }
+    }
+    
+    [Rpc(SendTo.Everyone)]
+    private void HideWrenchRpc()
+    {
+        StartCoroutine(HideWrenchForDuration(0.25f));
     }
 
     private IEnumerator HideWrenchForDuration(float duration)
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        isUsingWrench = true;
+        graphics.SetActive(false);
         yield return new WaitForSeconds(duration);
-        transform.GetChild(0).gameObject.SetActive(true);
+        graphics.SetActive(true);
+        isUsingWrench = false;
     }
 }
