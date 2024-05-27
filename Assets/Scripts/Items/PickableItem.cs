@@ -18,6 +18,8 @@ public class PickableItem : NetworkBehaviour
     
     [HideInInspector]
     public bool canBeThrown;
+
+    public bool isBeingHeld => isPickedUp;
     
     private ItemHandler currentHolder = null;
     private bool isPickedUp = false;

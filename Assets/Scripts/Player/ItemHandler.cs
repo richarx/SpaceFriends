@@ -69,7 +69,7 @@ public class ItemHandler : NetworkBehaviour
     {
         PickableItem targetItem = LookForPickupItem();
 
-        if (targetItem != null)
+        if (targetItem != null && targetItem.isBeingHeld)
             PickupItem(targetItem);
     }
 
