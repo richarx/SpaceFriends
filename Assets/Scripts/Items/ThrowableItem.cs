@@ -34,7 +34,7 @@ public class ThrowableItem : NetworkBehaviour
         transform.position = position;
         UpdatePositionRpc(position);
     }
-    
+
     [Rpc(SendTo.NotMe)]
     private void UpdatePositionRpc(Vector2 position)
     {

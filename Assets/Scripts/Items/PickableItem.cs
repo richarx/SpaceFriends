@@ -82,8 +82,7 @@ public class PickableItem : NetworkBehaviour
     {
         transform.position = currentHolder.itemDropPosition;
         UpdatePositionAndDirectionRpc(currentHolder.itemDropPosition, currentHolder.itemHolderDirection);
-        
-        currentHolder = null;
+
         SetItemAsDroppedRpc();
     }
 
@@ -95,6 +94,7 @@ public class PickableItem : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void SetItemAsDroppedRpc()
     {
+        currentHolder = null;
         isPickedUp = false;
         SetSpriteState(ItemDisplayState.Selected);
     }
