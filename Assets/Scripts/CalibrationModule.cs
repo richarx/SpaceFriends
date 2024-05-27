@@ -5,10 +5,19 @@ using UnityEngine;
 
 public class CalibrationModule : NetworkBehaviour
 {
+    enum BulbState
+    {
+        Green,
+        Yellow,
+        Red,
+        Broken
+    }
+    
     [SerializeField] private Animator nutSelected;
     [SerializeField] private Transform cursor;
-    [SerializeField] private GameObject bulbOff;
-    [SerializeField] private GameObject bulbOn;
+    [SerializeField] private GameObject bulbGreen;
+    [SerializeField] private GameObject bulbYellow;
+    [SerializeField] private GameObject bulbRed;
     [SerializeField] private GameObject bulbBroken;
     [SerializeField] private GameObject brokenModule;
     [SerializeField] private GameObject smoke;
@@ -17,6 +26,7 @@ public class CalibrationModule : NetworkBehaviour
 
     public bool isCalibrated => calibrationStep == 0;
     private int calibrationStep = 0;
+    private int absoluteCalibrationStep => Math.Abs(calibrationStep);
 
     private int repairStep = 0;
     
@@ -28,6 +38,8 @@ public class CalibrationModule : NetworkBehaviour
     {
         if (IsServer)
             StartCoroutine(UncalibrateModule());
+        
+        SetBulbState();
     }
 
     private IEnumerator UncalibrateModule()
@@ -124,9 +136,6 @@ public class CalibrationModule : NetworkBehaviour
     private void BuildBackModule()
     {
         isBroken = false;
-        bulbOff.SetActive(true);
-        bulbOn.SetActive(false);
-        bulbBroken.SetActive(false);
         cursor.gameObject.SetActive(true);
         screen.SetActive(true);
         smoke.SetActive(false);
@@ -134,21 +143,20 @@ public class CalibrationModule : NetworkBehaviour
         repairStep = 0;
         calibrationStep = 0;
         SetCursorPosition(calibrationStep);
+        SetBulbState();
     }
     
     [Rpc(SendTo.Everyone)]
     private void BreakDownModuleRpc()
     {
         isBroken = true;
-        bulbOff.SetActive(false);
-        bulbOn.SetActive(false);
         cursor.gameObject.SetActive(false);
         screen.SetActive(false);
-        bulbBroken.SetActive(true);
         smoke.SetActive(true);
         brokenModule.SetActive(true);
         repairBar.size = new Vector2(0.0f, 2.5f);
         repairStep = 0;
+        SetBulbState();
     }
     
     [Rpc(SendTo.Everyone)]
@@ -156,7 +164,7 @@ public class CalibrationModule : NetworkBehaviour
     {
         calibrationStep = step;
         SetCursorPosition(step);
-        SetBulbState(step >= 5 || step <= -5);
+        SetBulbState();
     }
 
     private void SetCursorPosition(int step)
@@ -164,10 +172,31 @@ public class CalibrationModule : NetworkBehaviour
         cursor.localPosition = new Vector3(step * 0.1f, 0.42f, 0.0f);
     }
 
-    private void SetBulbState(bool alarmed)
+    private void SetBulbState()
     {
-        bulbOff.SetActive(!alarmed);
-        bulbOn.SetActive(alarmed);
+        SetBulbState(ComputeBulbState(absoluteCalibrationStep));
+    }
+
+    private BulbState ComputeBulbState(int step)
+    {
+        if (absoluteCalibrationStep > 9)
+            return BulbState.Broken;
+
+        if (absoluteCalibrationStep >= 7)
+            return BulbState.Red;
+
+        if (absoluteCalibrationStep >= 5)
+            return BulbState.Yellow;
+
+        return BulbState.Green;
+    }
+    
+    private void SetBulbState(BulbState state)
+    {
+        bulbGreen.SetActive(state == BulbState.Green);
+        bulbYellow.SetActive(state == BulbState.Yellow);
+        bulbRed.SetActive(state == BulbState.Red);
+        bulbBroken.SetActive(state == BulbState.Broken);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -249,7 +249,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 190
+      x: 196
       y: 57
       width: 9
       height: 10
@@ -269,7 +269,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 206
+      x: 209
       y: 57
       width: 9
       height: 10
@@ -289,7 +289,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 222
+      x: 221
       y: 57
       width: 9
       height: 10
@@ -362,6 +362,26 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
+  - name: Calibration Module_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 235
+      y: 57
+      width: 9
+      height: 10
+    spriteID: 03831015d14337c48bef8d57ccee36ee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
     guid: 1566799018
@@ -375,7 +395,7 @@ ScriptedImporter:
       cellRect:
         x: 6
         y: 22
-        width: 238
+        width: 240
         height: 218
       spriteId: 5969aa3805e63434ea0a268e54fbc000
     linkedCells: []
