@@ -9,6 +9,8 @@ public class BlowTorch : UsableItem
     
     private bool isUsingTorch;
 
+    private Coroutine flameRoutine = null;
+
     public override void UseItem(ItemHandler itemHandler)
     {
         if (isUsingTorch)
@@ -16,26 +18,32 @@ public class BlowTorch : UsableItem
 
         CalibrationModule calibrationModule = LookForCalibrationModule();
 
+        bool wasActionPerformed = false;
+        
         if (calibrationModule != null)
-        {
-            bool wasActionPerformed = calibrationModule.UseTorch();
-            if (wasActionPerformed)
-                ActivateFlameRpc();
-        }
+            wasActionPerformed = calibrationModule.UseTorch();
+
+        ActivateFlameRpc(wasActionPerformed);
     }
 
     [Rpc(SendTo.Everyone)]
-    private void ActivateFlameRpc()
+    private void ActivateFlameRpc(bool wasActionPerformed)
     {
-        StartCoroutine(ActivateFlameForDuration(1.0f));
+        if (flameRoutine != null)
+            StopAllCoroutines();
+            
+        flameRoutine = StartCoroutine(ActivateFlameForDuration(1.0f, wasActionPerformed));
     }
     
-    private IEnumerator ActivateFlameForDuration(float duration)
+    private IEnumerator ActivateFlameForDuration(float duration, bool lockTorch)
     {
-        isUsingTorch = true;
         torchFlame.SetActive(true);
-        yield return new WaitForSeconds(0.25f);
-        isUsingTorch = false;
+        if (lockTorch)
+        {
+            isUsingTorch = true;
+            yield return new WaitForSeconds(0.25f);
+            isUsingTorch = false;
+        }
         yield return new WaitForSeconds(duration - 0.25f);
         torchFlame.SetActive(false);
     }
