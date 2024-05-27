@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ProtocolType: 0
+  m_ProtocolType: 1
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
   m_HeartbeatTimeoutMS: 500
@@ -5036,7 +5036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f401d390d5f7d468455c338344c663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useRelay: 0
+  useRelay: 1
   hostButton: {fileID: 569990788}
   clientButton: {fileID: 971172980}
   codeTextInput: {fileID: 1979466315}
