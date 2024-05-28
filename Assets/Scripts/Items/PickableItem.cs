@@ -1,9 +1,14 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickableItem : NetworkBehaviour
 {
+    public UnityEvent<ItemHandler> OnItemPickup = new UnityEvent<ItemHandler>();
+    public UnityEvent OnItemRelease = new UnityEvent();
+
+    
     private enum ItemDisplayState
     {
         Idle,
@@ -20,8 +25,10 @@ public class PickableItem : NetworkBehaviour
     public bool canBeThrown;
 
     public bool isBeingHeld => currentHolder != null;
+
+    private bool previousHeldStatus = false;
     
-    private ItemHandler currentHolder => ItemParentingAuthority.Instance != null ? ItemParentingAuthority.Instance.GetOwner(this) : null;
+    public ItemHandler currentHolder => ItemParentingAuthority.Instance != null ? ItemParentingAuthority.Instance.GetOwner(this) : null;
 
     private void Start()
     {
@@ -32,12 +39,28 @@ public class PickableItem : NetworkBehaviour
     {
         if (isBeingHeld)
         {
+            if (!previousHeldStatus && IsServer)
+            {
+                SetItemStateRpc(ItemDisplayState.PickedUp);
+                previousHeldStatus = true;
+                OnItemPickup?.Invoke(currentHolder);
+            }
+            
             Vector2 position = currentHolder.itemHolderPosition;
             float direction = currentHolder.itemHolderDirection;
             
             transform.position = position;
             transform.localScale = new Vector3(direction, 1.0f, 1.0f);
             UpdatePositionAndDirectionRpc(position, direction);
+        }
+        else
+        {
+            if (previousHeldStatus && IsServer)
+            {
+                SetItemStateRpc(ItemDisplayState.Idle);
+                previousHeldStatus = false;
+                OnItemRelease?.Invoke();
+            }
         }
     }
 
@@ -66,36 +89,18 @@ public class PickableItem : NetworkBehaviour
             SetSpriteState(ItemDisplayState.Idle);
     }
 
-    public void PickedUpItem(ItemHandler itemHandler)
-    {
-        SetItemAsPickedUpRpc();
-    }
-    
     [Rpc(SendTo.Everyone)]
-    private void SetItemAsPickedUpRpc()
+    private void SetItemStateRpc(ItemDisplayState state)
     {
-        SetSpriteState(ItemDisplayState.PickedUp);
+        SetSpriteState(state);
     }
     
     public void DropItem()
     {
         transform.position = currentHolder.itemDropPosition;
         UpdatePositionAndDirectionRpc(currentHolder.itemDropPosition, currentHolder.itemHolderDirection);
-
-        SetItemAsDroppedRpc();
     }
-
-    public void DetachItem()
-    {
-        SetItemAsDroppedRpc();
-    }
-
-    [Rpc(SendTo.Everyone)]
-    private void SetItemAsDroppedRpc()
-    {
-        SetSpriteState(ItemDisplayState.Selected);
-    }
-
+    
     private void SetSpriteState(ItemDisplayState state)
     {
         switch (state)
@@ -115,17 +120,5 @@ public class PickableItem : NetworkBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
-    }
-    
-    [Rpc(SendTo.Server)]
-    public void GiveOwnershipRpc(ulong targetId)
-    {
-        NetworkObject.ChangeOwnership(targetId);
-    }
-    
-    [Rpc(SendTo.Server)]
-    public void RemoveOwnershipRpc()
-    {
-        NetworkObject.RemoveOwnership();
     }
 }

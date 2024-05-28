@@ -44,18 +44,12 @@ public class ItemParentingAuthority : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void RequestAuthorityRpc(ulong player, ulong item)
     {
-        Debug.Log($"Zuzu : RequestAuthorityRpc ! player : {player} / item : {item}");
-
         ItemHandler itemHandler =
             NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].GetComponent<ItemHandler>();
         
-        Debug.Log($"Zuzu : Grab Player : {itemHandler.gameObject.name}");
-
         PickableItem pickableItem =
             NetworkManager.Singleton.SpawnManager.SpawnedObjects[item].GetComponent<PickableItem>();
         
-        Debug.Log($"Zuzu : Grab Item : {pickableItem.gameObject.name}");
-
         if (authority.ContainsKey(itemHandler) || authority.ContainsValue(pickableItem))
             return;
         

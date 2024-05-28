@@ -46,6 +46,7 @@ public class ItemHandler : NetworkBehaviour
         ThrowableItem throwableItem = currentItem!.GetComponent<ThrowableItem>();
         if (throwableItem != null)
         {
+            ItemParentingAuthority.Instance.ReleaseAuthority(this, currentItem);
             throwableItem.ThrowItem(direction);
         }
         else
