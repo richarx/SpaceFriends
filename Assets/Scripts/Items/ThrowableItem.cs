@@ -98,6 +98,32 @@ public class ThrowableItem : NetworkBehaviour
 
         return false;
     }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (pickableItem.isBeingHeld)
+            return;
+        
+        if (!isMoving)
+            return;
+
+        bool isPlayer = other.CompareTag("Player");
+            
+        if (!isPlayer)
+            return;
+
+        ItemHandler player = other.transform.parent.GetComponent<ItemHandler>();
+
+        bool isLocalPlayer = player.IsOwner;
+        
+        if (!isLocalPlayer)
+            return;
+
+        bool isPlayerEmptyHanded = ItemParentingAuthority.Instance.GetItem(player) == null;
+        
+        if (isPlayerEmptyHanded)
+            ItemParentingAuthority.Instance.RequestAuthority(player, pickableItem);
+    }
 
     private void FallOnTheGround()
     {
