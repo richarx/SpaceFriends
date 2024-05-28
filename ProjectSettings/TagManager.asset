@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Module
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - Water
   - UI
   - PlayerToPlayer
-  - 
-  - 
+  - Wall
+  - ItemToWall
   - 
   - 
   - 

@@ -351,7 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 41824134}
   - component: {fileID: 41824133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +519,7 @@ GameObject:
   m_Component:
   - component: {fileID: 88619837}
   - component: {fileID: 88619836}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +841,7 @@ GameObject:
   m_Component:
   - component: {fileID: 151588923}
   - component: {fileID: 151588922}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cockpit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -925,7 +925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 184959717}
   - component: {fileID: 184959716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2542,7 +2542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 608986128}
   - component: {fileID: 608986127}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2738,9 +2738,9 @@ GameObject:
   - component: {fileID: 639887384}
   - component: {fileID: 639887383}
   - component: {fileID: 639887404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4241,7 +4241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 649965175}
   - component: {fileID: 649965174}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4325,7 +4325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 666222608}
   - component: {fileID: 666222607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4409,7 +4409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 670838751}
   - component: {fileID: 670838750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon Bay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4577,7 +4577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 702616540}
   - component: {fileID: 702616539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5134,7 +5134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 846282760}
   - component: {fileID: 846282759}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5218,7 +5218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 850437312}
   - component: {fileID: 850437311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: South Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5302,7 +5302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 889136949}
   - component: {fileID: 889136948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Life Support Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5591,7 +5591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1037488623}
   - component: {fileID: 1037488622}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5675,7 +5675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1046217317}
   - component: {fileID: 1046217316}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5759,7 +5759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1051447540}
   - component: {fileID: 1051447539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StarDeck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5843,7 +5843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1120435546}
   - component: {fileID: 1120435545}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6180,7 +6180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278028699}
   - component: {fileID: 1278028698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6264,7 +6264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1298564844}
   - component: {fileID: 1298564843}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: North Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6348,7 +6348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1314540399}
   - component: {fileID: 1314540398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6432,7 +6432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360676894}
   - component: {fileID: 1360676893}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6700,7 +6700,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381584556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Corridors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6836,7 +6836,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1472032014}
   - component: {fileID: 1472032013}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7301,7 +7301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1756498312}
   - component: {fileID: 1756498311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7653,7 +7653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786204848}
   - component: {fileID: 1786204847}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Engine Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7821,7 +7821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1874043838}
   - component: {fileID: 1874043837}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7905,7 +7905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875485062}
   - component: {fileID: 1875485061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7989,7 +7989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1891953183}
   - component: {fileID: 1891953182}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8517,7 +8517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1976663657}
   - component: {fileID: 1976663656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Room_Floor_17 (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

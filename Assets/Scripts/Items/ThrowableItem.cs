@@ -1,15 +1,19 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class ThrowableItem : NetworkBehaviour
 {
     private PickableItem pickableItem;
+    [SerializeField] private Collider2D wallCollider;
 
     private Vector2 direction;
     private Vector2 startPosition;
 
-    private float maxTravelDistance = 4.0f;
-    private float speed = 7.5f;
+    private bool isMoving => direction != Vector2.zero;
+
+    private float maxTravelDistance = 10.0f;
+    private float speed = 10.0f;
     
     private void Start()
     {
@@ -23,7 +27,7 @@ public class ThrowableItem : NetworkBehaviour
 
     private void Update()
     {
-        if (!pickableItem.isBeingHeld)
+        if (!pickableItem.isBeingHeld && isMoving)
         {
             if (isArrivedAtDestination())
                 FallOnTheGround();
@@ -44,6 +48,12 @@ public class ThrowableItem : NetworkBehaviour
         direction = Vector2.zero;
         startPosition = Vector2.zero;
     }
+
+    private void ResetVelocityLocal()
+    {
+        direction = Vector2.zero;
+        startPosition = Vector2.zero;
+    }
     
     [Rpc(SendTo.Everyone)]
     private void SetVelocityRpc(Vector2 position, Vector2 throwDirection)
@@ -61,22 +71,37 @@ public class ThrowableItem : NetworkBehaviour
     {
         Vector2 position = transform.position.ToVector2() + (direction * (speed * Time.deltaTime));
         transform.position = position;
-        //UpdatePositionRpc(position);
-    }
-
-    [Rpc(SendTo.NotMe)]
-    private void UpdatePositionRpc(Vector2 position)
-    {
-        transform.position = position;
     }
 
     private bool isArrivedAtDestination()
     {
+        if (IsBlockedByWall())
+            return true;
+
         return (startPosition - transform.position.ToVector2()).magnitude >= maxTravelDistance;
+    }
+
+    private bool IsBlockedByWall()
+    {
+        List<Collider2D> results = new List<Collider2D>();
+
+        int contactCount = Physics2D.OverlapCollider(wallCollider, new ContactFilter2D().NoFilter(), results);
+
+        if (contactCount < 1)
+            return false;
+
+        foreach (Collider2D result in results)
+        {
+            if (result.CompareTag("Wall"))
+                return true;
+        }
+
+        return false;
     }
 
     private void FallOnTheGround()
     {
+        ResetVelocityLocal();
         if (IsServer)
             ResetVelocityRpc(transform.position);
     }
