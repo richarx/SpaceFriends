@@ -56,15 +56,14 @@ public class ThrowableItem : NetworkBehaviour
     }
     
     [Rpc(SendTo.Everyone)]
-    private void SetVelocityRpc(Vector2 position, Vector2 throwDirection)
+    private void SetVelocityRpc(Vector2 throwDirection)
     {
-        startPosition = position;
         direction = throwDirection.normalized;
     }
 
     public void ThrowItem(Vector2 throwDirection)
     {
-        SetVelocityRpc(transform.position, throwDirection);
+        SetVelocityRpc(throwDirection);
     }
 
     private void MoveTowardDestination()
