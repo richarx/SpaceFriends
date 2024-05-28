@@ -19,10 +19,9 @@ public class PickableItem : NetworkBehaviour
     [HideInInspector]
     public bool canBeThrown;
 
-    public bool isBeingHeld => isPickedUp;
+    public bool isBeingHeld => currentHolder != null;
     
-    private ItemHandler currentHolder = null;
-    private bool isPickedUp = false;
+    private ItemHandler currentHolder => ItemParentingAuthority.Instance != null ? ItemParentingAuthority.Instance.GetOwner(this) : null;
 
     private void Start()
     {
@@ -31,7 +30,7 @@ public class PickableItem : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if (isPickedUp && currentHolder != null)
+        if (isBeingHeld)
         {
             Vector2 position = currentHolder.itemHolderPosition;
             float direction = currentHolder.itemHolderDirection;
@@ -51,7 +50,7 @@ public class PickableItem : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isPickedUp)
+        if (isBeingHeld)
             return;
         
         if (other.CompareTag("Player") && other.transform.parent.GetComponent<PlayerMovement>().IsOwner)
@@ -60,7 +59,7 @@ public class PickableItem : NetworkBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (isPickedUp)
+        if (isBeingHeld)
             return;
         
         if (other.CompareTag("Player") && other.transform.parent.GetComponent<PlayerMovement>().IsOwner)
@@ -69,14 +68,12 @@ public class PickableItem : NetworkBehaviour
 
     public void PickedUpItem(ItemHandler itemHandler)
     {
-        currentHolder = itemHandler;
         SetItemAsPickedUpRpc();
     }
     
     [Rpc(SendTo.Everyone)]
     private void SetItemAsPickedUpRpc()
     {
-        isPickedUp = true;
         SetSpriteState(ItemDisplayState.PickedUp);
     }
     
@@ -96,8 +93,6 @@ public class PickableItem : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void SetItemAsDroppedRpc()
     {
-        currentHolder = null;
-        isPickedUp = false;
         SetSpriteState(ItemDisplayState.Selected);
     }
 

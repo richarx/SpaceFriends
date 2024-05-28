@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -13,9 +14,9 @@ public class ItemHandler : NetworkBehaviour
     public Vector2 itemDropPosition => itemDropper.position;
 
     public bool IsHoldingItem => currentItem != null;
-    public bool IsItemThrowable => IsHoldingItem && currentItem.canBeThrown;
-    public string itemName => currentItem.name;
-    private PickableItem currentItem = null;
+    public bool IsItemThrowable => IsHoldingItem && currentItem!.canBeThrown;
+    public string itemName => IsHoldingItem ? currentItem!.name : "none";
+    [CanBeNull] private PickableItem currentItem => ItemParentingAuthority.Instance != null ? ItemParentingAuthority.Instance.GetItem(this) : null;
 
     private void Update()
     {
@@ -39,11 +40,13 @@ public class ItemHandler : NetworkBehaviour
     
     public void ThrowItem(Vector2 direction)
     {
-        ThrowableItem throwableItem = currentItem.GetComponent<ThrowableItem>();
+        if (!IsHoldingItem)
+            return;
+        
+        ThrowableItem throwableItem = currentItem!.GetComponent<ThrowableItem>();
         if (throwableItem != null)
         {
             throwableItem.ThrowItem(direction);
-            currentItem = null;
         }
         else
             Debug.Log("Zuzu : ItemHandler item not throwable");
@@ -51,7 +54,10 @@ public class ItemHandler : NetworkBehaviour
 
     private void UseItem()
     {
-        UsableItem usableItem = currentItem.GetComponent<UsableItem>();
+        if (!IsHoldingItem)
+            return;
+        
+        UsableItem usableItem = currentItem!.GetComponent<UsableItem>();
         if (usableItem != null)
             usableItem.UseItem(this);
         else
@@ -60,25 +66,24 @@ public class ItemHandler : NetworkBehaviour
 
     private void DropItem()
     {
-        Debug.Log($"Zuzu : Dropping item : {currentItem}");
-        currentItem.DropItem();
-        currentItem = null;
+        Debug.Log($"Zuzu : Request Dropping item : {currentItem}");
+        
+        ItemParentingAuthority.Instance.ReleaseAuthority(this, currentItem);
     }
 
     private void TryToPickupItem()
     {
         PickableItem targetItem = LookForPickupItem();
 
-        if (targetItem != null && !targetItem.isBeingHeld)
+        if (targetItem != null)
             PickupItem(targetItem);
     }
 
     private void PickupItem(PickableItem targetItem)
     {
-        Debug.Log($"Zuzu : PickupItem : {targetItem}");
+        Debug.Log($"Zuzu : Request PickupItem : {targetItem}");
 
-        targetItem.PickedUpItem(this);
-        currentItem = targetItem;
+        ItemParentingAuthority.Instance.RequestAuthority(this, targetItem);
     }
 
     private PickableItem LookForPickupItem()
