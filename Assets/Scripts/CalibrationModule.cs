@@ -32,8 +32,15 @@ public class CalibrationModule : NetworkBehaviour
     
     [HideInInspector] public bool isBroken = false;
 
-    private float uncalibrationSpeed = 5.0f;
-    
+    private float uncalibrationSpeed = 2.5f;
+
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -116,9 +123,12 @@ public class CalibrationModule : NetworkBehaviour
         }
         
         repairBar.size = new Vector2(repairStep * 0.18f, 2.5f);
-        
+
         if (isUsingWrench)
+        {
             nutSelected.Play("Wrench_Recalibrate");
+            audioSource.Play();
+        }
     }
 
     [Rpc(SendTo.Everyone)]
@@ -127,9 +137,10 @@ public class CalibrationModule : NetworkBehaviour
         if (!isCalibrated)
         {
             nutSelected.Play("Wrench_Recalibrate");
+            audioSource.Play();
             calibrationStep -= Math.Sign(calibrationStep);
         }
-        
+
         SetCursorPositionRpc(calibrationStep);
     }
 

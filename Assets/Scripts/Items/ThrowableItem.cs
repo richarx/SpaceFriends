@@ -13,7 +13,7 @@ public class ThrowableItem : NetworkBehaviour
     private bool isMoving => direction != Vector2.zero;
 
     private float maxTravelDistance = 30.0f;
-    private float speed = 15.0f;
+    private float speed = 10.0f;
     
     private void Start()
     {

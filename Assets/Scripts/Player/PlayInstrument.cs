@@ -8,6 +8,7 @@ public class PlayInstrument : NetworkBehaviour
     [SerializeField] private List<AudioClip> clips;
     
     [HideInInspector] public bool isPlayingBanjo = false;
+    private ulong banjoID;
 
     private PlayerMovement playerMovement;
     private ItemHandler itemHandler;
@@ -35,13 +36,14 @@ public class PlayInstrument : NetworkBehaviour
     public void PlayBanjo()
     {
         int clip = Random.Range(0, clips.Count);
-        PlayBanjoRpc(clip);   
+        PlayBanjoRpc(clip);
     }
 
     [Rpc(SendTo.Everyone)]
     private void PlayBanjoRpc(int clip)
     {
         isPlayingBanjo = true;
+        banjoID = ItemParentingAuthority.Instance.GetItem(itemHandler)!.NetworkObjectId;
         SetBanjoState(false);
         playerAnimation.PlayBanjo();
         audioSource.clip = clips[clip];
@@ -58,6 +60,6 @@ public class PlayInstrument : NetworkBehaviour
 
     private void SetBanjoState(bool state)
     {
-        ItemParentingAuthority.Instance.GetItem(itemHandler)?.transform.GetChild(0).gameObject.SetActive(state);
+        NetworkManager.Singleton.SpawnManager.SpawnedObjects[banjoID].transform.GetChild(0).gameObject.SetActive(state);
     }  
 }
