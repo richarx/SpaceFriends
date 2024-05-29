@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -16,6 +17,12 @@ public class ItemParentingAuthority : NetworkBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsServer)
+            RequestAuthoritySpreadRpc();
     }
 
     [CanBeNull]
@@ -44,32 +51,14 @@ public class ItemParentingAuthority : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void RequestAuthorityRpc(ulong player, ulong item)
     {
-        ItemHandler itemHandler =
-            NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].GetComponent<ItemHandler>();
-        
-        PickableItem pickableItem =
-            NetworkManager.Singleton.SpawnManager.SpawnedObjects[item].GetComponent<PickableItem>();
-        
+        ItemHandler itemHandler = GetPlayerFromId(player);
+        PickableItem pickableItem = GetItemFromId(item);
+
         if (authority.ContainsKey(itemHandler) || authority.ContainsValue(pickableItem))
             return;
-        
+
         authority.Add(itemHandler, pickableItem);
-        SpreadAuthorityRpc(player, item, true);
-    }
-
-    [Rpc(SendTo.NotMe)]
-    private void SpreadAuthorityRpc(ulong player, ulong item, bool ownership)
-    {
-        ItemHandler itemHandler =
-            NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].GetComponent<ItemHandler>();
-
-        PickableItem pickableItem =
-            NetworkManager.Singleton.SpawnManager.SpawnedObjects[item].GetComponent<PickableItem>();
-
-        if (ownership)
-            authority.Add(itemHandler, pickableItem);
-        else
-            authority.Remove(itemHandler);
+        SpreadAuthority();
     }
 
     public void ReleaseAuthority(ItemHandler player, PickableItem item)
@@ -80,11 +69,8 @@ public class ItemParentingAuthority : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void RequestReleaseAuthorityRpc(ulong player, ulong item)
     {
-        ItemHandler itemHandler =
-            NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].GetComponent<ItemHandler>();
-
-        PickableItem pickableItem =
-            NetworkManager.Singleton.SpawnManager.SpawnedObjects[item].GetComponent<PickableItem>();
+        ItemHandler itemHandler = GetPlayerFromId(player);
+        PickableItem pickableItem = GetItemFromId(item);
 
         bool playerHasNoItem = !authority.ContainsKey(itemHandler);
         bool playerHasItem = !playerHasNoItem && authority[itemHandler] == pickableItem;
@@ -102,6 +88,49 @@ public class ItemParentingAuthority : NetworkBehaviour
         }
 
         authority.Remove(itemHandler);
-        SpreadAuthorityRpc(player, item, false);
+        SpreadAuthority();
+    }
+
+    [Rpc(SendTo.Server)]
+    private void RequestAuthoritySpreadRpc()
+    {
+        SpreadAuthority();
+    }
+    
+    private void SpreadAuthority()
+    {
+        int count = authority.Count;
+
+        ulong[] players = new ulong[count];
+        ulong[] items = new ulong[count];
+
+        int i = 0;
+        foreach (KeyValuePair<ItemHandler,PickableItem> pair in authority)
+        {
+            players[i] = pair.Key.NetworkObjectId;
+            items[i] = pair.Value.NetworkObjectId;
+            i += 1;
+        }
+        
+        SpreadAuthorityRpc(players, items);
+    }
+    
+    [Rpc(SendTo.NotMe)]
+    private void SpreadAuthorityRpc(ulong[] players, ulong[] items)
+    {
+        authority = new Dictionary<ItemHandler, PickableItem>();
+
+        for (int i = 0; i < players.Length; i++)
+            authority.Add(GetPlayerFromId(players[i]), GetItemFromId(items[i]));
+    }
+
+    private ItemHandler GetPlayerFromId(ulong player)
+    {
+        return NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].GetComponent<ItemHandler>();
+    }
+    
+    private PickableItem GetItemFromId(ulong item)
+    {
+        return NetworkManager.Singleton.SpawnManager.SpawnedObjects[item].GetComponent<PickableItem>();
     }
 }
