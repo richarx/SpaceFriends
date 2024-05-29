@@ -3,29 +3,18 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayInstrument playInstrument;
     [SerializeField] private Animator animator;
 
     private string previousAnimation;
-
-    private bool isPlayingBanjo = false;
-    private Banjo banjoRef = null;
 
     private void LateUpdate()
     {
         Vector2 direction = playerMovement.MoveDirection;
 
-        if (isPlayingBanjo)
-        {
-            if (direction.magnitude > 0.5f)
-            {
-                isPlayingBanjo = false;
-                GetComponent<AudioSource>().Stop();
-                banjoRef.transform.GetChild(0).gameObject.SetActive(true);
-            }
-            else
-                return;
-        }
-        
+        if (playInstrument.isPlayingBanjo)
+            return;
+
         string targetAnimation = ComputeAnimation(direction, previousAnimation);
 
         bool isFirstAnimationEver = string.IsNullOrEmpty(previousAnimation);
@@ -37,13 +26,10 @@ public class PlayerAnimation : MonoBehaviour
         previousAnimation = targetAnimation;
     }
 
-    public void PlayBanjo(Banjo banjo)
+    public void PlayBanjo()
     {
-        banjoRef = banjo;
         previousAnimation = string.Empty;
-        isPlayingBanjo = true;
         animator.Play("Banjo");
-        GetComponent<AudioSource>().Play();
     }
 
     private static string ComputeAnimation(Vector2 direction, string previousAnimation)
@@ -100,6 +86,9 @@ public class PlayerAnimation : MonoBehaviour
 
     private static string ComputeIdleAnimation(string previousAnimation)
     {
+        if (string.IsNullOrEmpty(previousAnimation))
+            return "Idle_F";
+        
         if (previousAnimation == "Walk_BR")
             return "Idle_BR";
         if (previousAnimation == "Walk_FR")
@@ -116,7 +105,7 @@ public class PlayerAnimation : MonoBehaviour
             return "Idle_F";
         if (previousAnimation == "Walk_B")
             return "Idle_B";
-        
+
         return previousAnimation;
     }
 }
