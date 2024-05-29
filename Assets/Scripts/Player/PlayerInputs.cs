@@ -80,7 +80,7 @@ public class PlayerInputs
     
     private static bool CheckKeyboardPickup()
     {
-        return Keyboard.current.eKey.wasPressedThisFrame;
+        return Keyboard.current.spaceKey.wasPressedThisFrame;
     }
 
     public static bool CheckForSpeedIncrease()
@@ -105,7 +105,7 @@ public class PlayerInputs
     
     public static bool CheckForUseItem()
     {
-        return Keyboard.current.fKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame);
+        return Keyboard.current.eKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame);
     }
     
     public static bool CheckForThrowItem()

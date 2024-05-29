@@ -27,7 +27,7 @@ public class Wrench : UsableItem
     [Rpc(SendTo.Everyone)]
     private void HideWrenchRpc()
     {
-        StartCoroutine(HideWrenchForDuration(0.25f));
+        StartCoroutine(HideWrenchForDuration(0.5f));
     }
 
     private IEnumerator HideWrenchForDuration(float duration)
