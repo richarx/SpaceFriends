@@ -12,8 +12,8 @@ public class ThrowableItem : NetworkBehaviour
 
     private bool isMoving => direction != Vector2.zero;
 
-    private float maxTravelDistance = 10.0f;
-    private float speed = 10.0f;
+    private float maxTravelDistance = 30.0f;
+    private float speed = 15.0f;
     
     private void Start()
     {
@@ -38,13 +38,12 @@ public class ThrowableItem : NetworkBehaviour
 
     private void OnPickup(ItemHandler player)
     {
-        ResetVelocityRpc(transform.position);
+        ResetVelocityRpc();
     }
     
     [Rpc(SendTo.Everyone)]
-    private void ResetVelocityRpc(Vector2 position)
+    private void ResetVelocityRpc()
     {
-        transform.position = position;
         direction = Vector2.zero;
         startPosition = Vector2.zero;
     }
@@ -56,14 +55,15 @@ public class ThrowableItem : NetworkBehaviour
     }
     
     [Rpc(SendTo.Everyone)]
-    private void SetVelocityRpc(Vector2 throwDirection)
+    private void SetVelocityRpc(Vector2 position, Vector2 throwDirection)
     {
+        startPosition = position;
         direction = throwDirection.normalized;
     }
 
     public void ThrowItem(Vector2 throwDirection)
     {
-        SetVelocityRpc(throwDirection);
+        SetVelocityRpc(transform.position, throwDirection);
     }
 
     private void MoveTowardDestination()
@@ -75,7 +75,10 @@ public class ThrowableItem : NetworkBehaviour
     private bool isArrivedAtDestination()
     {
         if (IsBlockedByWall())
+        {
+            Debug.Log("Zuzu : Blocked By Wall");
             return true;
+        }
 
         return (startPosition - transform.position.ToVector2()).magnitude >= maxTravelDistance;
     }
@@ -128,6 +131,6 @@ public class ThrowableItem : NetworkBehaviour
     {
         ResetVelocityLocal();
         if (IsServer)
-            ResetVelocityRpc(transform.position);
+            ResetVelocityRpc();
     }
 }

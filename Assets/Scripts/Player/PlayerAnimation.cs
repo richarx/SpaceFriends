@@ -51,21 +51,43 @@ public class PlayerAnimation : MonoBehaviour
         if (direction.magnitude < 0.5f)
             return ComputeIdleAnimation(previousAnimation);
 
-        return ComputeWalkAnimation(direction);
+        return ComputeWalkAnimation_4(direction);
     }
 
-    private static string ComputeWalkAnimation(Vector2 direction)
+    private static string ComputeWalkAnimation_4(Vector2 direction)
+    {
+        if (direction.x > 0.5f && direction.y > 0.5f)
+            return "Walk_B";
+        if (direction.x > 0.5f && direction.y < -0.5f)
+            return "Walk_F";
+        if (direction.x < -0.5f && direction.y > 0.5f)
+            return "Walk_B";
+        if (direction.x < -0.5f && direction.y < -0.5f)
+            return "Walk_F";
+        if (direction.x > 0.5f && direction.y < 0.5f && direction.y > -0.5f)
+            return "Walk_R";
+        if (direction.x < -0.5f && direction.y < 0.5f && direction.y > -0.5f)
+            return "Walk_L";
+        if (direction.x < 0.5f && direction.x > -0.5f && direction.y > 0.5f)
+            return "Walk_B";
+        if (direction.x < 0.5f && direction.x > -0.5f && direction.y < -0.5f)
+            return "Walk_F";
+
+        return "Idle_F";
+    }
+    
+    private static string ComputeWalkAnimation_8(Vector2 direction)
     {
         if (direction.x > 0.5f && direction.y > 0.5f)
             return "Walk_BR";
         if (direction.x > 0.5f && direction.y < -0.5f)
             return "Walk_FR";
-        if (direction.x > 0.5f && direction.y < 0.5f && direction.y > -0.5f)
-            return "Walk_R";
         if (direction.x < -0.5f && direction.y > 0.5f)
             return "Walk_BL";
         if (direction.x < -0.5f && direction.y < -0.5f)
             return "Walk_FL";
+        if (direction.x > 0.5f && direction.y < 0.5f && direction.y > -0.5f)
+            return "Walk_R";
         if (direction.x < -0.5f && direction.y < 0.5f && direction.y > -0.5f)
             return "Walk_L";
         if (direction.x < 0.5f && direction.x > -0.5f && direction.y > 0.5f)
