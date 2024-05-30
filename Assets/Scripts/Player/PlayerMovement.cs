@@ -38,15 +38,23 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         if (SpawnPosition.Instance != null)
+        {
             transform.position = SpawnPosition.Instance.GetSpawnPosition();
-        
-        isInit = true;
+            isInit = true;
+        }
     }
 
     private void Update()
     {
         if (!isInit)
+        {
+            if (SpawnPosition.Instance != null)
+            {
+                transform.position = SpawnPosition.Instance.GetSpawnPosition();
+                isInit = true;
+            }
             return;
+        }
         
         if (IsServer && PlayerInputs.CheckForSpeedIncrease())
             speed.Value += 1.0f;
