@@ -37,6 +37,9 @@ public class PlayerMovement : NetworkBehaviour
             aimHandler = GetComponent<AimHandler>();
         }
 
+        if (SpawnPosition.Instance != null)
+            transform.position = SpawnPosition.Instance.GetSpawnPosition();
+        
         isInit = true;
     }
 
