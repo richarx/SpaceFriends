@@ -14,6 +14,8 @@ public class PlayInstrument : NetworkBehaviour
     private ItemHandler itemHandler;
     private PlayerAnimation playerAnimation;
     
+    private float timeStamp = 0.0f;
+    
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -30,11 +32,20 @@ public class PlayInstrument : NetworkBehaviour
             return;
 
         if (playerMovement.MoveDirection.magnitude > 0.5f || !itemHandler.IsHoldingItem)
+        {
+            timeStamp = Time.time;
             StopPlayingRpc();
+        }
     }
 
     public void PlayBanjo()
     {
+        if (isPlayingBanjo)
+            return;
+        
+        if (timeStamp >= Time.time - 0.5f)
+            return;
+
         int clip = Random.Range(0, clips.Count);
         PlayBanjoRpc(clip);
     }
