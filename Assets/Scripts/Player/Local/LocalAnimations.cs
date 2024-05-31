@@ -11,7 +11,7 @@ public class LocalAnimations : MonoBehaviour
     
     private void LateUpdate()
     {
-        Vector2 direction = playerMovement.MovementDirection;
+        Vector2 direction = playerMovement.MoveDirection;
 
         string targetAnimation = ComputeAnimation(direction, previousAnimation);
 

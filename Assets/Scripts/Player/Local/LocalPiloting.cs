@@ -13,6 +13,8 @@ public class LocalPiloting : MonoBehaviour
     
     private float speed = 10.0f;
     private Vector2 velocity = Vector2.zero;
+
+    public Vector2 MoveDirection => velocity;
     
     private void Update()
     {
@@ -66,5 +68,6 @@ public class LocalPiloting : MonoBehaviour
     private void StopPiloting()
     {
         virtualCamera.m_Lens.OrthographicSize = 4.0f;
+        velocity = Vector2.zero;
     }
 }

@@ -11,7 +11,7 @@ public class LocalMovement : MonoBehaviour
     private float speed = 6.0f;
     private Vector2 velocity = Vector2.zero;
 
-    public Vector2 MovementDirection => velocity;
+    public Vector2 MoveDirection => velocity;
 
     private void Awake()
     {
