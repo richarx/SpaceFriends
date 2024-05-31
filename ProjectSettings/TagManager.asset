@@ -7,6 +7,7 @@ TagManager:
   - Item
   - Module
   - Wall
+  - PilotSeat
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - PlayerToPlayer
   - Wall
   - ItemToWall
-  - 
+  - Space
   - 
   - 
   - 

@@ -6,13 +6,17 @@ using UnityEngine;
 public class LocalMovement : MonoBehaviour
 {
     private Rigidbody2D attachedRigidbody;
+    private LocalPiloting localPiloting;
 
     private float speed = 6.0f;
     private Vector2 velocity = Vector2.zero;
-    
+
+    public Vector2 MovementDirection => velocity;
+
     private void Awake()
     {
         attachedRigidbody = GetComponent<Rigidbody2D>();
+        localPiloting = GetComponent<LocalPiloting>();
     }
 
     private void Start()
@@ -23,6 +27,12 @@ public class LocalMovement : MonoBehaviour
     
     private void Update()
     {
+        if (localPiloting.IsPiloting)
+        {
+            velocity = Vector2.zero;
+            return;
+        }
+        
         Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
         velocity = inputDirection.normalized;
     }
