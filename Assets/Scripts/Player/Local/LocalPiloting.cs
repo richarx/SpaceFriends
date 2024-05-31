@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
 public class LocalPiloting : MonoBehaviour
 {
-    [SerializeField] private Transform movingSpaceship;
+    [SerializeField] private Rigidbody2D movingSpaceship;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Collider2D playerCollider;
     
@@ -31,8 +32,12 @@ public class LocalPiloting : MonoBehaviour
     {
         inputDirection = PlayerInputs.ComputeInputDirection();
         velocity += inputDirection.normalized * (speed * Time.deltaTime);
-        Vector2 finalVelocity = Vector2.ClampMagnitude(velocity, maxSpeed);
-        movingSpaceship.position += finalVelocity.ToVector3() * Time.deltaTime;
+        velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
+    }
+
+    private void FixedUpdate()
+    {
+        movingSpaceship.MovePosition(movingSpaceship.position + (velocity * Time.fixedDeltaTime));
     }
 
     private void SwapPilotingStatus()
