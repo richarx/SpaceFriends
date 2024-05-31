@@ -47,7 +47,7 @@ public class ItemHandler : NetworkBehaviour
         if (throwableItem != null)
         {
             ItemParentingAuthority.Instance.ReleaseAuthority(this, currentItem);
-            throwableItem.ThrowItem(direction);
+            throwableItem.ThrowItem(NetworkObjectId, direction);
         }
         else
             Debug.Log("Zuzu : ItemHandler item not throwable");

@@ -14,6 +14,8 @@ public class ThrowableItem : NetworkBehaviour
 
     private float maxTravelDistance = 30.0f;
     private float speed = 10.0f;
+
+    private ulong previousOwner;
     
     private void Start()
     {
@@ -55,15 +57,16 @@ public class ThrowableItem : NetworkBehaviour
     }
     
     [Rpc(SendTo.Everyone)]
-    private void SetVelocityRpc(Vector2 position, Vector2 throwDirection)
+    private void SetVelocityRpc(Vector2 position, Vector2 throwDirection, ulong player)
     {
         startPosition = position;
         direction = throwDirection.normalized;
+        previousOwner = player;
     }
 
-    public void ThrowItem(Vector2 throwDirection)
+    public void ThrowItem(ulong player, Vector2 throwDirection)
     {
-        SetVelocityRpc(transform.position, throwDirection);
+        SetVelocityRpc(transform.position, throwDirection, player);
     }
 
     private void MoveTowardDestination()
@@ -116,6 +119,9 @@ public class ThrowableItem : NetworkBehaviour
 
         ItemHandler player = other.transform.parent.GetComponent<ItemHandler>();
 
+        if (player.NetworkObjectId == previousOwner)
+            return;
+        
         bool isLocalPlayer = player.IsOwner;
         
         if (!isLocalPlayer)
