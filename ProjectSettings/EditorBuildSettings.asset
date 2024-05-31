@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MapMaking.unity
     guid: 4b375ee23455fab4aaa18ed179dd6881
+  - enabled: 1
+    path: Assets/Scenes/Piloting.unity
+    guid: 2c2b962c1c5b6fe44aff920eb1d8a947
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e195fe103b8b62740804324d2c46ac0a, type: 2}
