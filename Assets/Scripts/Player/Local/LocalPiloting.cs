@@ -11,10 +11,12 @@ public class LocalPiloting : MonoBehaviour
     private bool isPiloting = false;
     public bool IsPiloting => isPiloting;
     
-    private float speed = 10.0f;
+    public float speed = 3.0f;
+    public float maxSpeed = 6.0f;
     private Vector2 velocity = Vector2.zero;
 
-    public Vector2 MoveDirection => velocity;
+    private Vector2 inputDirection = Vector2.zero;
+    public Vector2 InputDirection => inputDirection;
     
     private void Update()
     {
@@ -27,9 +29,10 @@ public class LocalPiloting : MonoBehaviour
 
     private void PilotShip()
     {
-        Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
-        velocity = inputDirection.normalized;
-        movingSpaceship.position += (velocity * (speed * Time.deltaTime)).ToVector3();
+        inputDirection = PlayerInputs.ComputeInputDirection();
+        velocity += inputDirection.normalized * (speed * Time.deltaTime);
+        Vector2 finalVelocity = Vector2.ClampMagnitude(velocity, maxSpeed);
+        movingSpaceship.position += finalVelocity.ToVector3() * Time.deltaTime;
     }
 
     private void SwapPilotingStatus()
@@ -69,5 +72,6 @@ public class LocalPiloting : MonoBehaviour
     {
         virtualCamera.m_Lens.OrthographicSize = 4.0f;
         velocity = Vector2.zero;
+        inputDirection = Vector2.zero;
     }
 }

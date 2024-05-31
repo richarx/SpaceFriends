@@ -13,7 +13,7 @@ public class BoostersDisplay : MonoBehaviour
     
     private void LateUpdate()
     {
-        Vector2 direction = piloting.MoveDirection;
+        Vector2 direction = piloting.InputDirection;
 
         if (direction == previousDirection)
             return;
