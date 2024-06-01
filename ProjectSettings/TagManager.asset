@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - PilotSeat
   - UsableModule
+  - Teleportable
   layers:
   - Default
   - TransparentFX

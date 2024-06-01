@@ -7,7 +7,8 @@ using UnityEngine.Events;
 public class AttachCameraToPlayer : NetworkBehaviour
 {
     public static UnityEvent<float> OnRequestCameraFovUpdate = new UnityEvent<float>();
-    
+    public static UnityEvent<Vector2> OnTeleportPlayer = new UnityEvent<Vector2>();
+
     private CinemachineVirtualCamera virtualCamera;
     
     private NetworkVariable<float> zoom = new NetworkVariable<float>(
@@ -19,7 +20,14 @@ public class AttachCameraToPlayer : NetworkBehaviour
     private void Awake()
     {
         PlayerMovement.OnPlayerSpawn.AddListener(AttachCamera);
+        OnTeleportPlayer.AddListener(MoveCamera);
         OnRequestCameraFovUpdate.AddListener(UpdateCameraFov);
+    }
+
+    private void MoveCamera(Vector2 direction)
+    {
+        Debug.Log($"Zuzu : MoveCamera : direction : {direction} / finalPosition : {transform.position + direction.ToVector3()}");
+        virtualCamera.OnTargetObjectWarped(virtualCamera.Follow, direction);
     }
 
     private void Start()

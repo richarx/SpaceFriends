@@ -417,6 +417,73 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.58}
   m_EdgeRadius: 0
+--- !u!1 &4455400977181883160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4434797984601798335}
+  - component: {fileID: 2422182438500974408}
+  m_Layer: 3
+  m_Name: TeleportHitbox
+  m_TagString: Teleportable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4434797984601798335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455400977181883160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6567376268294888495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2422182438500974408
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455400977181883160}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00066352275, y: 0.0932619}
+  m_Size: {x: 0.40179762, y: 0.23152366}
+  m_Direction: 1
 --- !u!1 &5638302821543512520
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +696,7 @@ Transform:
   - {fileID: 3874848444034354}
   - {fileID: 5979261372826028198}
   - {fileID: 5981907057931297524}
+  - {fileID: 4434797984601798335}
   - {fileID: 6374329257495657562}
   - {fileID: 3750957412363415888}
   - {fileID: 6232090931813660008}
@@ -738,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9518d65fcda02342bf84b15c1a102a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLocked: 0
 --- !u!114 &-5017841352187153786
 MonoBehaviour:
   m_ObjectHideFlags: 0
