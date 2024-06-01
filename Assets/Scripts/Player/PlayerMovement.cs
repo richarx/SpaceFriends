@@ -8,6 +8,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private Rigidbody2D attachedRigidbody;
     private AimHandler aimHandler;
+    private Piloting piloting;
 
     private bool isInit = false;
 
@@ -35,6 +36,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             OnPlayerSpawn?.Invoke(transform);
             aimHandler = GetComponent<AimHandler>();
+            piloting = GetComponent<Piloting>();
         }
 
         if (SpawnPosition.Instance != null)
@@ -64,6 +66,12 @@ public class PlayerMovement : NetworkBehaviour
 
         if (!IsOwner)
             return;
+
+        if (piloting.IsPiloting)
+        {
+            direction.Value = Vector2.zero;
+            return;
+        }
 
         Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
 

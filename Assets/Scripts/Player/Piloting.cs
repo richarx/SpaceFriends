@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class LocalPiloting : MonoBehaviour
+public class Piloting : NetworkBehaviour
 {
-    [SerializeField] private Rigidbody2D movingSpaceship;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Collider2D playerCollider;
-    
+
+    public static UnityEvent<Piloting> OnUpdatePilotingStatus = new UnityEvent<Piloting>();
+
     private bool isPiloting = false;
     public bool IsPiloting => isPiloting;
     
@@ -17,9 +18,12 @@ public class LocalPiloting : MonoBehaviour
 
     private Vector2 inputDirection = Vector2.zero;
     public Vector2 InputDirection => inputDirection;
-    
+
     private void Update()
     {
+        if (!IsOwner)
+            return;
+        
         if (PlayerInputs.CheckForUseItem() && (isPiloting || LookForPilotingSeat()))
             SwapPilotingStatus();
 
@@ -32,11 +36,7 @@ public class LocalPiloting : MonoBehaviour
         inputDirection = PlayerInputs.ComputeInputDirection();
         velocity += inputDirection.normalized * (speed * Time.deltaTime);
         velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
-    }
-
-    private void FixedUpdate()
-    {
-        movingSpaceship.MovePosition(movingSpaceship.position + (velocity * Time.fixedDeltaTime));
+        SpaceshipSingleton.Instance.SetVelocity(velocity);
     }
 
     private void SwapPilotingStatus()
@@ -69,13 +69,15 @@ public class LocalPiloting : MonoBehaviour
     
     private void StartPiloting()
     {
-        virtualCamera.m_Lens.OrthographicSize = 15.0f;
+        AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(15.0f);
+        OnUpdatePilotingStatus?.Invoke(this);
     }
 
     private void StopPiloting()
     {
-        virtualCamera.m_Lens.OrthographicSize = 4.0f;
+        AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(4.0f);
         //velocity = Vector2.zero;
         inputDirection = Vector2.zero;
+        OnUpdatePilotingStatus?.Invoke(this);
     }
 }

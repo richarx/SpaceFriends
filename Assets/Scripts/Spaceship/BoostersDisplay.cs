@@ -1,29 +1,39 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class BoostersDisplay : MonoBehaviour
+public class BoostersDisplay : NetworkBehaviour
 {
-    [SerializeField] private LocalPiloting piloting;
-
     [SerializeField] private Animator topBooster;
     [SerializeField] private Animator botBooster;
     [SerializeField] private Animator leftBooster;
     [SerializeField] private Animator rightBooster;
 
-    private Vector2 previousDirection;
+    private Piloting piloting = null;
     
+    private Vector2 previousDirection;
+
+    public override void OnNetworkSpawn()
+    {
+       Piloting.OnUpdatePilotingStatus.AddListener((p) => { piloting = p; });
+    }
+
     private void LateUpdate()
     {
+        if (piloting == null || !piloting.IsPiloting)
+           return;
+       
         Vector2 direction = piloting.InputDirection;
 
         if (direction == previousDirection)
             return;
         
-        DisplayBoosterFromDirection(direction);
+        DisplayBoosterFromDirectionRpc(direction);
 
         previousDirection = direction;
     }
 
-    private void DisplayBoosterFromDirection(Vector2 direction)
+    [Rpc(SendTo.Everyone)]
+    private void DisplayBoosterFromDirectionRpc(Vector2 direction)
     {
         if (direction.x > 0.0f)
            leftBooster.Play("Booster_Selected");

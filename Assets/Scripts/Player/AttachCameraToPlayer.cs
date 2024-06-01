@@ -2,9 +2,12 @@ using System;
 using Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AttachCameraToPlayer : NetworkBehaviour
 {
+    public static UnityEvent<float> OnRequestCameraFovUpdate = new UnityEvent<float>();
+    
     private CinemachineVirtualCamera virtualCamera;
     
     private NetworkVariable<float> zoom = new NetworkVariable<float>(
@@ -16,6 +19,7 @@ public class AttachCameraToPlayer : NetworkBehaviour
     private void Awake()
     {
         PlayerMovement.OnPlayerSpawn.AddListener(AttachCamera);
+        OnRequestCameraFovUpdate.AddListener(UpdateCameraFov);
     }
 
     private void Start()
@@ -47,6 +51,11 @@ public class AttachCameraToPlayer : NetworkBehaviour
             zoom.Value += 0.5f;
             virtualCamera.m_Lens.OrthographicSize = zoom.Value;
         }
+    }
+    
+    private void UpdateCameraFov(float size)
+    {
+        virtualCamera.m_Lens.OrthographicSize = size;
     }
 
     private void AttachCamera(Transform target)
