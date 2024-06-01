@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwapSpriteOnTrigger : MonoBehaviour
@@ -22,7 +19,7 @@ public class SwapSpriteOnTrigger : MonoBehaviour
         if (!isIdle)
             return;
         
-        if (other.CompareTag("Player"))// && other.transform.parent.GetComponent<PlayerMovement>().IsOwner)
+        if (other.CompareTag("Player") && other.transform.parent.GetComponent<PlayerMovement>().IsOwner)
             SetSpriteState(false);
     }
 
@@ -31,7 +28,7 @@ public class SwapSpriteOnTrigger : MonoBehaviour
         if (isIdle)
             return;
         
-        if (other.CompareTag("Player"))// && other.transform.parent.GetComponent<PlayerMovement>().IsOwner)
+        if (other.CompareTag("Player") && other.transform.parent.GetComponent<PlayerMovement>().IsOwner)
             SetSpriteState(true);
     }
 

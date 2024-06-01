@@ -70,6 +70,7 @@ public class Piloting : NetworkBehaviour
     private void StartPiloting()
     {
         AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(15.0f);
+        GetComponent<PlayerMovement>().isLocked = true;
         OnUpdatePilotingStatus?.Invoke(this);
     }
 
@@ -77,6 +78,7 @@ public class Piloting : NetworkBehaviour
     {
         AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(4.0f);
         //velocity = Vector2.zero;
+        GetComponent<PlayerMovement>().isLocked = false;
         inputDirection = Vector2.zero;
         OnUpdatePilotingStatus?.Invoke(this);
     }

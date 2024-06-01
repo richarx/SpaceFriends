@@ -8,9 +8,10 @@ public class PlayerMovement : NetworkBehaviour
 
     private Rigidbody2D attachedRigidbody;
     private AimHandler aimHandler;
-    private Piloting piloting;
 
     private bool isInit = false;
+
+    public bool isLocked = false;
 
     public Vector2 MoveDirection => direction.Value;
     private NetworkVariable<Vector2> direction = new NetworkVariable<Vector2>(
@@ -36,7 +37,6 @@ public class PlayerMovement : NetworkBehaviour
         {
             OnPlayerSpawn?.Invoke(transform);
             aimHandler = GetComponent<AimHandler>();
-            piloting = GetComponent<Piloting>();
         }
 
         if (SpawnPosition.Instance != null)
@@ -67,7 +67,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner)
             return;
 
-        if (piloting.IsPiloting)
+        if (isLocked)
         {
             direction.Value = Vector2.zero;
             return;
