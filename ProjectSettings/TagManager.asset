@@ -8,6 +8,8 @@ TagManager:
   - Module
   - Wall
   - PilotSeat
+  - Table
+  - ScoopModule
   layers:
   - Default
   - TransparentFX

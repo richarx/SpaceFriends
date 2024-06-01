@@ -264,7 +264,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: Modules_6
     originalName: 
-    pivot: {x: 0.5, y: 0.25}
+    pivot: {x: 0.5, y: 0.129}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -284,15 +284,15 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: Modules_7
     originalName: 
-    pivot: {x: 0.5, y: 0.25}
+    pivot: {x: 0.5, y: 0.125}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 74
+      x: 73
       y: 126
-      width: 12
-      height: 23
+      width: 14
+      height: 24
     spriteID: 4b6ea02b3647dcb429a08d2ffd30dd52
     spriteBone: []
     spriteOutline: []

@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 7396291229900336008}
   - component: {fileID: 4107948885660542096}
   - component: {fileID: 7293198775607893493}
+  - component: {fileID: 674678104416339367}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -810,6 +811,19 @@ MonoBehaviour:
   playerCollider: {fileID: 7014968067893059866}
   speed: 3
   maxSpeed: 6
+--- !u!114 &674678104416339367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8029653635968636651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b56d91bcc855e40a31a124d14d5bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 7014968067893059866}
 --- !u!1 &8069339732170750552
 GameObject:
   m_ObjectHideFlags: 0
