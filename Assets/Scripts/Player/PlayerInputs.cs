@@ -105,7 +105,7 @@ public class PlayerInputs
     
     public static bool CheckForUseItem()
     {
-        return Keyboard.current.eKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame);
+        return Keyboard.current.eKey.wasPressedThisFrame || /*Mouse.current.leftButton.wasPressedThisFrame ||*/ (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame);
     }
     
     public static bool CheckForThrowItem()

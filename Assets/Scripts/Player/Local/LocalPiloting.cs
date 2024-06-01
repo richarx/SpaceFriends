@@ -76,7 +76,7 @@ public class LocalPiloting : MonoBehaviour
     private void StopPiloting()
     {
         virtualCamera.m_Lens.OrthographicSize = 4.0f;
-        velocity = Vector2.zero;
+        //velocity = Vector2.zero;
         inputDirection = Vector2.zero;
     }
 }
