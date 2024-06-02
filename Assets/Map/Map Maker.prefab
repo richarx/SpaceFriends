@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4889784518944110876}
+  - component: {fileID: 2279099435321285176}
   - component: {fileID: 8130558069598781572}
   m_Layer: 0
   m_Name: Map Maker
@@ -117,6 +118,27 @@ Transform:
   - {fileID: 5606300138105985386}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2279099435321285176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5677980397749189585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1964197528
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &8130558069598781572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +190,12 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 9869185
     prefab: {fileID: 5585037410699131899, guid: 5f198359ca9d5da4b8a13ee542872152, type: 3}
+  tools:
+  - {fileID: 3955429779435958980, guid: aea17bab75b2a6649a27519cda72576b, type: 3}
+  - {fileID: 3955429779435958980, guid: 0448ba560de8c774980fb445b41c5293, type: 3}
+  - {fileID: 3955429779435958980, guid: c2254356f77e1e44297b808bed1cc24c, type: 3}
+  - {fileID: 3955429779435958980, guid: 6ba09fbde425e1b458135a1eb3653fc4, type: 3}
+  - {fileID: 3955429779435958980, guid: 7644b3ffb10e14c42ac678e1d85b88e1, type: 3}
+  - {fileID: 3955429779435958980, guid: 2a3dcad2287d2554f9c7f4f6ecc4eb0c, type: 3}
+  - {fileID: 3955429779435958980, guid: 4b6ccdbd529cf2c40bc44a5029734b87, type: 3}
+  - {fileID: 3955429779435958980, guid: 1c53d27ef54fe904497afa7235571be6, type: 3}
