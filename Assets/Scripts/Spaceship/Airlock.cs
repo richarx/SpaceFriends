@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,15 +6,23 @@ public class Airlock : NetworkBehaviour
 {
     [SerializeField] private GameObject floor;
     [SerializeField] private Animator staticInsideDoor;
-    [SerializeField] private Animator staticOutsideDoor;
     [SerializeField] private Animator movingInsideDoor;
     [SerializeField] private Animator movingOutsideDoor;
 
     [SerializeField] private Collider2D staticTeleportZone;
     [SerializeField] private Collider2D movingTeleportZone;
 
+    public static Airlock Instance;
+
+    public Vector2 staticPosition => staticTeleportZone.transform.position.ToVector2();
+    public Vector2 movingPosition => movingTeleportZone.transform.position.ToVector2();
 
     private bool isOpen = false;
+
+    public void Awake()
+    {
+        Instance = this;
+    }
 
     public override void OnNetworkSpawn()
     {
@@ -46,11 +53,10 @@ public class Airlock : NetworkBehaviour
         staticInsideDoor.Play("Door_Open");
         movingInsideDoor.Play("Door_Open");
         
-        staticOutsideDoor.Play("Door_Close");
         movingOutsideDoor.Play("Door_Close");
 
         if (IsServer)
-            FromMovingToStaticRpc();
+            TeleportEverythingRpc(false);
     }
     
     [Rpc(SendTo.Everyone)]
@@ -61,21 +67,20 @@ public class Airlock : NetworkBehaviour
         staticInsideDoor.Play("Door_Close");
         movingInsideDoor.Play("Door_Close");
         
-        staticOutsideDoor.Play("Door_Open");
         movingOutsideDoor.Play("Door_Open");
 
         if (IsServer)
-            FromStaticToMovingRpc();
+            TeleportEverythingRpc(true);
     }
 
     [Rpc(SendTo.Server)]
-    private void FromStaticToMovingRpc()
+    private void TeleportEverythingRpc(bool fromStaticToMoving)
     {
-        Debug.Log("Zuzu From Static To Moving");
-        
         List<Collider2D> results = new List<Collider2D>();
 
-        int contactCount = Physics2D.OverlapCollider(staticTeleportZone, new ContactFilter2D().NoFilter(), results);
+        Collider2D teleportZone = fromStaticToMoving ? staticTeleportZone : movingTeleportZone;
+        
+        int contactCount = Physics2D.OverlapCollider(teleportZone, new ContactFilter2D().NoFilter(), results);
 
         if (contactCount < 1)
             return;
@@ -84,70 +89,39 @@ public class Airlock : NetworkBehaviour
         {
             if (result.CompareTag("Teleportable"))
             {
-                Debug.Log("Zuzu Teleportable found");
-            
                 Transform parentTransform = result.transform.parent;
                 if (parentTransform.CompareTag("Player"))
                 {
-                    PlayerMovement player = parentTransform.GetComponent<PlayerMovement>();
-                    TeleportPlayerRpc(player.NetworkObjectId);
-                    return;
+                    TeleportPlayer(parentTransform, fromStaticToMoving);
                 }
-                
-                Vector2 position = parentTransform.position;
-                Vector3 relativePosition = position - staticTeleportZone.transform.position.ToVector2();
-                Vector2 newPosition = movingTeleportZone.transform.position + relativePosition;
-                result.transform.parent.position = newPosition;
+                else
+                {
+                    TeleportItem(parentTransform, fromStaticToMoving);
+                }
             }
         }
     }
 
-    [Rpc(SendTo.Everyone)]
-    private void TeleportPlayerRpc(ulong player)
+    private void TeleportPlayer(Transform parentTransform, bool fromStaticToMoving)
     {
-        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].IsOwner)
-            return;
-        
-        Transform playerTransform = NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].transform;
-        
-        ClientNetworkTransform networkTransform = playerTransform.GetComponent<ClientNetworkTransform>();
-        networkTransform.Interpolate = false;
-        
-        Vector2 position = playerTransform.position;
-        Vector3 relativePosition = position - staticTeleportZone.transform.position.ToVector2();
-        Vector2 newPosition = movingTeleportZone.transform.position + relativePosition;
-        playerTransform.position = newPosition;
-
-        AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
+        parentTransform.GetComponent<PlayerTeleport>().TeleportPlayerRpc(fromStaticToMoving);
     }
 
-    [Rpc(SendTo.Server)]
-    private void FromMovingToStaticRpc()
+    private void TeleportItem(Transform parentTransform, bool fromStaticToMoving)
     {
-        Debug.Log("Zuzu From Moving To Static");
-        
-        List<Collider2D> results = new List<Collider2D>();
-
-        int contactCount = Physics2D.OverlapCollider(movingTeleportZone, new ContactFilter2D().NoFilter(), results);
-
-        if (contactCount < 1)
-            return;
-
-        foreach (Collider2D result in results)
+        if (fromStaticToMoving)
         {
-            if (result.CompareTag("Teleportable"))
-            {
-                Transform parentTransform = result.transform.parent;
-                Vector2 position = parentTransform.position;
-                Vector2 relativePosition = position - movingTeleportZone.transform.position.ToVector2();
-                Vector2 newPosition = staticTeleportZone.transform.position.ToVector2() + relativePosition;
-                parentTransform.position = newPosition;
-                
-                if (parentTransform.CompareTag("Player") && parentTransform.GetComponent<NetworkObject>().IsOwner)
-                {
-                    AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
-                }
-            }
+            Vector2 position = parentTransform.position;
+            Vector3 relativePosition = position - staticTeleportZone.transform.position.ToVector2();
+            Vector2 newPosition = movingTeleportZone.transform.position + relativePosition;
+            parentTransform.position = newPosition;
+        }
+        else
+        {
+            Vector2 position = parentTransform.position;
+            Vector2 relativePosition = position - movingTeleportZone.transform.position.ToVector2();
+            Vector2 newPosition = staticTeleportZone.transform.position.ToVector2() + relativePosition;
+            parentTransform.position = newPosition;
         }
     }
 }
