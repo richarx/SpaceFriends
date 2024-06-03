@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -48,7 +49,8 @@ public class Airlock : NetworkBehaviour
         staticOutsideDoor.Play("Door_Close");
         movingOutsideDoor.Play("Door_Close");
 
-        FromMovingToStaticRpc();
+        if (IsServer)
+            FromMovingToStaticRpc();
     }
     
     [Rpc(SendTo.Everyone)]
@@ -62,7 +64,8 @@ public class Airlock : NetworkBehaviour
         staticOutsideDoor.Play("Door_Open");
         movingOutsideDoor.Play("Door_Open");
 
-        FromStaticToMovingRpc();
+        if (IsServer)
+            FromStaticToMovingRpc();
     }
 
     [Rpc(SendTo.Server)]
@@ -81,18 +84,41 @@ public class Airlock : NetworkBehaviour
         {
             if (result.CompareTag("Teleportable"))
             {
+                Debug.Log("Zuzu Teleportable found");
+            
                 Transform parentTransform = result.transform.parent;
+                if (parentTransform.CompareTag("Player"))
+                {
+                    PlayerMovement player = parentTransform.GetComponent<PlayerMovement>();
+                    TeleportPlayerRpc(player.NetworkObjectId);
+                    return;
+                }
+                
                 Vector2 position = parentTransform.position;
                 Vector3 relativePosition = position - staticTeleportZone.transform.position.ToVector2();
                 Vector2 newPosition = movingTeleportZone.transform.position + relativePosition;
                 result.transform.parent.position = newPosition;
-                
-                if (parentTransform.CompareTag("Player") && parentTransform.GetComponent<NetworkObject>().IsOwner)
-                {
-                    AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
-                }
             }
         }
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void TeleportPlayerRpc(ulong player)
+    {
+        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].IsOwner)
+            return;
+        
+        Transform playerTransform = NetworkManager.Singleton.SpawnManager.SpawnedObjects[player].transform;
+        
+        ClientNetworkTransform networkTransform = playerTransform.GetComponent<ClientNetworkTransform>();
+        networkTransform.Interpolate = false;
+        
+        Vector2 position = playerTransform.position;
+        Vector3 relativePosition = position - staticTeleportZone.transform.position.ToVector2();
+        Vector2 newPosition = movingTeleportZone.transform.position + relativePosition;
+        playerTransform.position = newPosition;
+
+        AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
     }
 
     [Rpc(SendTo.Server)]
