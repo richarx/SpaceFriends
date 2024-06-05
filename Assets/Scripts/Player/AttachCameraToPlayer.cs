@@ -6,8 +6,12 @@ using UnityEngine.Events;
 
 public class AttachCameraToPlayer : NetworkBehaviour
 {
+    [SerializeField] private Transform movingShipCameraTarget;
+    
     public static UnityEvent<float> OnRequestCameraFovUpdate = new UnityEvent<float>();
     public static UnityEvent<Vector2> OnTeleportPlayer = new UnityEvent<Vector2>();
+    public static UnityEvent<Transform> OnRequestAttachToPlayer = new UnityEvent<Transform>();
+    public static UnityEvent OnRequestAttachToMovingShip = new UnityEvent();
 
     private CinemachineVirtualCamera virtualCamera;
     
@@ -20,21 +24,17 @@ public class AttachCameraToPlayer : NetworkBehaviour
     private void Awake()
     {
         PlayerMovement.OnPlayerSpawn.AddListener(AttachCamera);
+        OnRequestAttachToPlayer.AddListener(AttachCamera);
+        OnRequestAttachToMovingShip.AddListener(AttachToMovingShip);
         OnTeleportPlayer.AddListener(MoveCamera);
         OnRequestCameraFovUpdate.AddListener(UpdateCameraFov);
-    }
-
-    private void MoveCamera(Vector2 direction)
-    {
-        Debug.Log($"Zuzu : MoveCamera : direction : {direction} / finalPosition : {transform.position + direction.ToVector3()}");
-        virtualCamera.OnTargetObjectWarped(virtualCamera.Follow, direction);
     }
 
     private void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
     }
-
+    
     public override void OnNetworkSpawn()
     {
         if (IsClient)
@@ -60,6 +60,24 @@ public class AttachCameraToPlayer : NetworkBehaviour
             virtualCamera.m_Lens.OrthographicSize = zoom.Value;
         }
     }
+
+    private CinemachineFramingTransposer framingTransposer;
+    
+    private void AttachToMovingShip()
+    {
+        Transform currentTarget = virtualCamera.Follow;
+        virtualCamera.m_Follow = movingShipCameraTarget;
+        virtualCamera.OnTargetObjectWarped(movingShipCameraTarget, movingShipCameraTarget.position - currentTarget.position);
+        //virtualCamera.AddCinemachineComponent<CinemachineHardLockToTarget>();
+        //framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        //virtualCamera.DestroyCinemachineComponent<CinemachineFramingTransposer>();
+    }
+
+    private void MoveCamera(Vector2 direction)
+    {
+        Debug.Log($"Zuzu : MoveCamera : direction : {direction} / finalPosition : {transform.position + direction.ToVector3()}");
+        virtualCamera.OnTargetObjectWarped(virtualCamera.Follow, direction);
+    }
     
     private void UpdateCameraFov(float size)
     {
@@ -69,5 +87,7 @@ public class AttachCameraToPlayer : NetworkBehaviour
     private void AttachCamera(Transform target)
     {
         virtualCamera.Follow = target;
+        //virtualCamera.DestroyCinemachineComponent<CinemachineHardLockToTarget>();
+        //virtualCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
     }
 }

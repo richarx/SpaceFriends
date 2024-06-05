@@ -757,7 +757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128681460}
   - component: {fileID: 128681462}
-  - component: {fileID: 128681461}
+  - component: {fileID: 128681463}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -780,7 +780,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1365768313}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &128681461
+--- !u!114 &128681462
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128681459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &128681463
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -797,18 +809,18 @@ MonoBehaviour:
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
   m_XDamping: 1
-  m_YDamping: 0.5
+  m_YDamping: 1
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.15
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.28
-  m_SoftZoneHeight: 0.46
+  m_SoftZoneWidth: 0.8
+  m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -823,18 +835,6 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
---- !u!114 &128681462
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128681459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &134138578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,7 +1741,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -5
   far clip plane: 1000
   field of view: 34
   orthographic: 1
@@ -4698,7 +4698,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 34
     OrthographicSize: 4
-    NearClipPlane: 0.3
+    NearClipPlane: -5
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
@@ -4742,6 +4742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf33a5260a6f66a44b39f7ede1b6d385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingShipCameraTarget: {fileID: 134138579}
 --- !u!114 &1365768315
 MonoBehaviour:
   m_ObjectHideFlags: 0
