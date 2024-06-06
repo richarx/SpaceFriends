@@ -10,6 +10,8 @@ public class PlayerMovement : NetworkBehaviour
     private AimHandler aimHandler;
 
     private bool isInit = false;
+    private bool isPositionInit = false;
+    
     public bool isLocked = false;
 
     public bool isInSpace = false;
@@ -40,22 +42,19 @@ public class PlayerMovement : NetworkBehaviour
             aimHandler = GetComponent<AimHandler>();
         }
 
-        if (SpawnPosition.Instance != null)
-        {
-            transform.position = SpawnPosition.Instance.GetSpawnPosition();
-            isInit = true;
-        }
+        TryToInitializePosition();
+
+        isInit = true;
     }
 
     private void Update()
     {
         if (!isInit)
+            return;
+
+        if (!isPositionInit)
         {
-            if (SpawnPosition.Instance != null)
-            {
-                transform.position = SpawnPosition.Instance.GetSpawnPosition();
-                isInit = true;
-            }
+            TryToInitializePosition();
             return;
         }
         
@@ -76,9 +75,15 @@ public class PlayerMovement : NetworkBehaviour
             ComputeMovingDirectionInShip();
     }
 
+    private Vector2 jetPackVelocity = Vector2.zero;
+    private float jetPackSpeed = 1.5f;
+    private float jetPackMaxSpeed = 3.0f;
+    
     private void ComputeMovingDirectionInSpace()
     {
         Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
+        jetPackVelocity += inputDirection.normalized * (jetPackSpeed * Time.deltaTime);
+        jetPackVelocity = Vector2.ClampMagnitude(jetPackVelocity, jetPackMaxSpeed);
         direction.Value = inputDirection;
     }
 
@@ -102,22 +107,18 @@ public class PlayerMovement : NetworkBehaviour
         if (!isInit)
             return;
 
-        if (!IsOwner || MoveDirection.magnitude <= 0.15f)
+        if (!IsOwner)
             return;
 
         if (isInSpace)
             ApplyMovementInSpace();
-        else
+        else if (MoveDirection.magnitude > 0.15f)
             ApplyMovementInShip();
     }
 
     private void ApplyMovementInSpace()
     {
-        float moveSpeed = aimHandler.isAiming ? speed.Value / 2.0f : speed.Value;
-        
-        Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (moveSpeed * Time.fixedDeltaTime));
-
-        attachedRigidbody.MovePosition(newPosition);
+        attachedRigidbody.velocity = jetPackVelocity;
     }
 
     private void ApplyMovementInShip()
@@ -127,5 +128,14 @@ public class PlayerMovement : NetworkBehaviour
         Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (moveSpeed * Time.fixedDeltaTime));
 
         attachedRigidbody.MovePosition(newPosition);
+    }
+
+    private void TryToInitializePosition()
+    {
+        if (SpawnPosition.Instance != null)
+        {
+            transform.position = SpawnPosition.Instance.GetSpawnPosition();
+            isPositionInit = true;
+        }
     }
 }
