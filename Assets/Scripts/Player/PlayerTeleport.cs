@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
@@ -27,7 +26,7 @@ public class PlayerTeleport : NetworkBehaviour
         Vector2 newPosition = Airlock.Instance.movingPosition + relativePosition;
         transform.position = newPosition.ToVector3();
 
-        GetComponent<PlayerMovement>().isInSpace = true;
+        GetComponent<PlayerMovement>().SetInSpaceStatusRpc(true);
         
         AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
     }
@@ -39,7 +38,7 @@ public class PlayerTeleport : NetworkBehaviour
         Vector2 newPosition = Airlock.Instance.staticPosition + relativePosition;
         transform.position = newPosition;
         
-        GetComponent<PlayerMovement>().isInSpace = false;
+        GetComponent<PlayerMovement>().SetInSpaceStatusRpc(false);
         
         AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
     }

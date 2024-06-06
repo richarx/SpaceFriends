@@ -8,7 +8,8 @@ public class SpaceshipSingleton : NetworkBehaviour
 
     private Rigidbody2D attachedRigidbody2D;
 
-    private Vector2 velocity;
+    public Vector2 CurrentVelocity => velocity;
+    private Vector2 velocity = Vector2.zero;
     
     private void Awake()
     {
@@ -35,6 +36,6 @@ public class SpaceshipSingleton : NetworkBehaviour
     private void FixedUpdate()
     {
         if (IsServer)
-            attachedRigidbody2D.MovePosition(attachedRigidbody2D.position + (velocity * Time.fixedDeltaTime));
+            attachedRigidbody2D.velocity = velocity;
     }
 }

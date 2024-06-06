@@ -5,7 +5,8 @@ using UnityEngine.Events;
 public class PlayerMovement : NetworkBehaviour
 {
     public static readonly UnityEvent<Transform> OnPlayerSpawn = new UnityEvent<Transform>();
-
+    public readonly UnityEvent<bool> OnPlayerGoThroughAirlock = new UnityEvent<bool>();
+    
     private Rigidbody2D attachedRigidbody;
     private AimHandler aimHandler;
 
@@ -14,7 +15,8 @@ public class PlayerMovement : NetworkBehaviour
     
     public bool isLocked = false;
 
-    public bool isInSpace = false;
+    public bool IsInSpace => isInSpace;
+    private bool isInSpace = false;
     
     public Vector2 MoveDirection => direction.Value;
     private NetworkVariable<Vector2> direction = new NetworkVariable<Vector2>(
@@ -76,8 +78,8 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     private Vector2 jetPackVelocity = Vector2.zero;
-    private float jetPackSpeed = 1.5f;
-    private float jetPackMaxSpeed = 3.0f;
+    private float jetPackSpeed = 3.0f;
+    private float jetPackMaxSpeed = 6.0f;
     
     private void ComputeMovingDirectionInSpace()
     {
@@ -136,6 +138,23 @@ public class PlayerMovement : NetworkBehaviour
         {
             transform.position = SpawnPosition.Instance.GetSpawnPosition();
             isPositionInit = true;
+        }
+    }
+
+    [Rpc(SendTo.Everyone)]
+    public void SetInSpaceStatusRpc(bool status)
+    {
+        isInSpace = status;
+
+        if (IsOwner)
+        {
+            if (isInSpace)
+                jetPackVelocity = SpaceshipSingleton.Instance.CurrentVelocity;
+            else
+            {
+                jetPackVelocity = Vector2.zero;
+                attachedRigidbody.velocity = Vector2.zero;
+            }
         }
     }
 }

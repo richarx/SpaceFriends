@@ -15,7 +15,7 @@ public class PlayerAnimation : MonoBehaviour
         if (playInstrument.isPlayingBanjo)
             return;
 
-        string targetAnimation = ComputeAnimation(direction, previousAnimation, playerMovement.isInSpace);
+        string targetAnimation = ComputeAnimation(direction, previousAnimation, playerMovement.IsInSpace);
 
         bool isFirstAnimationEver = string.IsNullOrEmpty(previousAnimation);
         bool isANewAnimation = !isFirstAnimationEver && !targetAnimation.Equals(previousAnimation);
