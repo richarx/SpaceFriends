@@ -10,9 +10,10 @@ public class PlayerMovement : NetworkBehaviour
     private AimHandler aimHandler;
 
     private bool isInit = false;
-
     public bool isLocked = false;
 
+    public bool isInSpace = false;
+    
     public Vector2 MoveDirection => direction.Value;
     private NetworkVariable<Vector2> direction = new NetworkVariable<Vector2>(
         Vector2.zero,
@@ -58,11 +59,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
         
-        if (IsServer && PlayerInputs.CheckForSpeedIncrease())
-            speed.Value += 1.0f;
-
-        if (IsServer && PlayerInputs.CheckForSpeedDecrease())
-            speed.Value = Mathf.Max(speed.Value - 1.0f, 0.0f);
+        UpdateSpeed();
 
         if (!IsOwner)
             return;
@@ -73,9 +70,31 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
-        Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
+        if (isInSpace)
+            ComputeMovingDirectionInSpace();
+        else
+            ComputeMovingDirectionInShip();
+    }
 
+    private void ComputeMovingDirectionInSpace()
+    {
+        Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
         direction.Value = inputDirection;
+    }
+
+    private void ComputeMovingDirectionInShip()
+    {
+        Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
+        direction.Value = inputDirection;
+    }
+
+    private void UpdateSpeed()
+    {
+        if (IsServer && PlayerInputs.CheckForSpeedIncrease())
+            speed.Value += 1.0f;
+
+        if (IsServer && PlayerInputs.CheckForSpeedDecrease())
+            speed.Value = Mathf.Max(speed.Value - 1.0f, 0.0f);
     }
 
     private void FixedUpdate()
@@ -86,6 +105,23 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner || MoveDirection.magnitude <= 0.15f)
             return;
 
+        if (isInSpace)
+            ApplyMovementInSpace();
+        else
+            ApplyMovementInShip();
+    }
+
+    private void ApplyMovementInSpace()
+    {
+        float moveSpeed = aimHandler.isAiming ? speed.Value / 2.0f : speed.Value;
+        
+        Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (moveSpeed * Time.fixedDeltaTime));
+
+        attachedRigidbody.MovePosition(newPosition);
+    }
+
+    private void ApplyMovementInShip()
+    {
         float moveSpeed = aimHandler.isAiming ? speed.Value / 2.0f : speed.Value;
         
         Vector2 newPosition = (Vector2)transform.position + (MoveDirection * (moveSpeed * Time.fixedDeltaTime));

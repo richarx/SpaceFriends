@@ -808,6 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocked: 0
+  isInSpace: 0
 --- !u!114 &-5017841352187153786
 MonoBehaviour:
   m_ObjectHideFlags: 0

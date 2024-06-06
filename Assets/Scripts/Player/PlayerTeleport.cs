@@ -26,6 +26,8 @@ public class PlayerTeleport : NetworkBehaviour
         Vector2 relativePosition = position - Airlock.Instance.staticPosition;
         Vector2 newPosition = Airlock.Instance.movingPosition + relativePosition;
         transform.position = newPosition.ToVector3();
+
+        GetComponent<PlayerMovement>().isInSpace = true;
         
         AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
     }
@@ -36,6 +38,8 @@ public class PlayerTeleport : NetworkBehaviour
         Vector2 relativePosition = position - Airlock.Instance.movingPosition;
         Vector2 newPosition = Airlock.Instance.staticPosition + relativePosition;
         transform.position = newPosition;
+        
+        GetComponent<PlayerMovement>().isInSpace = false;
         
         AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
     }

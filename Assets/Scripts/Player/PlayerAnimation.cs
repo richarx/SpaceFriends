@@ -15,7 +15,7 @@ public class PlayerAnimation : MonoBehaviour
         if (playInstrument.isPlayingBanjo)
             return;
 
-        string targetAnimation = ComputeAnimation(direction, previousAnimation);
+        string targetAnimation = ComputeAnimation(direction, previousAnimation, playerMovement.isInSpace);
 
         bool isFirstAnimationEver = string.IsNullOrEmpty(previousAnimation);
         bool isANewAnimation = !isFirstAnimationEver && !targetAnimation.Equals(previousAnimation);
@@ -32,12 +32,37 @@ public class PlayerAnimation : MonoBehaviour
         animator.Play("Banjo");
     }
 
-    private static string ComputeAnimation(Vector2 direction, string previousAnimation)
+    private static string ComputeAnimation(Vector2 direction, string previousAnimation, bool playerMovementIsInSpace)
     {
+        if (playerMovementIsInSpace)
+            return ComputeAnimationInSpace(direction, previousAnimation);
+        
         if (direction.magnitude < 0.5f)
             return ComputeIdleAnimation(previousAnimation);
 
         return ComputeWalkAnimation_4(direction);
+    }
+
+    private static string ComputeAnimationInSpace(Vector2 direction, string previousAnimation)
+    {
+        if (direction.x > 0.5f && direction.y > 0.5f)
+            return "JetPack_B";
+        if (direction.x > 0.5f && direction.y < -0.5f)
+            return "JetPack_F";
+        if (direction.x < -0.5f && direction.y > 0.5f)
+            return "JetPack_B";
+        if (direction.x < -0.5f && direction.y < -0.5f)
+            return "JetPack_F";
+        if (direction.x > 0.5f && direction.y < 0.5f && direction.y > -0.5f)
+            return "JetPack_R";
+        if (direction.x < -0.5f && direction.y < 0.5f && direction.y > -0.5f)
+            return "JetPack_L";
+        if (direction.x < 0.5f && direction.x > -0.5f && direction.y > 0.5f)
+            return "JetPack_B";
+        if (direction.x < 0.5f && direction.x > -0.5f && direction.y < -0.5f)
+            return "JetPack_F";
+
+        return previousAnimation;
     }
 
     private static string ComputeWalkAnimation_4(Vector2 direction)
