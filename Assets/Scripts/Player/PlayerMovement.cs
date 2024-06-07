@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -77,15 +78,26 @@ public class PlayerMovement : NetworkBehaviour
             ComputeMovingDirectionInShip();
     }
 
+    private bool resetJetPackVelocity = true;
     private Vector2 jetPackVelocity = Vector2.zero;
     private float jetPackSpeed = 3.0f;
     private float jetPackMaxSpeed = 6.0f;
     
+    //TODO Problem here, but fuck me i cant find the solution
     private void ComputeMovingDirectionInSpace()
     {
         Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
-        jetPackVelocity += inputDirection.normalized * (jetPackSpeed * Time.deltaTime);
-        jetPackVelocity = Vector2.ClampMagnitude(jetPackVelocity, jetPackMaxSpeed);
+        if (resetJetPackVelocity)
+        {
+            jetPackVelocity = attachedRigidbody.velocity;
+            resetJetPackVelocity = false;
+        }
+        Vector2 tmpVelocity = jetPackVelocity + inputDirection.normalized * (jetPackSpeed * Time.deltaTime);
+
+        if (jetPackVelocity.magnitude >= jetPackMaxSpeed && tmpVelocity.magnitude > jetPackVelocity.magnitude)
+            tmpVelocity = jetPackVelocity;
+
+        jetPackVelocity = tmpVelocity;
         direction.Value = inputDirection;
     }
 
@@ -116,6 +128,8 @@ public class PlayerMovement : NetworkBehaviour
             ApplyMovementInSpace();
         else if (MoveDirection.magnitude > 0.15f)
             ApplyMovementInShip();
+
+        resetJetPackVelocity = true;
     }
 
     private void ApplyMovementInSpace()

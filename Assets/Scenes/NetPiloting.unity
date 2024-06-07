@@ -7166,7 +7166,7 @@ GameObject:
   - component: {fileID: 5001459194948831410}
   - component: {fileID: 4188085043934689027}
   - component: {fileID: 3823527562412616820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8359,7 +8359,7 @@ GameObject:
   - component: {fileID: 7566622525613435728}
   - component: {fileID: 5226317833594015223}
   - component: {fileID: 1815428513175482544}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8628,7 +8628,7 @@ GameObject:
   - component: {fileID: 4718811966888619484}
   - component: {fileID: 8089895449694278672}
   - component: {fileID: 4810455092021680786}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8770,7 +8770,7 @@ GameObject:
   - component: {fileID: 8854995658637014159}
   - component: {fileID: 8854995658637014161}
   - component: {fileID: 8854995658637014160}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Moving Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
