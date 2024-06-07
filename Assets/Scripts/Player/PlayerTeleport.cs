@@ -2,9 +2,12 @@ using System.Collections;
 using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerTeleport : NetworkBehaviour
 {
+    public static UnityEvent<bool> OnTeleportPlayer = new UnityEvent<bool>();
+
     [Rpc(SendTo.Everyone)]
     public void TeleportPlayerRpc(bool fromStaticToMoving)
     {
@@ -17,6 +20,8 @@ public class PlayerTeleport : NetworkBehaviour
             FromStaticToMoving();
         else
             FromMovingToStatic();
+        
+        OnTeleportPlayer?.Invoke(fromStaticToMoving);
     }
 
     private void FromStaticToMoving()
@@ -28,7 +33,7 @@ public class PlayerTeleport : NetworkBehaviour
 
         GetComponent<PlayerMovement>().SetInSpaceStatusRpc(true);
         
-        AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
+        CameraManager.OnRequestCameraSwap.Invoke(CameraManager.CameraState.OutsideShip);
     }
     
     private void FromMovingToStatic()
@@ -40,7 +45,7 @@ public class PlayerTeleport : NetworkBehaviour
         
         GetComponent<PlayerMovement>().SetInSpaceStatusRpc(false);
         
-        AttachCameraToPlayer.OnTeleportPlayer?.Invoke(newPosition - position);
+        CameraManager.OnRequestCameraSwap.Invoke(CameraManager.CameraState.InsideShip);
     }
 
     private IEnumerator SkipInterpolation()

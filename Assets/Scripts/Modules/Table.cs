@@ -19,12 +19,12 @@ public class Table : UsableModule
     private void StartUsingTable(ModuleHandler moduleHandler)
     {
         moduleHandler.GetComponent<PlayerMovement>().isLocked = true;
-        AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(15.0f);
+        CameraManager.OnRequestCameraSwap.Invoke(CameraManager.CameraState.PilotingShip);
     }
 
     private void StopUsingTable(ModuleHandler moduleHandler)
     {
         moduleHandler.GetComponent<PlayerMovement>().isLocked = false;
-        AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(4.0f);
+        CameraManager.OnRequestCameraSwap.Invoke(CameraManager.CameraState.InsideShip);
     }
 }

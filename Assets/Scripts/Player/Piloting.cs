@@ -69,17 +69,14 @@ public class Piloting : NetworkBehaviour
     
     private void StartPiloting()
     {
-        AttachCameraToPlayer.OnRequestAttachToMovingShip?.Invoke();
-        AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(15.0f);
+        CameraManager.OnRequestCameraSwap.Invoke(CameraManager.CameraState.PilotingShip);
         GetComponent<PlayerMovement>().isLocked = true;
         OnUpdatePilotingStatus?.Invoke(this);
     }
 
     private void StopPiloting()
     {
-        AttachCameraToPlayer.OnRequestAttachToPlayer?.Invoke(transform);
-        AttachCameraToPlayer.OnRequestCameraFovUpdate?.Invoke(4.0f);
-        //velocity = Vector2.zero;
+        CameraManager.OnRequestCameraSwap.Invoke(CameraManager.CameraState.InsideShip);
         GetComponent<PlayerMovement>().isLocked = false;
         inputDirection = Vector2.zero;
         OnUpdatePilotingStatus?.Invoke(this);
