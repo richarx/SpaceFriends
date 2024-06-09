@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Parallax : MonoBehaviour
 {
@@ -7,24 +6,22 @@ public class Parallax : MonoBehaviour
     [SerializeField] private float speed;
 
     private Material material;
-    private Vector2 previousPosition;
+
+    private ParallaxFollowTarget ParallaxHandler;
+    private Vector2 currentVelocity => ParallaxHandler.CurrentVelocity;
 
     private void Start()
     {
         material = image.GetComponent<MeshRenderer>().material;
-        previousPosition = transform.position;
+        ParallaxHandler = GetComponent<ParallaxFollowTarget>();
     }
 
     private void LateUpdate()
     {
-        Vector2 direction = transform.position.ToVector2() - previousPosition;
-
         Vector2 offset = material.mainTextureOffset;
-
-        offset += direction * (speed * Time.deltaTime);
+        
+        offset += currentVelocity * (speed * Time.deltaTime);
 
         material.mainTextureOffset = offset;
-
-        previousPosition = transform.position;
     }
 }

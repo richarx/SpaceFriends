@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 684540806}
-  speed: 1.2
+  speed: 0.01
 --- !u!114 &244958801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,7 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1677825972}
-  speed: 0.8
+  speed: 0.008
 --- !u!114 &244958802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1324931303}
-  speed: 0.4
+  speed: 0.005
 --- !u!114 &244958803
 MonoBehaviour:
   m_ObjectHideFlags: 0

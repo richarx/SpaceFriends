@@ -3,8 +3,13 @@ using UnityEngine;
 public class ParallaxFollowTarget : MonoBehaviour
 {
     [SerializeField] private Transform movingSpaceship;
-
     private Transform playerTransform;
+
+    private Rigidbody2D shipRigidbody;
+    private Rigidbody2D playerRigidbody;
+    
+    private bool isShipTarget = true;
+    public Vector2 CurrentVelocity => isShipTarget ? shipRigidbody.velocity : playerRigidbody.velocity;
     
     public bool hasTarget => target != null;
     private Transform target = null;
@@ -13,24 +18,38 @@ public class ParallaxFollowTarget : MonoBehaviour
 
     private void Awake()
     {
-        PlayerMovement.OnPlayerSpawn.AddListener((player) => playerTransform = player);
+        PlayerMovement.OnPlayerSpawn.AddListener((player) =>
+        {
+            playerTransform = player;
+            playerRigidbody = playerTransform.GetComponent<Rigidbody2D>();
+        });
         PlayerTeleport.OnTeleportPlayer.AddListener(SwapTargetOnTeleport);
+
+        shipRigidbody = movingSpaceship.GetComponent<Rigidbody2D>();
         
-        SetTarget(movingSpaceship);
+        SetShipTarget();
     }
 
     private void SwapTargetOnTeleport(bool fromStaticToMoving)
     {
         if (fromStaticToMoving)
-            SetTarget(playerTransform);
+            SetPlayerTarget();
         else
-            SetTarget(movingSpaceship);
+            SetShipTarget();
     }
 
-    private void SetTarget(Transform newTarget)
+    private void SetPlayerTarget()
     {
-        target = newTarget;
-        offset = transform.position - newTarget.position;
+        isShipTarget = false;
+        target = playerTransform;
+        offset = transform.position - playerTransform.position;
+    }
+    
+    private void SetShipTarget()
+    {
+        isShipTarget = true;
+        target = movingSpaceship;
+        offset = transform.position - movingSpaceship.position;
     }
     
     private void Update()

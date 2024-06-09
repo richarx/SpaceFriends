@@ -163,7 +163,7 @@ public class PlayerMovement : NetworkBehaviour
         if (IsOwner)
         {
             if (isInSpace)
-                jetPackVelocity = SpaceshipSingleton.Instance.CurrentVelocity;
+                attachedRigidbody.velocity = SpaceshipSingleton.Instance.CurrentVelocity;
             else
             {
                 jetPackVelocity = Vector2.zero;
