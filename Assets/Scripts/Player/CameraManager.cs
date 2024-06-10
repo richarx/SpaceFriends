@@ -15,6 +15,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera playerCamera;
     [SerializeField] private CinemachineVirtualCamera jetPackCamera;
     [SerializeField] private CinemachineVirtualCamera spaceshipCamera;
+    [SerializeField] private GameObject overlayCamera;
     
     public static UnityEvent<CameraState> OnRequestCameraSwap = new UnityEvent<CameraState>();
 
@@ -28,7 +29,7 @@ public class CameraManager : MonoBehaviour
 
     private void SetupCameraTargets(Transform target)
     {
-        playerCamera.Follow = target;
+        //playerCamera.Follow = target;
         jetPackCamera.Follow = target;
     }
 
@@ -62,6 +63,7 @@ public class CameraManager : MonoBehaviour
             playerCamera.OnTargetObjectWarped(playerCamera.Follow, playerPosition - previousPlayerPosition);
         }
 
+        overlayCamera.SetActive(true);
         playerCamera.Priority = 10;
         jetPackCamera.Priority = 9;
         spaceshipCamera.Priority = 9;
@@ -74,6 +76,7 @@ public class CameraManager : MonoBehaviour
         
         playerCamera.OnTargetObjectWarped(playerCamera.Follow, playerPosition - previousPlayerPosition);
         
+        overlayCamera.SetActive(false);
         playerCamera.Priority = 9;
         jetPackCamera.Priority = 10;
         spaceshipCamera.Priority = 9;
@@ -81,6 +84,7 @@ public class CameraManager : MonoBehaviour
 
     private void ActivatePilotingCamera()
     {
+        overlayCamera.SetActive(false);
         playerCamera.Priority = 9;
         jetPackCamera.Priority = 9;
         spaceshipCamera.Priority = 10;
