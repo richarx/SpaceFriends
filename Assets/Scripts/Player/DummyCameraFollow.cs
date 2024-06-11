@@ -6,7 +6,7 @@ public class DummyCameraFollow : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera playerCamera;
     [SerializeField] private Transform staticShip;
     [SerializeField] private Transform movingShip;
-    
+
     private void LateUpdate()
     {
         Vector2 offset = playerCamera.transform.position - movingShip.position;
