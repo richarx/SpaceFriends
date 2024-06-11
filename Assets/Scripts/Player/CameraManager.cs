@@ -16,10 +16,13 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera jetPackCamera;
     [SerializeField] private CinemachineVirtualCamera spaceshipCamera;
     [SerializeField] private GameObject overlayCamera;
+    [SerializeField] private DummyPlayer dummyPlayer;
     
     public static UnityEvent<CameraState> OnRequestCameraSwap = new UnityEvent<CameraState>();
 
     private CameraState currentState = CameraState.InsideShip;
+
+    private Transform playerTransform;
     
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class CameraManager : MonoBehaviour
     private void SetupCameraTargets(Transform target)
     {
         //playerCamera.Follow = target;
+        playerTransform = target;
         jetPackCamera.Follow = target;
     }
 
@@ -55,27 +59,30 @@ public class CameraManager : MonoBehaviour
 
     private void ActivateInsideCamera()
     {
-        if (currentState == CameraState.OutsideShip)
-        {
-            Vector2 playerPosition = playerCamera.Follow.position.ToVector2();
-            Vector2 previousPlayerPosition = jetPackCamera.transform.position.ToVector2();
+        Vector2 playerPosition = playerCamera.Follow.position.ToVector2();
+        Vector2 previousPlayerPosition = jetPackCamera.transform.position.ToVector2();
         
-            playerCamera.OnTargetObjectWarped(playerCamera.Follow, playerPosition - previousPlayerPosition);
-        }
-
+        jetPackCamera.OnTargetObjectWarped(jetPackCamera.Follow, playerPosition - previousPlayerPosition);
+        jetPackCamera.Follow = null;
+        
         overlayCamera.SetActive(true);
         playerCamera.Priority = 10;
         jetPackCamera.Priority = 9;
         spaceshipCamera.Priority = 9;
+        
+        dummyPlayer.isFlying = false;
     }
 
     private void ActivateOutsideCamera()
     {
+        dummyPlayer.isFlying = true;
+        jetPackCamera.Follow = playerTransform;
+        
         Vector2 playerPosition = playerCamera.Follow.position.ToVector2();
         Vector2 previousPlayerPosition = jetPackCamera.transform.position.ToVector2();
         
-        playerCamera.OnTargetObjectWarped(playerCamera.Follow, playerPosition - previousPlayerPosition);
-        
+        jetPackCamera.OnTargetObjectWarped(jetPackCamera.Follow,  previousPlayerPosition - playerPosition);
+
         overlayCamera.SetActive(false);
         playerCamera.Priority = 9;
         jetPackCamera.Priority = 10;

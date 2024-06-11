@@ -9,7 +9,7 @@ public class ParallaxFollowTarget : MonoBehaviour
     private Rigidbody2D playerRigidbody;
     
     private bool isShipTarget = true;
-    public Vector2 CurrentVelocity => isShipTarget ? shipRigidbody.velocity : playerRigidbody.velocity;
+    public Vector2? CurrentVelocity => isShipTarget ? shipRigidbody?.velocity : playerRigidbody?.velocity;
     
     public bool hasTarget => target != null;
     private Transform target = null;

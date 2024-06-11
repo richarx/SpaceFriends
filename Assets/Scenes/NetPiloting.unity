@@ -341,6 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staticShip: {fileID: 7015849448250240586}
   movingShip: {fileID: 2141734040394180474}
+  isFlying: 0
 --- !u!1 &71876432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,6 +1393,7 @@ MonoBehaviour:
   jetPackCamera: {fileID: 1833593603}
   spaceshipCamera: {fileID: 1544595315}
   overlayCamera: {fileID: 2686065426200563759}
+  dummyPlayer: {fileID: 54833754}
 --- !u!1 &374324508
 GameObject:
   m_ObjectHideFlags: 3
@@ -5080,7 +5082,7 @@ MonoBehaviour:
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
-    m_InheritPosition: 0
+    m_InheritPosition: 1
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []
@@ -8965,6 +8967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1365768312}
+  jetPackCamera: {fileID: 1833593603}
   staticShip: {fileID: 7015849448250240586}
   movingShip: {fileID: 2141734040394180474}
 --- !u!4 &8426476117644222873

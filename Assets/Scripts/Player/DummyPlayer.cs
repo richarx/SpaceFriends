@@ -9,6 +9,8 @@ public class DummyPlayer : MonoBehaviour
 
     private bool isTargetSet => player != null;
     private Transform player = null;
+
+    public bool isFlying = false;
     
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class DummyPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (isTargetSet)
+        if (isTargetSet && !isFlying)
             FollowPlayer();
     }
 
