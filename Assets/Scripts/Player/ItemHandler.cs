@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Unity.Netcode;
@@ -9,6 +10,8 @@ public class ItemHandler : NetworkBehaviour
     [SerializeField] private Transform itemDropper;
     [SerializeField] private Collider2D playerCollider;
 
+    private PlayerMovement playerMovement;
+    
     public Vector2 itemHolderPosition => itemHolder.position;
     public float itemHolderDirection => itemHolder.localScale.x;
     public Vector2 itemDropPosition => itemDropper.position;
@@ -17,6 +20,11 @@ public class ItemHandler : NetworkBehaviour
     public bool IsItemThrowable => IsHoldingItem && currentItem!.canBeThrown;
     public string itemName => IsHoldingItem ? currentItem!.name : "none";
     [CanBeNull] private PickableItem currentItem => ItemParentingAuthority.Instance != null ? ItemParentingAuthority.Instance.GetItem(this) : null;
+
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
 
     private void Update()
     {
@@ -48,6 +56,8 @@ public class ItemHandler : NetworkBehaviour
         {
             ItemParentingAuthority.Instance.ReleaseAuthority(this, currentItem);
             throwableItem.ThrowItem(NetworkObjectId, direction);
+            playerMovement.ApplyKnockBack(direction * -1.0f, 3.0f);
+            
         }
         else
             Debug.Log("Zuzu : ItemHandler item not throwable");

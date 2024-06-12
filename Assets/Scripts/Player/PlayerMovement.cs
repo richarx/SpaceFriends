@@ -10,6 +10,7 @@ public class PlayerMovement : NetworkBehaviour
     
     private Rigidbody2D attachedRigidbody;
     private AimHandler aimHandler;
+    private FuelHandler fuelHandler;
 
     private bool isInit = false;
     private bool isPositionInit = false;
@@ -35,6 +36,7 @@ public class PlayerMovement : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         attachedRigidbody = GetComponent<Rigidbody2D>();
+        fuelHandler = GetComponent<FuelHandler>();
 
         if (!IsOwner)
             attachedRigidbody.bodyType = RigidbodyType2D.Kinematic;
@@ -92,6 +94,13 @@ public class PlayerMovement : NetworkBehaviour
             jetPackVelocity = attachedRigidbody.velocity;
             resetJetPackVelocity = false;
         }
+
+        if (fuelHandler.IsFuelEmpty)
+        {
+            direction.Value = inputDirection.normalized * 0.4f;
+            return;
+        }
+        
         Vector2 tmpVelocity = jetPackVelocity + inputDirection.normalized * (jetPackSpeed * Time.deltaTime);
 
         if (jetPackVelocity.magnitude >= jetPackMaxSpeed && tmpVelocity.magnitude > jetPackVelocity.magnitude)
@@ -99,6 +108,7 @@ public class PlayerMovement : NetworkBehaviour
 
         jetPackVelocity = tmpVelocity;
         direction.Value = inputDirection;
+        
     }
 
     private void ComputeMovingDirectionInShip()
@@ -169,6 +179,18 @@ public class PlayerMovement : NetworkBehaviour
                 jetPackVelocity = Vector2.zero;
                 attachedRigidbody.velocity = Vector2.zero;
             }
+
+            fuelHandler.UpdateFuelDisplayState(isInSpace);
         }
+    }
+
+    public void ApplyKnockBack(Vector2 knockDirection, float power)
+    {
+        Debug.Log($"Zuzu : ApplyKnockBack : isInSpace : {isInSpace} / direction : {knockDirection} / power : {power}");
+        
+        if (!isInSpace)
+            return;
+        
+        jetPackVelocity += knockDirection.normalized * power;
     }
 }

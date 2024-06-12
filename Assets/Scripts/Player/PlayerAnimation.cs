@@ -37,7 +37,7 @@ public class PlayerAnimation : MonoBehaviour
         if (playerMovementIsInSpace)
         {
             if (direction.magnitude < 0.5f)
-                return ComputeIdleAnimationInSpace(previousAnimation);
+                return ComputeIdleAnimationInSpace(direction, previousAnimation);
             else
                 return ComputeAnimationInSpace(direction, previousAnimation);
         }
@@ -70,10 +70,13 @@ public class PlayerAnimation : MonoBehaviour
         return previousAnimation;
     }
 
-    private static string ComputeIdleAnimationInSpace(string previousAnimation)
+    private static string ComputeIdleAnimationInSpace(Vector2 direction, string previousAnimation)
     {
         if (string.IsNullOrEmpty(previousAnimation) || !previousAnimation.Contains("JetPack"))
             return "JetPack_Idle_B";
+
+        if (direction.magnitude > 0.3f)
+            previousAnimation = ComputeAnimationInSpace(direction.normalized, previousAnimation);
         
         if (previousAnimation == "JetPack_R")
             return "JetPack_Idle_R";

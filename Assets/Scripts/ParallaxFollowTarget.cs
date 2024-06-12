@@ -5,11 +5,11 @@ public class ParallaxFollowTarget : MonoBehaviour
     [SerializeField] private Transform movingSpaceship;
     private Transform playerTransform;
 
-    private Rigidbody2D shipRigidbody;
-    private Rigidbody2D playerRigidbody;
+    public Rigidbody2D shipRigidbody;
+    public Rigidbody2D playerRigidbody;
     
     private bool isShipTarget = true;
-    public Vector2? CurrentVelocity => isShipTarget ? shipRigidbody?.velocity : playerRigidbody?.velocity;
+    public Vector2 CurrentVelocity => isShipTarget ? shipRigidbody.velocity : playerRigidbody.velocity;
     
     public bool hasTarget => target != null;
     private Transform target = null;

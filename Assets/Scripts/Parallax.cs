@@ -7,23 +7,23 @@ public class Parallax : MonoBehaviour
 
     private Material material;
 
-    private ParallaxFollowTarget ParallaxHandler;
-    private Vector2? currentVelocity => ParallaxHandler.CurrentVelocity;
+    private ParallaxFollowTarget parallaxHandler;
+    private Vector2 currentVelocity => parallaxHandler.CurrentVelocity;
 
     private void Start()
     {
         material = image.GetComponent<MeshRenderer>().material;
-        ParallaxHandler = GetComponent<ParallaxFollowTarget>();
+        parallaxHandler = GetComponent<ParallaxFollowTarget>();
     }
 
     private void LateUpdate()
     {
-        if (currentVelocity == null)
+        if (parallaxHandler.shipRigidbody == null || parallaxHandler.playerRigidbody == null)
             return;
         
         Vector2 offset = material.mainTextureOffset;
         
-        offset += currentVelocity.Value * (speed * Time.deltaTime);
+        offset += currentVelocity * (speed * Time.deltaTime);
 
         material.mainTextureOffset = offset;
     }

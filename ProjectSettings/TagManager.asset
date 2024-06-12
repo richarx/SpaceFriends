@@ -10,6 +10,7 @@ TagManager:
   - PilotSeat
   - UsableModule
   - Teleportable
+  - RefuelZone
   layers:
   - Default
   - TransparentFX

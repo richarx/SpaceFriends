@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 535947529897319720}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Teleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
