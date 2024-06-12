@@ -179,8 +179,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   spriteRenderer: {fileID: 6006867427957013030}
-  idleSprite: {fileID: -6069284432066636931, guid: f83075046f97a9440ba34703f3871963, type: 3}
-  selectedSprite: {fileID: 357826885133667892, guid: f83075046f97a9440ba34703f3871963, type: 3}
+  idleSprite: {fileID: 357826885133667892, guid: f83075046f97a9440ba34703f3871963, type: 3}
+  selectedSprite: {fileID: -6069284432066636931, guid: f83075046f97a9440ba34703f3871963, type: 3}
   pickedUpSprite: {fileID: -1396703784732044243, guid: f83075046f97a9440ba34703f3871963, type: 3}
   canBeThrown: 0
 --- !u!114 &-7846961275758730941
@@ -269,7 +269,7 @@ SpriteRenderer:
   m_SortingLayerID: -110012591
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6069284432066636931, guid: f83075046f97a9440ba34703f3871963, type: 3}
+  m_Sprite: {fileID: 357826885133667892, guid: f83075046f97a9440ba34703f3871963, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -279,4 +279,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
