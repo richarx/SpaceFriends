@@ -45,6 +45,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             OnPlayerSpawn?.Invoke(transform);
             aimHandler = GetComponent<AimHandler>();
+            GetComponent<CheatCodes>().OnPrimaryCheat.AddListener((s) =>
+            {
+                jetPackSpeed += s * 0.5f;
+                Debug.Log($"Zuzu : Jetpack Speed updated : {jetPackSpeed}");
+            });
         }
 
         TryToInitializePosition();
@@ -62,8 +67,6 @@ public class PlayerMovement : NetworkBehaviour
             TryToInitializePosition();
             return;
         }
-        
-        UpdateSpeed();
 
         if (!IsOwner)
             return;
@@ -115,15 +118,6 @@ public class PlayerMovement : NetworkBehaviour
     {
         Vector2 inputDirection = PlayerInputs.ComputeInputDirection();
         direction.Value = inputDirection;
-    }
-
-    private void UpdateSpeed()
-    {
-        if (IsServer && PlayerInputs.CheckForSpeedIncrease())
-            speed.Value += 1.0f;
-
-        if (IsServer && PlayerInputs.CheckForSpeedDecrease())
-            speed.Value = Mathf.Max(speed.Value - 1.0f, 0.0f);
     }
 
     private void FixedUpdate()

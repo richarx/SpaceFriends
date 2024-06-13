@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f8e9c05844746c74b83a302569a9959b
+guid: 065819cda9f696943902d8f30b5ef60b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638538871522153192
+  platformSettingsDirtyTick: 638538871694205913
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,7 +121,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Booster
+  - name: Booster_Broken_Frame_0
     originalName: 
     pivot: {x: 0.6603774, y: -1.074074}
     alignment: 9
@@ -129,70 +129,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 218
-      width: 53
-      height: 27
-    spriteID: f41f7ddbc711c2e42bfbd8c33c37ea49
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 218}
-  - name: Booster_Frame_1
-    originalName: 
-    pivot: {x: 0.6603774, y: -0.4677419}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 148
-      width: 53
-      height: 62
-    spriteID: 1fce960d9a518d646a5ce4e92efa790c
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 148}
-  - name: Booster_Frame_2
-    originalName: 
-    pivot: {x: 0.6603774, y: -0.4603175}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 77
-      width: 53
-      height: 63
-    spriteID: 0a87470956b5cd54daac082a88d93ed5
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 77}
-  - name: Booster_Frame_3
-    originalName: 
-    pivot: {x: 0.6603774, y: -0.44615385}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
       y: 4
       width: 53
-      height: 65
-    spriteID: 261c639c6de778544aa33d9bd1f886cf
+      height: 27
+    spriteID: 6ea5a469a8c14b844b7bbaa66a879d2a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -201,47 +141,235 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  spriteSheetImportData: []
+  - name: Booster_Broken_Frame_1
+    originalName: 
+    pivot: {x: 0.64705884, y: -1.0357144}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 39
+      width: 51
+      height: 28
+    spriteID: 5d4298d7c10375443a1bf4ef67833c3c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 39}
+  - name: Booster_Broken_Frame_2
+    originalName: 
+    pivot: {x: 0.64705884, y: -1.0357144}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 75
+      width: 51
+      height: 28
+    spriteID: 49befa6454278e74b9f5d65dc7ebfcfc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 75}
+  - name: Booster_Broken_Frame_3
+    originalName: 
+    pivot: {x: 0.64705884, y: -1.0357144}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 65
+      y: 4
+      width: 51
+      height: 28
+    spriteID: 025ba85d0ee8be049b860a2789afe8bd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 65, y: 4}
+  - name: Booster_Broken_Frame_4
+    originalName: 
+    pivot: {x: 0.64705884, y: -1.0357144}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 65
+      y: 40
+      width: 51
+      height: 28
+    spriteID: 4191e91469657964b9c625ec9e84ab07
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 65, y: 40}
+  spriteSheetImportData:
+  - name: Booster_Broken_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 75
+      width: 51
+      height: 28
+    spriteID: d311320cf54ccc64f82ff47f4dbb0714
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Booster_Broken_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 39
+      width: 51
+      height: 28
+    spriteID: 4d210374cccc7b14aaafb4f131619b1e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Booster_Broken_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 53
+      height: 27
+    spriteID: b4f8554ab6b283348a01768291dc12bd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Booster_Broken_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 65
+      y: 4
+      width: 51
+      height: 28
+    spriteID: cdb97a38c4409c941b8513a6edc14971
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Booster_Broken_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 65
+      y: 40
+      width: 51
+      height: 28
+    spriteID: 74bd3535ab8f81f4c9b7a86fad0b7312
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
-    guid: -1215971630
-    name: Booster
+    guid: -1060228510
+    name: Booster_Broken
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Booster_Frame_0
+    - name: Booster_Broken_Frame_0
       frameIndex: 0
       cellRect:
         x: 29
         y: 29
         width: 53
         height: 27
-      spriteId: f41f7ddbc711c2e42bfbd8c33c37ea49
-    - name: Booster_Frame_1
+      spriteId: 6ea5a469a8c14b844b7bbaa66a879d2a
+    - name: Booster_Broken_Frame_1
       frameIndex: 1
       cellRect:
-        x: 29
+        x: 31
         y: 29
-        width: 53
-        height: 62
-      spriteId: 1fce960d9a518d646a5ce4e92efa790c
-    - name: Booster_Frame_2
+        width: 51
+        height: 28
+      spriteId: 5d4298d7c10375443a1bf4ef67833c3c
+    - name: Booster_Broken_Frame_2
       frameIndex: 2
       cellRect:
-        x: 29
+        x: 31
         y: 29
-        width: 53
-        height: 63
-      spriteId: 0a87470956b5cd54daac082a88d93ed5
-    - name: Booster_Frame_3
+        width: 51
+        height: 28
+      spriteId: 49befa6454278e74b9f5d65dc7ebfcfc
+    - name: Booster_Broken_Frame_3
       frameIndex: 3
       cellRect:
-        x: 29
+        x: 31
         y: 29
-        width: 53
-        height: 65
-      spriteId: 261c639c6de778544aa33d9bd1f886cf
+        width: 51
+        height: 28
+      spriteId: 025ba85d0ee8be049b860a2789afe8bd
+    - name: Booster_Broken_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 31
+        y: 29
+        width: 51
+        height: 28
+      spriteId: 4191e91469657964b9c625ec9e84ab07
     linkedCells: []
     parentIndex: -1
   platformSettings:

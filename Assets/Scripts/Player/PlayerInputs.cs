@@ -83,26 +83,6 @@ public class PlayerInputs
         return Keyboard.current.spaceKey.wasPressedThisFrame;
     }
 
-    public static bool CheckForSpeedIncrease()
-    {
-        return Keyboard.current.rightArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.right.wasPressedThisFrame);
-    }
-    
-    public static bool CheckForSpeedDecrease()
-    {
-        return Keyboard.current.leftArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.left.wasPressedThisFrame);
-    }
-    
-    public static bool CheckForZoomIncrease()
-    {
-        return Keyboard.current.upArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.up.wasPressedThisFrame);
-    }
-    
-    public static bool CheckForZoomDecrease()
-    {
-        return Keyboard.current.downArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.down.wasPressedThisFrame);
-    }
-    
     public static bool CheckForUseItem()
     {
         return Keyboard.current.eKey.wasPressedThisFrame || /*Mouse.current.leftButton.wasPressedThisFrame ||*/ (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame);
@@ -116,5 +96,35 @@ public class PlayerInputs
     public static bool CheckForAim()
     {
         return Mouse.current.rightButton.isPressed || (Gamepad.current != null && Gamepad.current.leftTrigger.isPressed);
+    }
+
+    public static bool CheckForStartGame()
+    {
+        return Keyboard.current.enterKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
+    }
+    
+    public static bool CheckForPrimaryCheatUp()
+    {
+        return Keyboard.current.rightArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.right.wasPressedThisFrame);
+    }
+    
+    public static bool CheckForPrimaryCheatDown()
+    {
+        return Keyboard.current.leftArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.left.wasPressedThisFrame);
+    }
+    
+    public static bool CheckForSecondaryCheatUp()
+    {
+        return Keyboard.current.upArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.up.wasPressedThisFrame);
+    }
+    
+    public static bool CheckForSecondaryCheatDown()
+    {
+        return Keyboard.current.downArrowKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.dpad.down.wasPressedThisFrame);
+    }
+    
+    public static bool CheckForTertiaryCheat()
+    {
+        return Keyboard.current.escapeKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.selectButton.wasPressedThisFrame);
     }
 }

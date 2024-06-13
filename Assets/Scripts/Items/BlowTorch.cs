@@ -16,7 +16,12 @@ public class BlowTorch : UsableItem
         if (isUsingTorch)
             return;
 
-        CalibrationModule calibrationModule = LookForCalibrationModule();
+        GameObject foundModule = LookForModule("Module");
+
+        if (foundModule == null)
+            return;
+
+        CalibrationModule calibrationModule = foundModule.GetComponent<CalibrationModule>();
 
         bool wasActionPerformed = false;
 

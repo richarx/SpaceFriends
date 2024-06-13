@@ -16,22 +16,20 @@ public class UsableItem : NetworkBehaviour
         Debug.Log("Zuzu : Calling UseItem on parent class");
     }
     
-    protected CalibrationModule LookForCalibrationModule()
+    protected GameObject LookForModule(string targetTag, Collider2D trigger = null)
     {
         List<Collider2D> results = new List<Collider2D>();
 
-        int contactCount = Physics2D.OverlapCollider(itemTriggerZone, new ContactFilter2D().NoFilter(), results);
+        int contactCount = Physics2D.OverlapCollider(trigger != null ? trigger : itemTriggerZone, new ContactFilter2D().NoFilter(), results);
 
         if (contactCount < 1)
             return null;
 
         foreach (Collider2D result in results)
         {
-            if (result.CompareTag("Module"))
+            if (result.CompareTag(targetTag))
             {
-                CalibrationModule item = result.GetComponent<CalibrationModule>();
-                if (item != null)
-                    return item;
+                return result.gameObject;
             }
         }
 

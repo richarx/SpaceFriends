@@ -23,6 +23,7 @@ public class CalibrationModule : NetworkBehaviour
     [SerializeField] private GameObject smoke;
     [SerializeField] private GameObject screen;
     [SerializeField] private SpriteRenderer repairBar;
+    [SerializeField] public Transform wrenchUseTarget;
 
     public bool isCalibrated => calibrationStep == 0;
     private int calibrationStep = 0;

@@ -760,6 +760,7 @@ GameObject:
   - component: {fileID: 674678104416339367}
   - component: {fileID: 3201515005946254795}
   - component: {fileID: 5312865329616099100}
+  - component: {fileID: 312321958541556352}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1007,6 +1008,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuelDisplay: {fileID: 6737967507435295001}
   fuelGauge: {fileID: 3227573759191917843}
+--- !u!114 &312321958541556352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8029653635968636651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73be11ab71321fe45b65b9dc637042ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8069339732170750552
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,9 @@ using UnityEngine.Events;
 
 public class PickableItem : NetworkBehaviour
 {
+    [HideInInspector]
     public UnityEvent<ItemHandler> OnItemPickup = new UnityEvent<ItemHandler>();
+    [HideInInspector]
     public UnityEvent OnItemRelease = new UnityEvent();
 
     
@@ -24,6 +26,7 @@ public class PickableItem : NetworkBehaviour
     [HideInInspector]
     public bool canBeThrown;
 
+    public bool isBeingUsed = false;
     public bool isBeingHeld => currentHolder != null;
 
     private bool previousHeldStatus = false;
@@ -45,6 +48,9 @@ public class PickableItem : NetworkBehaviour
                 previousHeldStatus = true;
                 OnItemPickup?.Invoke(currentHolder);
             }
+            
+            if (isBeingUsed)
+                return;
             
             Vector2 position = currentHolder.itemHolderPosition;
             float direction = currentHolder.itemHolderDirection;

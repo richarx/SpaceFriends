@@ -1,5 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2110798904197687010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4801889746142816727}
+  - component: {fileID: 8438479897314584274}
+  m_Layer: 0
+  m_Name: FoamCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4801889746142816727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110798904197687010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1860644389685747311}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &8438479897314584274
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110798904197687010}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.9963093, y: 0.36675313}
+  m_Size: {x: 3.4589634, y: 1.0833732}
+  m_Direction: 1
 --- !u!1 &3955429779435958980
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,6 +104,7 @@ Transform:
   - {fileID: 4441204430077941285}
   - {fileID: 3961590516872129973}
   - {fileID: 6336229530348041252}
+  - {fileID: 4801889746142816727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &5651974075712081250
@@ -118,6 +186,7 @@ MonoBehaviour:
   selectedSprite: {fileID: 2560272459124471374, guid: 51dbdc57893700f46b7290617cc250fb, type: 3}
   pickedUpSprite: {fileID: 9079613888231489894, guid: 51dbdc57893700f46b7290617cc250fb, type: 3}
   canBeThrown: 0
+  isBeingUsed: 0
 --- !u!114 &-591966393706940656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 5872135479067498335}
+  foamCollider: {fileID: 8438479897314584274}
 --- !u!1 &5808629299725591711
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +275,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0029464364, y: 0.35798568}

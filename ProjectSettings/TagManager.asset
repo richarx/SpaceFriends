@@ -11,6 +11,7 @@ TagManager:
   - UsableModule
   - Teleportable
   - RefuelZone
+  - Booster
   layers:
   - Default
   - TransparentFX
