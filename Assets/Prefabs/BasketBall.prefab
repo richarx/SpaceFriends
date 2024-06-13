@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 86381368
+  GlobalObjectIdHash: 3654352920
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -113,11 +113,14 @@ MonoBehaviour:
   OnItemRelease:
     m_PersistentCalls:
       m_Calls: []
+  wallCollider: {fileID: 1675085383440212635}
   spriteRenderer: {fileID: 6006867427957013030}
   idleSprite: {fileID: 5798921145115229371, guid: 62ac4556e7affe54bb4aa29e8a0ad488, type: 3}
   selectedSprite: {fileID: -8051404602396129511, guid: 62ac4556e7affe54bb4aa29e8a0ad488, type: 3}
   pickedUpSprite: {fileID: 8769522170830567661, guid: 62ac4556e7affe54bb4aa29e8a0ad488, type: 3}
   canBeThrown: 0
+  floatDirection: {x: 0, y: 0}
+  isBeingUsed: 0
 --- !u!114 &2780347260591576124
 MonoBehaviour:
   m_ObjectHideFlags: 0

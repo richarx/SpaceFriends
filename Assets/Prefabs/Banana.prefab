@@ -178,11 +178,14 @@ MonoBehaviour:
   OnItemRelease:
     m_PersistentCalls:
       m_Calls: []
+  wallCollider: {fileID: 247124324217077147}
   spriteRenderer: {fileID: 6006867427957013030}
   idleSprite: {fileID: -5418631590140978317, guid: 4bb11d65adb696449ac27fc5f4d6f8a7, type: 3}
   selectedSprite: {fileID: -1056699638892494682, guid: 4bb11d65adb696449ac27fc5f4d6f8a7, type: 3}
   pickedUpSprite: {fileID: 6687402365532675032, guid: 4bb11d65adb696449ac27fc5f4d6f8a7, type: 3}
   canBeThrown: 0
+  floatDirection: {x: 0, y: 0}
+  isBeingUsed: 0
 --- !u!114 &4236342441764114832
 MonoBehaviour:
   m_ObjectHideFlags: 0

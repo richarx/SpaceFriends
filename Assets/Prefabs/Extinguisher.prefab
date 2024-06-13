@@ -181,6 +181,7 @@ MonoBehaviour:
   OnItemRelease:
     m_PersistentCalls:
       m_Calls: []
+  wallCollider: {fileID: 535947529897319720}
   spriteRenderer: {fileID: 6006867427957013030}
   idleSprite: {fileID: -7088851844589570183, guid: 51dbdc57893700f46b7290617cc250fb, type: 3}
   selectedSprite: {fileID: 2560272459124471374, guid: 51dbdc57893700f46b7290617cc250fb, type: 3}

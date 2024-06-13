@@ -123,5 +123,9 @@ public class Airlock : NetworkBehaviour
             Vector2 newPosition = staticTeleportZone.transform.position.ToVector2() + relativePosition;
             parentTransform.position = newPosition;
         }
+        
+        PickableItem pickableItem = parentTransform.GetComponent<PickableItem>();
+        if (pickableItem != null)
+            pickableItem.SetFloatingVelocityRpc(Vector2.zero);
     }
 }

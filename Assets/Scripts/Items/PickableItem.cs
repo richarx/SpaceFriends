@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +19,7 @@ public class PickableItem : NetworkBehaviour
         PickedUp
     }
     
+    [SerializeField] private Collider2D wallCollider;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite selectedSprite;
@@ -25,6 +27,9 @@ public class PickableItem : NetworkBehaviour
     
     [HideInInspector]
     public bool canBeThrown;
+
+    private Vector2 floatDirection;
+    private bool isInSpace => floatDirection != Vector2.zero;
 
     public bool isBeingUsed = false;
     public bool isBeingHeld => currentHolder != null;
@@ -47,11 +52,12 @@ public class PickableItem : NetworkBehaviour
                 SetItemStateRpc(ItemDisplayState.PickedUp);
                 previousHeldStatus = true;
                 OnItemPickup?.Invoke(currentHolder);
+                floatDirection = Vector2.zero;
             }
-            
+
             if (isBeingUsed)
                 return;
-            
+
             Vector2 position = currentHolder.itemHolderPosition;
             float direction = currentHolder.itemHolderDirection;
             
@@ -66,6 +72,20 @@ public class PickableItem : NetworkBehaviour
                 SetItemStateRpc(ItemDisplayState.Idle);
                 previousHeldStatus = false;
                 OnItemRelease?.Invoke();
+            }
+
+            if (isInSpace && IsServer)
+            {
+                if (IsBlockedByWall())
+                {
+                    SetFloatingVelocityRpc(Vector2.zero);
+                    Debug.Log("Zuzu : Blocked By Wall");
+                    return;
+                }
+                
+                Vector2 position = transform.position + floatDirection.ToVector3() * Time.deltaTime;
+                transform.position = position;
+                UpdatePositionAndDirectionRpc(position, transform.localScale.x);
             }
         }
     }
@@ -107,6 +127,12 @@ public class PickableItem : NetworkBehaviour
         UpdatePositionAndDirectionRpc(currentHolder.itemDropPosition, currentHolder.itemHolderDirection);
     }
     
+    [Rpc(SendTo.Server)]
+    public void SetFloatingVelocityRpc(Vector2 velocity)
+    {
+        floatDirection = velocity;
+    }
+    
     private void SetSpriteState(ItemDisplayState state)
     {
         switch (state)
@@ -126,5 +152,23 @@ public class PickableItem : NetworkBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
+    }
+    
+    private bool IsBlockedByWall()
+    {
+        List<Collider2D> results = new List<Collider2D>();
+
+        int contactCount = Physics2D.OverlapCollider(wallCollider, new ContactFilter2D().NoFilter(), results);
+
+        if (contactCount < 1)
+            return false;
+
+        foreach (Collider2D result in results)
+        {
+            if (result.CompareTag("Wall"))
+                return true;
+        }
+
+        return false;
     }
 }

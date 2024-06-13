@@ -81,7 +81,10 @@ public class ItemHandler : NetworkBehaviour
     private void DropItem()
     {
         Debug.Log($"Zuzu : Request Dropping item : {currentItem}");
-        
+
+        if (IsHoldingItem)
+            currentItem.SetFloatingVelocityRpc(attachedRigidbody.velocity * 0.5f);
+
         ItemParentingAuthority.Instance.ReleaseAuthority(this, currentItem);
     }
 
