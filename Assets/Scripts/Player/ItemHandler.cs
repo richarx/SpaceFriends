@@ -11,6 +11,7 @@ public class ItemHandler : NetworkBehaviour
     [SerializeField] private Collider2D playerCollider;
 
     private PlayerMovement playerMovement;
+    private Rigidbody2D attachedRigidbody;
     
     public Vector2 itemHolderPosition => itemHolder.position;
     public float itemHolderDirection => itemHolder.localScale.x;
@@ -24,6 +25,7 @@ public class ItemHandler : NetworkBehaviour
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        attachedRigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -55,9 +57,10 @@ public class ItemHandler : NetworkBehaviour
         if (throwableItem != null)
         {
             ItemParentingAuthority.Instance.ReleaseAuthority(this, currentItem);
-            throwableItem.ThrowItem(NetworkObjectId, direction);
+
+            Vector2 playerVelocity = playerMovement.IsInSpace ? attachedRigidbody.velocity : Vector2.zero;
+            throwableItem.ThrowItem(NetworkObjectId, direction, playerVelocity);
             playerMovement.ApplyKnockBack(direction * -1.0f, 3.0f);
-            
         }
         else
             Debug.Log("Zuzu : ItemHandler item not throwable");

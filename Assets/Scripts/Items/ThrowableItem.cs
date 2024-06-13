@@ -8,6 +8,7 @@ public class ThrowableItem : NetworkBehaviour
     [SerializeField] private Collider2D wallCollider;
 
     private Vector2 direction;
+    private Vector2 playerVelocity;
     private Vector2 startPosition;
 
     private bool isMoving => direction != Vector2.zero;
@@ -57,21 +58,22 @@ public class ThrowableItem : NetworkBehaviour
     }
     
     [Rpc(SendTo.Everyone)]
-    private void SetVelocityRpc(Vector2 position, Vector2 throwDirection, ulong player)
+    private void SetVelocityRpc(Vector2 position, Vector2 throwDirection, Vector2 playerCurrentVelocity, ulong player)
     {
         startPosition = position;
         direction = throwDirection.normalized;
+        playerVelocity = playerCurrentVelocity;
         previousOwner = player;
     }
 
-    public void ThrowItem(ulong player, Vector2 throwDirection)
+    public void ThrowItem(ulong player, Vector2 throwDirection, Vector2 playerCurrentVelocity)
     {
-        SetVelocityRpc(transform.position, throwDirection, player);
+        SetVelocityRpc(transform.position, throwDirection, playerCurrentVelocity, player);
     }
 
     private void MoveTowardDestination()
     {
-        Vector2 position = transform.position.ToVector2() + (direction * (speed * Time.deltaTime));
+        Vector2 position = transform.position.ToVector2() + (direction * (speed * Time.deltaTime)) + playerVelocity * Time.deltaTime;
         transform.position = position;
     }
 
