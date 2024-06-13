@@ -64,9 +64,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.034052253, y: 0.31657398}
+  m_Offset: {x: 0.034052253, y: 0.021132827}
   serializedVersion: 2
-  m_Radius: 0.44805324
+  m_Radius: 0.50066614
 --- !u!1 &3955429779435958980
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 5156309990538089235}
   - component: {fileID: -7846961275758730941}
   m_Layer: 0
-  m_Name: Beacon
+  m_Name: Crystal_0
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ Transform:
   m_GameObject: {fileID: 3955429779435958980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.783, y: -1.613, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -136,9 +136,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.065975904, y: 0.24953008}
+  m_Offset: {x: -0.025084734, y: 0.020866513}
   serializedVersion: 2
-  m_Radius: 0.8227556
+  m_Radius: 1.0736783
 --- !u!114 &9034667683581412870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 419732805
+  GlobalObjectIdHash: 157397599
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -179,9 +179,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   spriteRenderer: {fileID: 6006867427957013030}
-  idleSprite: {fileID: 357826885133667892, guid: f83075046f97a9440ba34703f3871963, type: 3}
-  selectedSprite: {fileID: -6069284432066636931, guid: f83075046f97a9440ba34703f3871963, type: 3}
-  pickedUpSprite: {fileID: -1396703784732044243, guid: f83075046f97a9440ba34703f3871963, type: 3}
+  idleSprite: {fileID: -1593062973126528760, guid: 050a91da28de5674383ac70a5584d6ee, type: 3}
+  selectedSprite: {fileID: -8092340139841238121, guid: 050a91da28de5674383ac70a5584d6ee, type: 3}
+  pickedUpSprite: {fileID: -1593062973126528760, guid: 050a91da28de5674383ac70a5584d6ee, type: 3}
   canBeThrown: 0
 --- !u!114 &-7846961275758730941
 MonoBehaviour:
@@ -269,7 +269,7 @@ SpriteRenderer:
   m_SortingLayerID: -110012591
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 357826885133667892, guid: f83075046f97a9440ba34703f3871963, type: 3}
+  m_Sprite: {fileID: -1593062973126528760, guid: 050a91da28de5674383ac70a5584d6ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
