@@ -242,6 +242,38 @@ ScriptedImporter:
         width: 76
         height: 88
       spriteId: bccd5124548f43e48b56b62732648bf9
+    - name: Booster_Burning_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 29
+        y: 29
+        width: 53
+        height: 61
+      spriteId: a0768048b1fc03446b188f24606eb7a2
+    - name: Booster_Burning_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 29
+        y: 29
+        width: 53
+        height: 58
+      spriteId: af074feb141538c409f4253a3793c0fe
+    - name: Booster_Burning_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 29
+        y: 29
+        width: 53
+        height: 64
+      spriteId: 8861d581c2c3dc148a1410990d361f68
+    - name: Booster_Burning_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 29
+        y: 29
+        width: 53
+        height: 62
+      spriteId: e73473e7b2b3b5246bdbbf1c8bb6356d
     linkedCells: []
     parentIndex: -1
   platformSettings:

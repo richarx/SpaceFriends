@@ -28,6 +28,8 @@ public class PickableItem : NetworkBehaviour
     [HideInInspector]
     public bool canBeThrown;
 
+    private Collider2D trigger;
+    
     private Vector2 floatDirection;
     private bool isInSpace => floatDirection != Vector2.zero;
 
@@ -41,6 +43,7 @@ public class PickableItem : NetworkBehaviour
     private void Start()
     {
         canBeThrown = TryGetComponent(out ThrowableItem _);
+        trigger = GetComponent<Collider2D>();
     }
 
     private void LateUpdate()
@@ -71,6 +74,7 @@ public class PickableItem : NetworkBehaviour
             {
                 SetItemStateRpc(ItemDisplayState.Idle);
                 previousHeldStatus = false;
+                CheckForPlayerAfterReleaseRpc();
                 OnItemRelease?.Invoke();
             }
 
@@ -113,6 +117,26 @@ public class PickableItem : NetworkBehaviour
         
         if (other.CompareTag("Player") && other.transform.parent.GetComponent<PlayerMovement>().IsOwner)
             SetSpriteState(ItemDisplayState.Idle);
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void CheckForPlayerAfterReleaseRpc()
+    {
+        List<Collider2D> results = new List<Collider2D>();
+
+        int contactCount = Physics2D.OverlapCollider(trigger, new ContactFilter2D().NoFilter(), results);
+
+        if (contactCount < 1)
+            return;
+
+        foreach (Collider2D result in results)
+        {
+            if (result.CompareTag("Player") && result.transform.parent.GetComponent<PlayerMovement>().IsOwner)
+            {
+                SetSpriteState(ItemDisplayState.Selected);
+                return;
+            }
+        }
     }
 
     [Rpc(SendTo.Everyone)]

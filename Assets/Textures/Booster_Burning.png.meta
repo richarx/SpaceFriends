@@ -193,6 +193,90 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Booster_Burning_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 96
+        height: 112
+      alignment: 9
+      pivot: {x: 0.4, y: 0.12}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a119982d213d06489e3542d57e64ba5
+      internalID: -2047637882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Booster_Burning_5
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 96
+        height: 112
+      alignment: 9
+      pivot: {x: 0.4, y: 0.12}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8d780485fd906f4ba898c397818f8c2
+      internalID: 263310433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Booster_Burning_6
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 96
+        height: 112
+      alignment: 9
+      pivot: {x: 0.4, y: 0.12}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d922f62c24d4c443a628c755ba7dcad
+      internalID: 1342188046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Booster_Burning_7
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 96
+        height: 112
+      alignment: 9
+      pivot: {x: 0.4, y: 0.12}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f807be151a037f43a77a0d83b02c537
+      internalID: 1052117103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -208,6 +292,10 @@ TextureImporter:
       Booster_Burning_1: 889431535
       Booster_Burning_2: 330338889
       Booster_Burning_3: 870188567
+      Booster_Burning_4: -2047637882
+      Booster_Burning_5: 263310433
+      Booster_Burning_6: 1342188046
+      Booster_Burning_7: 1052117103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

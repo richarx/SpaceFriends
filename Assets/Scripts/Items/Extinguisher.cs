@@ -42,9 +42,7 @@ public class Extinguisher : UsableItem
             if (foundModule != null)
             {
                 Booster booster = foundModule.GetComponent<Booster>();
-                booster.Extinguish();
-                Debug.Log($"Zuzu : Found a Booster, state : {booster.CurrentState}");
-                yield break;
+                booster.ExtinguishRpc();
             }
 
             yield return null;
