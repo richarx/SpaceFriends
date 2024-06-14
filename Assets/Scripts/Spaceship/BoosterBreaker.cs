@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,6 +7,8 @@ using UnityEngine;
 public class BoosterBreaker : NetworkBehaviour
 {
     [SerializeField] private List<Booster> boosters;
+
+    public ReadOnlyCollection<Booster> BoosterList => boosters.AsReadOnly();
 
     private float timer = 0.0f;
     private float coolDown = 20.0f;
