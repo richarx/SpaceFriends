@@ -21,7 +21,8 @@ public class ItemHandler : NetworkBehaviour
     public bool IsItemThrowable => IsHoldingItem && currentItem!.canBeThrown;
     public string itemName => IsHoldingItem ? currentItem!.name : "none";
     [CanBeNull] private PickableItem currentItem => ItemParentingAuthority.Instance != null ? ItemParentingAuthority.Instance.GetItem(this) : null;
-
+    [CanBeNull] public PickableItem CurrentItem => currentItem;
+    
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();

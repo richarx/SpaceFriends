@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FuelHandler : NetworkBehaviour
 {
+    [SerializeField] private ItemHandler itemHandler;
     [SerializeField] private GameObject fuelDisplay;
     [SerializeField] private SpriteRenderer fuelGauge;
     
@@ -50,22 +51,44 @@ public class FuelHandler : NetworkBehaviour
             currentFuel = maxFuel;
             return;
         }
+        
+        if (IsHoldingRefuelItem())
+            RefillFuel();
 
-        if (IsFuelEmpty)
-            return;
-
-        currentFuel -= playerMovement.MoveDirection.magnitude * consumptionSpeed * Time.deltaTime;
-        currentFuel = Mathf.Clamp(currentFuel, 0.0f, maxFuel);
+        if (!IsFuelEmpty)
+            SpendFuel();
+        
         UpdateFuelGauge();
+    }
+
+    private bool IsHoldingRefuelItem()
+    {
+        if (!itemHandler.IsHoldingItem)
+            return false;
+
+        string currentItemName = itemHandler.CurrentItem.gameObject.name;
+        
+        return currentItemName.Contains("Fuel") || currentItemName.Contains("Beacon");
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("RefuelZone"))
+        if (IsOwner && other.CompareTag("RefuelZone"))
         {
-            currentFuel += refillSpeed * Time.deltaTime;
-            currentFuel = Mathf.Clamp(currentFuel, 0.0f, maxFuel);
+            RefillFuel();
         }
+    }
+
+    private void RefillFuel()
+    {
+        currentFuel += refillSpeed * Time.deltaTime;
+        currentFuel = Mathf.Clamp(currentFuel, 0.0f, maxFuel);
+    }
+
+    private void SpendFuel()
+    {
+        currentFuel -= playerMovement.MoveDirection.magnitude * consumptionSpeed * Time.deltaTime;
+        currentFuel = Mathf.Clamp(currentFuel, 0.0f, maxFuel);
     }
 
     private void UpdateFuelGauge()

@@ -1006,6 +1006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7f9dd545297ea44af515e7a76b5b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemHandler: {fileID: -5017841352187153786}
   fuelDisplay: {fileID: 6737967507435295001}
   fuelGauge: {fileID: 3227573759191917843}
 --- !u!114 &312321958541556352
@@ -1020,6 +1021,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73be11ab71321fe45b65b9dc637042ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPrimaryCheat:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSecondaryCheat:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTertiaryCheat:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8069339732170750552
 GameObject:
   m_ObjectHideFlags: 0
