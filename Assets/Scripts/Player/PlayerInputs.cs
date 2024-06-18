@@ -37,12 +37,12 @@ public class PlayerInputs
         return inputDirection.normalized;
     }
     
-    public static Vector2 ComputeAimDirection(Vector2 currentPosition, Camera camera)
+    public static Vector2 ComputeAimDirection(Vector2 currentPosition, Camera camera, bool isInSpace)
     {
         if (Gamepad.current != null)
             return ComputeGamepadAimDirection();
 
-        return ComputeKeyboardAimDirection(currentPosition, camera);
+        return ComputeKeyboardAimDirection(currentPosition, camera, isInSpace);
     }
 
     private static Vector2 ComputeGamepadAimDirection()
@@ -55,11 +55,15 @@ public class PlayerInputs
         return input.magnitude >= 0.15f ? input.normalized : Vector2.zero;
     }
     
-    private static Vector2 ComputeKeyboardAimDirection(Vector2 currentPosition, Camera camera)
+    private static Vector2 ComputeKeyboardAimDirection(Vector2 currentPosition, Camera camera, bool isInSpace)
     {
         Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
 
-        return (mousePosition - currentPosition).normalized;
+        Vector2 position = isInSpace
+            ? currentPosition
+            : SpaceshipSingleton.Instance.GetPosition() - StaticShipSingleton.Instance.GetPosition() + currentPosition;
+        
+        return (mousePosition - position).normalized;
     }
 
     public static bool CheckForPickupInput()

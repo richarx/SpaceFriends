@@ -38,4 +38,9 @@ public class SpaceshipSingleton : NetworkBehaviour
         if (IsServer)
             attachedRigidbody2D.velocity = velocity;
     }
+    
+    public Vector2 GetPosition()
+    {
+        return transform.position;
+    }
 }

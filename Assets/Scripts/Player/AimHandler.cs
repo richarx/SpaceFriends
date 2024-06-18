@@ -7,6 +7,7 @@ public class AimHandler : NetworkBehaviour
     
     private Camera _camera;
     private ItemHandler itemHandler;
+    private PlayerMovement playerMovement;
 
     private Vector2 previousDirection = Vector2.right;
 
@@ -16,9 +17,10 @@ public class AimHandler : NetworkBehaviour
     {
         if (!IsOwner)
             return;
-        
-        itemHandler = GetComponent<ItemHandler>();
+
         _camera = FindObjectOfType<Camera>();
+        itemHandler = GetComponent<ItemHandler>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -44,7 +46,7 @@ public class AimHandler : NetworkBehaviour
 
     private Vector2 ComputeDirection()
     {
-        Vector2 direction = PlayerInputs.ComputeAimDirection(cursor.transform.position, _camera);
+        Vector2 direction = PlayerInputs.ComputeAimDirection(cursor.transform.position, _camera, playerMovement.IsInSpace);
 
         if (direction == Vector2.zero)
             return previousDirection;
